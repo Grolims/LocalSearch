@@ -1,0 +1,7 @@
+{
+  "name": "LocalSearch",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
