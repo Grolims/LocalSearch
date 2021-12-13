@@ -26,8 +26,8 @@ export class LoginPage {
 
   constructor(private auth: AuthService, private router: Router) {
     this.authRequest = {
-      username: "sacha",
-      password: "1234test",
+      username: undefined,
+      password: undefined,
     };
   }
 
