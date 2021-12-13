@@ -17,10 +17,12 @@ const API_URL = "https://localsearch-ch.herokuapp.com";
 export class AuthService {
   #auth$: ReplaySubject<AuthResponse | undefined>;
 
-  constructor(private http: HttpClient, private storage: Storage ) {
+  constructor(private http: HttpClient, private storage: Storage) {
     this.#auth$ = new ReplaySubject(1);
-    // Emit an empty value on startup for now
-    this.#auth$.next();
+    this.storage.get('auth').then((auth) => {
+      // Emit the loaded value into the observable stream.
+      this.#auth$.next(auth);
+    });
   }
 
   private saveAuth$(auth: AuthResponse): Observable<void> {
@@ -40,19 +42,25 @@ export class AuthService {
     return this.#auth$.pipe(map((auth) => auth?.token));
   }
 
-  logIn$(authRequest: AuthRequest): Observable<User> {
+  logIn(authRequest: AuthRequest): Observable<User> {
+
     const authUrl = `${API_URL}/users/login`;
     return this.http.post<AuthResponse>(authUrl, authRequest).pipe(
-      map((auth) => {
+      // Delay the observable stream while persisting the authentication response.
+      delayWhen((auth) => this.saveAuth$(auth)),
+      map(auth => {
         this.#auth$.next(auth);
-        //console.log(`User ${auth.user.username} logged in`);
+        console.log(`User ${auth.user.username} logged in`);
         return auth.user;
       })
     );
   }
 
-  logOut(): void {
+  logOut() {
     this.#auth$.next(null);
-    console.log("User logged out");
+    // Remove the stored authentication from storage when logging out.
+    this.storage.remove('auth');
+    console.log('User logged out');
   }
+
 }

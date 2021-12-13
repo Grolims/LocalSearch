@@ -44,7 +44,7 @@ export class LoginPage {
     this.loginError = false;
 
     // Perform the authentication request to the API.
-    this.auth.logIn$(this.authRequest).subscribe({
+    this.auth.logIn(this.authRequest).subscribe({
       next: () => this.router.navigateByUrl("/"),
       error: (err) => {
         this.loginError = true;
