@@ -1,0 +1,6 @@
+{
+	"appId": "com.localsearch.app",
+	"appName": "LocalSearch",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
