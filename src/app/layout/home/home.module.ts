@@ -8,12 +8,16 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    LeafletModule
   ],
   declarations: [HomePage]
 })

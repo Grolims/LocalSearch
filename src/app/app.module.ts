@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { HttpClientModule } from "@angular/common/http";
 import { IonicStorageModule } from "@ionic/storage-angular";
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -13,7 +14,7 @@ import { AppRoutingModule } from './app-routing.module';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 
