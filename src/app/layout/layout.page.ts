@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
 import { latLng, MapOptions, tileLayer } from 'leaflet';
+import * as L from 'leaflet';
+
 
 @Component({
   selector: 'app-layout',
@@ -36,7 +38,9 @@ export class LayoutPage implements OnInit {
   ngOnInit() {
   }
 
-
+  onMapReady(map: L.Map) {
+    setTimeout(() => map.invalidateSize(), 0);
+  }
 
   logOut() {
     console.log("logging out...");
