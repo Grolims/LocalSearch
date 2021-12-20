@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from "@angular/router";
 import { AuthService } from "src/app/auth/auth.service";
-import { latLng, MapOptions, tileLayer } from 'leaflet';
+import { latLng, Map, MapOptions, marker, Marker, tileLayer } from 'leaflet';
+import { defaultIcon } from './default-marker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
@@ -14,6 +15,8 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 })
 export class LayoutPage implements OnInit {
   mapOptions: MapOptions;
+  map: Map;
+  mapMarkers: Marker[];
 
   constructor(
     private auth: AuthService,
@@ -34,20 +37,28 @@ export class LayoutPage implements OnInit {
       center: latLng(46.778186, 6.641524)
     };
 
+    this.mapMarkers = [
+      marker([46.778186, 6.641524], { icon: defaultIcon }),
+      marker([46.780796, 6.647395], { icon: defaultIcon }),
+      marker([46.784992, 6.652267], { icon: defaultIcon })
+    ];
+
 
   }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
-    this.geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
+    this.geolocation.getCurrentPosition().then((position) => {
       const coords = position.coords;
-      console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      this.map.setView(latLng(coords.latitude, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
   }
 
-  onMapReady(map: L.Map) {
+  onMapReady(map: Map) {
+    this.map = map;
     setTimeout(() => map.invalidateSize(), 0);
   }
 
