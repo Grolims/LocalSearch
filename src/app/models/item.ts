@@ -1,3 +1,4 @@
+
 export type Item = {
     name: string;
     type: string;
@@ -6,4 +7,3 @@ export type Item = {
     salepointId: string;
     creationDate: string;
   };
-  

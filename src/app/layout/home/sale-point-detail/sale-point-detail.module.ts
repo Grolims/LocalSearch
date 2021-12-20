@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+
+
 import { SalePointDetailPageRoutingModule } from './sale-point-detail-routing.module';
 
 import { SalePointDetailPage } from './sale-point-detail.page';
@@ -15,6 +17,7 @@ import { SalePointDetailPage } from './sale-point-detail.page';
     IonicModule,
     SalePointDetailPageRoutingModule
   ],
-  declarations: [SalePointDetailPage]
+  declarations: [SalePointDetailPage],
+
 })
 export class SalePointDetailPageModule {}
