@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/item';
+import { ItemResponse } from '../models/item';
+import { ItemResponseValue } from '../models/item';
+import { ItemName } from '../models/item';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -9,10 +11,16 @@ import { map } from 'rxjs/operators';
 export class  Itemservice {
   constructor(private http: HttpClient) { }
 
- getItem(): Observable<Item[]> {
+
+
+ getItem(): Observable<ItemResponse> {
   return this.http
-    .get<Item[]>("https://localsearch-ch.herokuapp.com/items");
-    //.pipe(map(convertJokeResponseToJoke));
+    .get<ItemResponse>("https://localsearch-ch.herokuapp.com/items");
+    //pipe(map(convertJokeResponseToJoke));
  }
 
+
 }
+
+
+

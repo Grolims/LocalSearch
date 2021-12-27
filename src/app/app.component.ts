@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { Itemservice } from './services/item.service';
 
-import { Item } from './models/item';
+import { ItemResponse } from './models/item';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { Item } from './models/item';
 })
 
 export class AppComponent {
-  items: Item[];
+  items: ItemResponse[];
   constructor(storage: Storage, private itemService: Itemservice) {
     storage.create();
   }

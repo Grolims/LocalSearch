@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Itemservice } from 'src/app/services/item.service';
-import { Item } from 'src/app/models/item';
+import { ItemResponse } from 'src/app/models/item';
+import { ItemResponseValue } from 'src/app/models/item';
 
 
 @Component({
@@ -9,12 +10,17 @@ import { Item } from 'src/app/models/item';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  items: Item[] = [];
+  items:ItemResponseValue[] = [];
   constructor(private itemService: Itemservice) { }
 
   addItem() {
+
     this.itemService.getItem().subscribe(item => {
-      this.items = item;
+      item.data.forEach(element => {
+        this.items.push(element);
+      });
+
+
     });
    }
 

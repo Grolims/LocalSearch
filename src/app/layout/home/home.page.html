@@ -7,9 +7,14 @@
 <ion-content>
 
   <p>
-    <button type="button"(click)="addItem()">Add item</button>
+    <button type="button"(click)="addItem()">Add all item </button>
   </p>
-  <ul>
-    <li *ngFor="let item of items">{{ item.name }}</li>
-  </ul>
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-label>{{item.name}}</ion-label>
+      <ion-label>{{item.description}}</ion-label>
+      <ion-label>{{item.price}} CHF </ion-label>
+      <ion-badge color="success">{{item.label}}</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>
