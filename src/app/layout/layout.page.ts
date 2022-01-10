@@ -6,6 +6,8 @@ import { latLng, Map, MapOptions, marker, Marker, tileLayer } from 'leaflet';
 import { defaultIcon } from './default-marker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { SalepointResponse, SalepointResponseValue } from '../models/salepoint';
+import { Salepointservice } from '../services/salepoint.service';
 
 
 @Component({
@@ -17,12 +19,14 @@ export class LayoutPage implements OnInit {
   mapOptions: MapOptions;
   map: Map;
   mapMarkers: Marker[];
+  salepoints:SalepointResponseValue[] = [];
 
   constructor(
     private auth: AuthService,
     // Inject the router
     private router: Router,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private salepointService: Salepointservice,
 
   ) {
 
@@ -37,6 +41,11 @@ export class LayoutPage implements OnInit {
       center: latLng(46.778186, 6.641524)
     };
 
+    this.addSalepoint();
+    // Ligne qui déconne
+    console.log(this.salepoints)
+
+    
     this.mapMarkers = [
       marker([46.778186, 6.641524], { icon: defaultIcon }),
       marker([46.780796, 6.647395], { icon: defaultIcon }),
@@ -45,6 +54,18 @@ export class LayoutPage implements OnInit {
 
 
   }
+
+  addSalepoint() {
+
+    this.salepointService.getSalepoint().subscribe(salepoint=> {
+      salepoint.data.forEach(element => {
+
+        this.salepoints.push(element);
+      });
+
+
+    });
+   }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
