@@ -42,6 +42,7 @@ export class AuthService {
     return this.#auth$.pipe(map((auth) => auth?.token));
   }
 
+
   logIn(authRequest: AuthRequest): Observable<User> {
 
     const authUrl = `${API_URL}/users/login`;
@@ -51,7 +52,9 @@ export class AuthService {
       map(auth => {
         this.#auth$.next(auth);
         console.log(`User ${auth.user.username} logged in`);
+        console.log(auth.user._id);
         return auth.user;
+
       })
     );
   }
@@ -62,5 +65,7 @@ export class AuthService {
     this.storage.remove('auth');
     console.log('User logged out');
   }
+
+
 
 }

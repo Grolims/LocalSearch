@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemResponseValue } from 'src/app/models/item';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -11,7 +12,24 @@ import { Storage } from "@ionic/storage";
 })
 export class CreateItemPage implements OnInit {
 
+
   constructor(public httpClient: HttpClient) { }
+
+
+  public types = [
+    { val: 'Fruit'},
+    { val: 'Viande'},
+    { val: 'Légumes'},
+    { val: 'Céréales'},
+    { val: 'Boissons'},
+    { val: 'Autre'}
+  ];
+
+  public labels = [
+    { val: "Bio"},
+    { val: "Vegan"},
+  ];
+
   items:ItemResponseValue = {
 
     name: null,
@@ -26,8 +44,6 @@ export class CreateItemPage implements OnInit {
 
   };
 
-
-
   greeting: string;
   displayedGreeting: string;
 
@@ -41,12 +57,6 @@ export class CreateItemPage implements OnInit {
   }
 
   createItem(){
-
-    var headers = new Headers();
-    headers.append("Accept", 'application/json');
-    headers.append('Content-Type', 'application/json' );
-
-
 
 
     console.log(this.items)

@@ -1,6 +1,6 @@
 export type User = {
   username: string;
   admin:boolean;
-  id: string;
+  _id: string;
   registrationdate: Date;
 };
