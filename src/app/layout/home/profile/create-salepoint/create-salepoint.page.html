@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>createSalepoint</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form>
+    <ion-input type="text" placeholder="Who are you?" [(ngModel)]="greeting"
+      name="greeting" required></ion-input>
+    <ion-button type="submit">Submit</ion-button>
+  </form>
+
+  <p>Hello {{ greeting }}</p>
+
+</ion-content>

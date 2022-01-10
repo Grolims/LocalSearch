@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>createItem</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form (submit)="createItem()">
+    <ion-input type="text" placeholder="Name" [(ngModel)]="items.name"
+      name="Name" required></ion-input>
+      <ion-input type="text" placeholder="Type" [(ngModel)]="items.type"
+      name="Type" required></ion-input>
+      <ion-input type="text" placeholder="Picture" [(ngModel)]="items.picture"
+      name="Picture" ></ion-input>
+      <ion-input type="number" placeholder="Price" [(ngModel)]="items.price"
+      name="Price" required ></ion-input>
+      <ion-input type="text" placeholder="Description" [(ngModel)]="items.description"
+      name="Descritpion" required ></ion-input>
+      <ion-input type="text" placeholder="Label" [(ngModel)]="items.label"
+      name="Label" required ></ion-input>
+      <ion-input type="text" placeholder="UserId" [(ngModel)]="items.userId"
+      name="userId" required ></ion-input>
+      <ion-input type="text" placeholder="SalepointId" [(ngModel)]="items.salepointId"
+      name="salepointId" required ></ion-input>
+
+    <ion-button type="submit">Submit</ion-button>
+  </form>
+
+  <p>Hello {{ greeting }}</p>
+
+
+</ion-content>

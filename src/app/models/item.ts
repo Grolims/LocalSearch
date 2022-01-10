@@ -13,6 +13,7 @@ export type ItemResponse = {
 export type ItemResponseValue = {
     name: string;
     type: string;
+    picture:string;
     description: string;
     label:string;
     price: number;

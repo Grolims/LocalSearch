@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: ProfilePage
+  },
+  {
+    path: 'create-salepoint',
+    loadChildren: () => import('./create-salepoint/create-salepoint.module').then( m => m.CreateSalepointPageModule)
+  },
+  {
+    path: 'create-item',
+    loadChildren: () => import('./create-item/create-item.module').then( m => m.CreateItemPageModule)
   }
 ];
 
