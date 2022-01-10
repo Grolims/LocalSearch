@@ -34,7 +34,6 @@ export class HomePage implements OnInit {
       salepoint.data.forEach(element => {
 
         this.salepoints.push(element);
-        console.log(this.salepoints[0].address)
       });
 
 

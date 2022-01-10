@@ -18,8 +18,8 @@ import { Salepointservice } from '../services/salepoint.service';
 export class LayoutPage implements OnInit {
   mapOptions: MapOptions;
   map: Map;
-  mapMarkers: Marker[];
-  salepoints:SalepointResponseValue[] = [];
+  mapMarkers: Marker[] = [];
+  salepoints: SalepointResponseValue[] = [];
 
   constructor(
     private auth: AuthService,
@@ -42,30 +42,27 @@ export class LayoutPage implements OnInit {
     };
 
     this.addSalepoint();
-    // Ligne qui déconne
-    console.log(this.salepoints)
 
-    
-    this.mapMarkers = [
-      marker([46.778186, 6.641524], { icon: defaultIcon }),
-      marker([46.780796, 6.647395], { icon: defaultIcon }),
-      marker([46.784992, 6.652267], { icon: defaultIcon })
-    ];
+    // this.mapMarkers = [
+    //   marker([46.778186, 6.641524], { icon: defaultIcon }),
+    //   marker([46.780796, 6.647395], { icon: defaultIcon }),
+    //   marker([46.784992, 6.652267], { icon: defaultIcon })
+    // ];
 
 
   }
 
   addSalepoint() {
 
-    this.salepointService.getSalepoint().subscribe(salepoint=> {
+    this.salepointService.getSalepoint().subscribe(salepoint => {
       salepoint.data.forEach(element => {
-
         this.salepoints.push(element);
+        this.mapMarkers.push(marker(element.location.coordinates, {icon: defaultIcon}));
       });
 
 
     });
-   }
+  }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
