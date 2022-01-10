@@ -1,12 +1,19 @@
-export type Item = {
-    adress: string;
+
+
+  export type SalepointResponse = {
+    data: SalepointResponseValue[];
+  }
+
+  export type SalepointResponseValue = {
+    location: {
+      type: string,
+      coordinates: [number, number]
+  };
+
+    _id: string;
+    address: string;
     picture: string;
     paymentMethod: string;
-    location: {
-        type: string,
-        coordinates: [number, number]
-    };
     userId: string;
-    salepointId: string;
     creationDate: string;
   };

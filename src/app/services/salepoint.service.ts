@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { ItemResponse } from '../models/item';
-import { ItemResponseValue } from '../models/item';
-import { ItemName } from '../models/item';
+import { SalepointResponse } from '../models/salepoint';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
-export class  Itemservice {
+export class  Salepointservice {
   constructor(private http: HttpClient) { }
 
 
 
- getItem(): Observable<ItemResponse> {
+ getSalepoint(): Observable<SalepointResponse> {
   return this.http
-    .get<ItemResponse>("https://localsearch-ch.herokuapp.com/items");
+    .get<SalepointResponse>("https://localsearch-ch.herokuapp.com/salepoints");
 
  }
 
