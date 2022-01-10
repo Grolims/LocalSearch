@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemResponseValue } from 'src/app/models/item';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { Storage } from "@ionic/storage";
+
 
 @Component({
   selector: 'app-create-item',

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ItemResponseValue } from 'src/app/models/item';
+import { Storage } from "@ionic/storage";
+
 
 @Component({
   selector: 'app-create-salepoint',
