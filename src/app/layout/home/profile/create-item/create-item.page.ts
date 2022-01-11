@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ItemResponseValue } from 'src/app/models/item';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
-import { AuthService } from 'src/app/auth/auth.service';
-
+import { Salepointservice } from 'src/app/services/salepoint.service';
+import { SalepointResponse, SalepointResponseValue } from 'src/app/models/salepoint';
 
 @Component({
   selector: 'app-create-item',
@@ -12,8 +12,13 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class CreateItemPage implements OnInit {
 
+  salepoints: SalepointResponseValue[] = [];
+  constructor(public httpClient: HttpClient, private salepointService: Salepointservice) {
 
-  constructor(public httpClient: HttpClient) { }
+    this.addSalepoint();
+   }
+
+
 
 
   public types = [
@@ -44,6 +49,8 @@ export class CreateItemPage implements OnInit {
 
   };
 
+
+
   greeting: string;
   displayedGreeting: string;
 
@@ -54,6 +61,17 @@ export class CreateItemPage implements OnInit {
 
   test() {
 
+  }
+
+  addSalepoint() {
+
+    this.salepointService.getSalepoint().subscribe(salepoint => {
+      salepoint.data.forEach(element => {
+        this.salepoints.push(element);
+      });
+
+
+    });
   }
 
   createItem(){

@@ -33,8 +33,13 @@
   </ion-item>
       <ion-input type="text" placeholder="UserId" [(ngModel)]="items.userId"
       name="userId" required ></ion-input>
-      <ion-input type="text" placeholder="SalepointId" [(ngModel)]="items.salepointId"
-      name="salepointId" required ></ion-input>
+
+      <ion-item>
+          <ion-label>Point de vente</ion-label>
+          <ion-select placeholder="Select type" [(ngModel)]="items.salepointId" [ngModelOptions]="{standalone: true}">
+            <ion-select-option *ngFor="let salepoint of salepoints" [value]="salepoint._id">{{salepoint.address}}</ion-select-option>
+          </ion-select>
+       </ion-item>
 
 
 
