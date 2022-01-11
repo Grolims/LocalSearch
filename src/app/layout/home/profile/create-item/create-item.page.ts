@@ -4,6 +4,9 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Storage } from "@ionic/storage";
 import { Salepointservice } from 'src/app/services/salepoint.service';
 import { SalepointResponse, SalepointResponseValue } from 'src/app/models/salepoint';
+import { NgForm } from "@angular/forms";
+import {FormControl, FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-item',
@@ -12,14 +15,20 @@ import { SalepointResponse, SalepointResponseValue } from 'src/app/models/salepo
 })
 export class CreateItemPage implements OnInit {
 
-  salepoints: SalepointResponseValue[] = [];
+  salepoints: SalepointResponseValue[] = [
+
+  ];
+
   constructor(public httpClient: HttpClient, private salepointService: Salepointservice) {
-
     this.addSalepoint();
+
+
+
+
+
+
+
    }
-
-
-
 
   public types = [
     { val: 'Fruit'},
@@ -38,10 +47,10 @@ export class CreateItemPage implements OnInit {
   items:ItemResponseValue = {
 
     name: null,
-    type: null,
+    type: "Fruit",
     description: null,
     picture:null,
-    label:null,
+    label:"Bio",
     price:null,
     userId:null,
     salepointId: null,
@@ -51,6 +60,8 @@ export class CreateItemPage implements OnInit {
 
 
 
+
+ postError: boolean;
   greeting: string;
   displayedGreeting: string;
 
@@ -63,6 +74,7 @@ export class CreateItemPage implements OnInit {
 
   }
 
+
   addSalepoint() {
 
     this.salepointService.getSalepoint().subscribe(salepoint => {
@@ -74,14 +86,19 @@ export class CreateItemPage implements OnInit {
     });
   }
 
-  createItem(){
+  createItem(form: NgForm){
 
+    if (form.invalid) {
+      return;
+    }
 
     console.log(this.items)
     this.httpClient.post("https://localsearch-ch.herokuapp.com/items", this.items)
     .subscribe(data => {
       console.log(data);
      }, error => {
+      this.postError = true;
+      console.warn(`Post failed: ${error.message}`);
       console.log(error);
     });
 
