@@ -27,7 +27,7 @@ export class CreateSalepointPage implements OnInit {
 
   salepoints:SalepointResponseValue = {
     location: {
-      type: null,
+      type: "Point",
       coordinates: [null,null]
     },
     address: null,

@@ -6,12 +6,9 @@
 
 <ion-content>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
-    <ion-input type="text" placeholder="Type" [(ngModel)]="salepoints.location.type"
-      name="Type" required></ion-input>
 
-      <ion-input type="number" placeholder="Coordinate" [(ngModel)]="salepoints.location.coordinates"
+      <ion-input type="string" placeholder="Coordinate" [(ngModel)]="salepoints.location.coordinates"
       name="Coordinate" required></ion-input>
-
 
       <ion-input type="address" #address= "ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
       name="Address" required min-length="1" max-length="200" ></ion-input>
@@ -25,15 +22,12 @@
 
       <ion-item>
         <ion-label>Type payment </ion-label>
-        <ion-select placeholder="Select type" [(ngModel)]="salepoints.paymentMethod" [ngModelOptions]="{standalone: true}"[selectedText]="paymentMethods[0].val">
+        <ion-select placeholder="Select type" [(ngModel)]="salepoints.paymentMethod" [ngModelOptions]="{standalone: true}">
           <ion-select-option *ngFor="let payment of paymentMethods" [value]="payment.val">{{payment.val}}</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-input type="text" placeholder="UserId" [(ngModel)]="salepoints.userId"
-      name="userId" required ></ion-input>
-
-    <ion-button type="submit" [disabled]="salepointForm.invalid" >Submit</ion-button>
+    <ion-button type="submit" [disabled]="salepointForm.invalid">Submit</ion-button>
   </form>
 
 </ion-content>

@@ -5,5 +5,15 @@ export type User = {
   registrationdate: Date;
 };
 
+export type UserResponse = {
+  data: UserResponseValue[];
+}
+
+export type UserResponseValue = {
+  username: string;
+  admin:boolean;
+  password:string;
+};
+
 
 
