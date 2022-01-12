@@ -5,6 +5,7 @@ import { SalepointResponseValue } from 'src/app/models/salepoint';
 
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-create-salepoint',
@@ -13,7 +14,10 @@ import { NgForm } from '@angular/forms';
 })
 export class CreateSalepointPage implements OnInit {
 
-  constructor(public httpClient: HttpClient) { }
+  constructor(public httpClient: HttpClient, private authservice: AuthService) {
+
+    this.authservice.getUser$().subscribe(user=> this.salepoints.userId = user._id)
+  }
 
   public paymentMethods = [
     { val: "Card"},
@@ -26,12 +30,10 @@ export class CreateSalepointPage implements OnInit {
       type: null,
       coordinates: [null,null]
     },
-    _id: null,
     address: null,
     picture:null,
     paymentMethod: null,
     userId: null,
-    creationDate: null,
   };
   postError: boolean;
 

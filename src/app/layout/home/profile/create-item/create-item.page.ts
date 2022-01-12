@@ -6,6 +6,7 @@ import { Salepointservice } from 'src/app/services/salepoint.service';
 import { SalepointResponse, SalepointResponseValue } from 'src/app/models/salepoint';
 import { NgForm } from "@angular/forms";
 import {FormControl, FormGroup} from '@angular/forms';
+import { AuthService } from 'src/app/auth/auth.service';
 
 
 @Component({
@@ -19,14 +20,9 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(public httpClient: HttpClient, private salepointService: Salepointservice) {
+  constructor(public httpClient: HttpClient, private salepointService: Salepointservice,private authservice: AuthService) {
     this.addSalepoint();
-
-
-
-
-
-
+    this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
 
    }
 
@@ -44,6 +40,8 @@ export class CreateItemPage implements OnInit {
     { val: "Vegan"},
   ];
 
+
+
   items:ItemResponseValue = {
 
     name: null,
@@ -59,9 +57,8 @@ export class CreateItemPage implements OnInit {
   };
 
 
-
-
- postError: boolean;
+  postOK:boolean;
+  postError:boolean;
   greeting: string;
   displayedGreeting: string;
 
@@ -88,19 +85,26 @@ export class CreateItemPage implements OnInit {
 
   createItem(form: NgForm){
 
+
+
     if (form.invalid) {
       return;
     }
 
     console.log(this.items)
+
+
     this.httpClient.post("https://localsearch-ch.herokuapp.com/items", this.items)
     .subscribe(data => {
+
       console.log(data);
      }, error => {
       this.postError = true;
       console.warn(`Post failed: ${error.message}`);
       console.log(error);
     });
+
+    this.postOK = true;
 
   }
 

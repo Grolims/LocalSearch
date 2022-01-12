@@ -33,10 +33,10 @@ export class AuthService {
     return this.#auth$.pipe(map((auth) => Boolean(auth)));
   }
 
-  /*
+
   getUser$(): Observable<User> {
     return this.#auth$.pipe(map((auth) => auth?.user));
-  }*/
+  }
 
   getToken$(): Observable<string> {
     return this.#auth$.pipe(map((auth) => auth?.token));

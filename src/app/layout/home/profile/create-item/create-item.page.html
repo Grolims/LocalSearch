@@ -7,56 +7,74 @@
 <ion-content>
 
   <form #itemForm="ngForm" (submit)="createItem(itemForm)">
-    <ion-input type="text" #name = "ngModel" placeholder="Name" [(ngModel)]="items.name"
-      name="Name" required></ion-input>
+
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" #name = "ngModel" placeholder="Name" [(ngModel)]="items.name"
+        name="Name" required>
+      </ion-input>
+  </ion-item>
 
       <ion-item lines="none" *ngIf="name.invalid && name.touched">
         <ion-text color="danger">Name is required.</ion-text>
       </ion-item>
 
   <ion-item>
-    <ion-label>Type de produit </ion-label>
-    <ion-select placeholder="Select type"  [selectedText]="types[0].val" [(ngModel)]="items.type" [ngModelOptions]="{standalone: true}">
+    <ion-label position="floating">Type de produits</ion-label>
+    <ion-select placeholder="Select type" [(ngModel)]="items.type" [ngModelOptions]="{standalone: true}">
       <ion-select-option *ngFor="let type of types" [value]="type.val">{{type.val}}</ion-select-option>
     </ion-select>
   </ion-item>
 
 
-
+  <ion-item>
+      <ion-label position="floating">Picture</ion-label>
       <ion-input type="text" placeholder="Picture" [(ngModel)]="items.picture"
       name="Picture" ></ion-input>
+  </ion-item>
 
-      <ion-input type="number" #price = "ngModel"placeholder="Price" [(ngModel)]="items.price"
-      name="Price" required ></ion-input>
+    <ion-item>
+        <ion-label position="floating">Price</ion-label>
+        <ion-input type="number" #price = "ngModel"placeholder="Price" [(ngModel)]="items.price"
+        name="Price" required ></ion-input>
+    </ion-item>
 
       <ion-item lines="none" *ngIf="price.invalid && price.touched">
         <ion-text color="danger">Price is required.</ion-text>
       </ion-item>
 
+      <ion-item>
+      <ion-label position="floating">Description</ion-label>
       <ion-input type="text" placeholder="Description" [(ngModel)]="items.description"
       name="Descritpion" ></ion-input>
+      </ion-item>
 
     <ion-item>
-    <ion-label>Label </ion-label>
+      <ion-label position="floating">Label</ion-label>
     <ion-select placeholder="Select type" [(ngModel)]="items.label" [ngModelOptions]="{standalone: true}" >
       <ion-select-option *ngFor="let label of labels" [value]="label.val">{{label.val}}</ion-select-option>
     </ion-select>
 
       </ion-item>
-      <ion-input type="text" placeholder="UserId" [(ngModel)]="items.userId"
-      name="userId" required ></ion-input>
 
          <!-- besoin de controle pas de value default-->
       <ion-item>
-          <ion-label>Point de vente</ion-label>
+          <ion-label position="floating">Point de vente</ion-label>
           <ion-select placeholder="Select type" [(ngModel)]="items.salepointId" [ngModelOptions]="{standalone: true}">
             <ion-select-option *ngFor="let salepoint of salepoints"  [value]="salepoint._id" >{{salepoint.address}} </ion-select-option>
           </ion-select>
        </ion-item>
 
-
     <ion-button type="submit" xpand="block" [disabled]="itemForm.invalid">Submit</ion-button>
+
+    <ion-text color="danger" *ngIf="postError">
+      invalid</ion-text>
   </form>
+
+  <ion-text color="success" *ngIf="postOK">
+   sucess</ion-text>
+
+
 
 
 </ion-content>
