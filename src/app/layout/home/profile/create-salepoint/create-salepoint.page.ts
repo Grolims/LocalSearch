@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Storage } from "@ionic/storage";
 import { Itemservice } from 'src/app/services/item.service';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
-
+import { latLng, Map, MapOptions, marker, Marker, tileLayer } from 'leaflet';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
@@ -28,7 +28,7 @@ export class CreateSalepointPage implements OnInit {
   salepoints:SalepointResponseValue = {
     location: {
       type: "Point",
-      coordinates: [null,null]
+      coordinates: [null, null]
     },
     address: null,
     picture:null,

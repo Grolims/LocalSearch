@@ -7,10 +7,10 @@
 <ion-content>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
-      <ion-input type="string" placeholder="Coordinate" [(ngModel)]="salepoints.location.coordinates"
+      <ion-input placeholder="Coordinate" [(ngModel)]="salepoints.location.coordinates"
       name="Coordinate" required></ion-input>
 
-      <ion-input type="address" #address= "ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
+      <ion-input type="number" #address= "ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
       name="Address" required min-length="1" max-length="200" ></ion-input>
 
       <ion-item lines="none" *ngIf="address.invalid && address.touched">
