@@ -42,6 +42,7 @@ export class HomePage implements OnInit {
 
    updateItems(){
 
+
    }
 
 

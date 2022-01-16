@@ -44,7 +44,7 @@ export class CreateItemPage implements OnInit {
 
   items:ItemResponseValue = {
 
-    name: null,
+    name: "Pomme",
     type: "Fruit",
     description: null,
     picture:null,
@@ -52,7 +52,6 @@ export class CreateItemPage implements OnInit {
     price:null,
     userId:null,
     salepointId: null,
-    creationDate: null,
 
   };
 

@@ -3,6 +3,7 @@ import { ItemResponseValue } from 'src/app/models/item';
 import { Itemservice } from 'src/app/services/item.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
+import { NavparamService } from 'src/app/navparam.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,7 @@ export class ProfilePage implements OnInit {
 
   items:ItemResponseValue[] = [];
 
-  constructor(private itemService: Itemservice, private authservice: AuthService, private router: Router) {
+  constructor(private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
@@ -26,13 +27,13 @@ export class ProfilePage implements OnInit {
   tabVide:boolean = false;
 
 
-  updateItem()
+  updateItem(oneItem)
   {
-
-    this.router.navigate(['home/profile/update-items'])
+    this.navParamService.setNavData(oneItem);
+    this.router.navigateByUrl("home/profile/update-items");
   }
 
-  deleteItem()
+  deleteItem(oneItem)
   {
 
   }
@@ -45,7 +46,6 @@ export class ProfilePage implements OnInit {
        if (element.userId = this.id)
        {
          this.items.push(element);
-         console.log(this.items[0].name)
        }
      });
    });

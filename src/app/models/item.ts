@@ -19,5 +19,4 @@ export type ItemResponseValue = {
     price: number;
     userId: string;
     salepointId: string;
-    creationDate: string;
   };

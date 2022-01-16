@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>updateItems</ion-title>
+    <ion-title>Mon profil </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,13 +10,14 @@
 <ion-text color="danger" *ngIf="tabVide">
  You are not create items
   </ion-text >
+  <ion-text>List of your item create </ion-text>
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-label>{{item.name}}</ion-label>
       <ion-label>{{item.description}}</ion-label>
       <ion-label>{{item.price}} CHF </ion-label>
-      <ion-button color="warning" (click)="updateItem()">Change item</ion-button>
-      <ion-badge color="danger"  (click)="deleteItem()">Delete item</ion-badge>
+      <ion-button color="warning" (click)="updateItem(item)">Change item</ion-button>
+      <ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>
     </ion-item>
   </ion-list>
 
