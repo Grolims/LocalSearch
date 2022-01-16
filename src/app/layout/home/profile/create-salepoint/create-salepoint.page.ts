@@ -52,8 +52,6 @@ export class CreateSalepointPage implements OnInit {
     });
 
   }
-
-
   ngOnInit() {
   }
 
