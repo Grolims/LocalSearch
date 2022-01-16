@@ -4,6 +4,8 @@ import { Itemservice } from 'src/app/services/item.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Router } from '@angular/router';
 import { NavparamService } from 'src/app/navparam.service';
+import { HttpClient } from '@angular/common/http';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-profile',
@@ -14,11 +16,13 @@ export class ProfilePage implements OnInit {
 
   items:ItemResponseValue[] = [];
 
-  constructor(private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
+  constructor(public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
     this.addItem();
+
+
 
 
   }
@@ -35,6 +39,19 @@ export class ProfilePage implements OnInit {
 
   deleteItem(oneItem)
   {
+
+    this.httpClient.delete("https://localsearch-ch.herokuapp.com/items/"+oneItem._id)
+    .subscribe(data => {
+      console.log(data);
+     }, error => {
+      console.warn(`Post failed: ${error.message}`);
+      console.log(error);
+    });
+
+    const isitem = (element) => element == oneItem;
+
+    const indexDel = this.items.findIndex(isitem);
+    this.items.splice(indexDel,1);
 
   }
 
@@ -54,6 +71,7 @@ export class ProfilePage implements OnInit {
      this.tabVide = true;
    }
   }
+
 
 
 
