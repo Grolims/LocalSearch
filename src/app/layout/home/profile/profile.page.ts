@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { NavparamService } from 'src/app/navparam.service';
 import { HttpClient } from '@angular/common/http';
 import { element } from 'protractor';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +18,7 @@ export class ProfilePage implements OnInit {
 
   items:ItemResponseValue[] = [];
 
-  constructor(public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
+  constructor(public alertController: AlertController, public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
@@ -37,21 +39,45 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl("home/profile/update-items");
   }
 
-  deleteItem(oneItem)
+  async deleteItem(oneItem)
   {
 
-    this.httpClient.delete("https://localsearch-ch.herokuapp.com/items/"+oneItem._id)
-    .subscribe(data => {
-      console.log(data);
-     }, error => {
-      console.warn(`Post failed: ${error.message}`);
-      console.log(error);
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Delete'+ oneItem.name,
+      message: 'Message <strong>Sur you want delete </strong>'+oneItem.name +"?",
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Delete',
+          handler: () => {
+            this.httpClient.delete("https://localsearch-ch.herokuapp.com/items/"+oneItem._id)
+            .subscribe(data => {
+              console.log(data);
+            }, error => {
+              console.warn(`Post failed: ${error.message}`);
+              console.log(error);
+            });
+
+              const isitem = (element) => element == oneItem;
+
+              const indexDel = this.items.findIndex(isitem);
+              this.items.splice(indexDel,1);
+
+            console.log('Confirm Okay');
+          }
+        }
+      ]
     });
 
-    const isitem = (element) => element == oneItem;
+    await alert.present();
 
-    const indexDel = this.items.findIndex(isitem);
-    this.items.splice(indexDel,1);
 
   }
 
