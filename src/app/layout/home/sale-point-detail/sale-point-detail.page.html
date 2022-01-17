@@ -5,5 +5,33 @@
 </ion-header>
 
 <ion-content>
-  <ion-badge color="primary">11</ion-badge>
+
+  <h3>Infos salepoint </h3>
+  <ion-item >
+    <ion-label>Point de vente de la {{data.address}}</ion-label>
+
+  </ion-item>
+
+  <ion-item >
+    <ion-label>Adresse: {{data.address}}</ion-label>
+ </ion-item>
+
+  <ion-item >
+    <ion-label>Mode de paiement:  {{data.paymentMethod}}</ion-label>
+  </ion-item>
+
+  <ion-item >
+    <ion-label> Date de création :{{data.creationDate}} </ion-label>
+  </ion-item>
+
+  <h3>Liste des items </h3>
+
+  <ion-item *ngFor="let item of items">
+    <ion-label>{{item.name}}</ion-label>
+    <ion-label>{{item.description}}</ion-label>
+    <ion-label>{{item.price}} CHF </ion-label>
+    <!-- <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
+    <ion-badge color="success">{{item.label}}</ion-badge>
+  </ion-item>
+
 </ion-content>

@@ -4,6 +4,8 @@ import { Salepointservice } from 'src/app/services/salepoint.service';
 import { ItemResponse } from 'src/app/models/item';
 import { ItemResponseValue } from 'src/app/models/item';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
+import { NavparamService } from 'src/app/navparam.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,12 @@ import { SalepointResponseValue } from 'src/app/models/salepoint';
 export class HomePage implements OnInit {
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
-  constructor(private itemService: Itemservice, private salepointService: Salepointservice) { }
+  constructor(private itemService: Itemservice, private salepointService: Salepointservice, private router: Router, private navParamService:NavparamService) {
+
+    this.addSalepoint();
+
+  }
+
 
   addItem() {
 
@@ -26,6 +33,12 @@ export class HomePage implements OnInit {
 
 
     });
+   }
+
+   openSalepoint(salepoint)
+   {
+    this.navParamService.setNavData(salepoint);
+    this.router.navigateByUrl("home/sale-point-detail");
    }
 
    addSalepoint() {

@@ -86,7 +86,7 @@ export class ProfilePage implements OnInit {
 
    this.itemService.getItem().subscribe(item => {
      item.data.forEach(element => {
-       if (element.userId = this.id)
+       if (element.userId == this.id)
        {
          this.items.push(element);
        }
