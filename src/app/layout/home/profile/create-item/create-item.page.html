@@ -33,6 +33,9 @@
       name="Picture" ></ion-input>
   </ion-item>
 
+  <ion-button (click)="takePicture()">Take picture</ion-button>
+  <img *ngIf="items.picture" [src]="items.picture" />
+
     <ion-item>
         <ion-label position="floating">Price</ion-label>
         <ion-input type="number" #price = "ngModel"placeholder="Price" [(ngModel)]="items.price"
@@ -61,7 +64,7 @@
       <ion-item>
           <ion-label position="floating">Point de vente</ion-label>
           <ion-select placeholder="Select type" [(ngModel)]="items.salepointId" [ngModelOptions]="{standalone: true}">
-            <ion-select-option *ngFor="let salepoint of salepoints"  [value]="salepoint._id" >{{salepoint.address}} </ion-select-option>
+            <ion-select-option *ngFor="let salepoint of salepoints" >{{salepoint.address}} </ion-select-option>
           </ion-select>
        </ion-item>
 

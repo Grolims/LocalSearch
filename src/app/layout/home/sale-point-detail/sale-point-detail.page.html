@@ -30,6 +30,7 @@
     <ion-label>{{item.name}}</ion-label>
     <ion-label>{{item.description}}</ion-label>
     <ion-label>{{item.price}} CHF </ion-label>
+    <img *ngIf="item.picture" [src]="item.picture" />
     <!-- <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
     <ion-badge color="success">{{item.label}}</ion-badge>
   </ion-item>

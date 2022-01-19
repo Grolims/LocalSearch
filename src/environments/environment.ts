@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+
+  qimgUrl: "https://comem-qimg.herokuapp.com/api",
+  qimgSecret: "z/7ZPu+X63bn0MqsSB+58qh03jkH6t9lFlIGbwCOui9nVo8soDjmzugJiBXRTbRTmjH0NJiQLT08cyTR5k9RWvQalNwBdbbouJdA60/kQ2gYth4g9oPvqPAXchXOLnpG/VqKRZsw7RWaiMwjasjZjym6M+vQ1VeO6FtjIhz6vig=",
 };
 
 /*

@@ -39,20 +39,26 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl("home/profile/update-items");
   }
 
+  createNewitem()
+  {
+    console.log("create buttun")
+    this.router.navigateByUrl("home/profile/create-item");
+  }
+
   async deleteItem(oneItem)
   {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Delete'+ oneItem.name,
-      message: 'Message <strong>Sur you want delete </strong>'+oneItem.name +"?",
+      message: 'Message <strong>Sure you want delete </strong>'+oneItem.name +"?",
       buttons: [
         {
           text: 'Cancel',
           role: 'cancel',
           cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+          handler: () => {
+            console.log('Confirm Cancel');
           }
         }, {
           text: 'Delete',

@@ -17,10 +17,15 @@
       <ion-label>{{item.name}}</ion-label>
       <ion-label>{{item.description}}</ion-label>
       <ion-label>{{item.price}} CHF </ion-label>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="item.picture"></ion-img>
+      </ion-thumbnail>
       <!-- <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
       <ion-badge color="success">{{item.label}}</ion-badge>
     </ion-item>
   </ion-list>
+  <ion-searchbar animated></ion-searchbar>
+
   <ion-list>
     <ion-item *ngFor="let salepoint of salepoints">
       <ion-label>{{salepoint.address}}</ion-label>

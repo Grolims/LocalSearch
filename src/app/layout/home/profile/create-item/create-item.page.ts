@@ -7,6 +7,8 @@ import { SalepointResponse, SalepointResponseValue } from 'src/app/models/salepo
 import { NgForm } from "@angular/forms";
 import {FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
+import { PictureService } from 'src/app/picture/picture.service';
+import { Itemservice } from 'src/app/services/item.service';
 
 
 @Component({
@@ -20,7 +22,7 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(public httpClient: HttpClient, private salepointService: Salepointservice,private authservice: AuthService) {
+  constructor(public httpClient: HttpClient, private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
 
@@ -105,6 +107,15 @@ export class CreateItemPage implements OnInit {
 
     this.postOK = true;
 
+  }
+
+  takePicture()
+  {
+    this.pictureService.takeAndUploadPicture()
+    .subscribe(pict=> {
+      console.log(pict)
+      this.items.picture = pict.url
+    })
   }
 
   ngOnInit() {
