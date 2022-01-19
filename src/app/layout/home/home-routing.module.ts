@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'sale-point-detail',
     loadChildren: () => import('../../Layout/Home/sale-point-detail/sale-point-detail.module').then( m => m.SalePointDetailPageModule)
+  },
+  {
+    path: 'item-detail',
+    loadChildren: () => import('./item-detail/item-detail.module').then( m => m.ItemDetailPageModule)
   }
 ];
 

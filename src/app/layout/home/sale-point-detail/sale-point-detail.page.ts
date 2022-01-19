@@ -3,6 +3,8 @@ import { NavparamService } from 'src/app/navparam.service';
 import { ItemResponseValue } from 'src/app/models/item';
 import { Itemservice } from 'src/app/services/item.service';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sale-point-detail',
@@ -17,7 +19,7 @@ export class SalePointDetailPage implements OnInit {
   data:any = 0;
 
 
-  constructor(private navParamService:NavparamService, private itemService: Itemservice,) {
+  constructor(private navParamService:NavparamService, private router: Router, private itemService: Itemservice,) {
 
     this.data = this.navParamService.getNavData();
     console.log(this.data._id);
@@ -45,6 +47,13 @@ export class SalePointDetailPage implements OnInit {
       this.tabVide = true;
     }
    }
+
+   openItem(item)
+   {
+    this.navParamService.setNavData(item);
+    this.router.navigateByUrl("home/item-detail");
+   }
+
 
 
   ngOnInit() {
