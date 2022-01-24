@@ -6,16 +6,19 @@
 
 <ion-content>
 
-
+  <form #Form="ngForm" (ngSubmit)="save()" >
   <ion-item>
     <label>Prix:</label>
-    <ion-range min="1000" max="2000" step="100" snaps="true" color="secondary"></ion-range>
+    <ion-range min="1" max="300" step="1" dual-knobs="true" snaps="true" pin = "true" color="secondary"></ion-range>
   </ion-item>
 
   <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-label>{{item.type}}</ion-label>
-      <ion-checkbox>slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    <ion-item *ngFor="let entry of types">
+      <ion-label>{{entry.val}}</ion-label>
+      <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
     </ion-item>
   </ion-list>
+  <ion-button type="submit" xpand="block">Appliquer les filtres</ion-button>
+</form>
+
 </ion-content>

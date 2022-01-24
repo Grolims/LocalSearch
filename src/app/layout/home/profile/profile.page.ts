@@ -24,9 +24,6 @@ export class ProfilePage implements OnInit {
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
     this.addItem();
 
-
-
-
   }
   id:string;
 
