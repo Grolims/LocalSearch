@@ -86,5 +86,14 @@ export class LayoutPage implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
+  goHome()
+  {
+    this.router.navigateByUrl("/home");
+  }
+  goProfile()
+  {
+    this.router.navigateByUrl("/home/profile");
+  }
+
 }
 

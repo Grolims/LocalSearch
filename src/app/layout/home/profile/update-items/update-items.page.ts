@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { NavparamService } from 'src/app/navparam.service';
 import { HttpClient } from '@angular/common/http';
+import { PictureService } from 'src/app/picture/picture.service';
 
 @Component({
   selector: 'app-update-items',
@@ -19,7 +20,7 @@ export class UpdateItemsPage implements OnInit {
   data:any = 0;
 
 
-  constructor(public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private activatedRoute: ActivatedRoute, private navParamService:NavparamService) {
+  constructor(private pictureService: PictureService, public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private activatedRoute: ActivatedRoute, private navParamService:NavparamService) {
 
     this.data = this.navParamService.getNavData();
     console.log(this.data.name);
@@ -43,6 +44,14 @@ export class UpdateItemsPage implements OnInit {
 
   postOK:boolean;
 
+  takePicture()
+  {
+    this.pictureService.takeAndUploadPicture()
+    .subscribe(pict=> {
+      console.log(pict)
+      this.data.picture = pict.url
+    })
+  }
 
   updateItems(form: NgForm)
   {

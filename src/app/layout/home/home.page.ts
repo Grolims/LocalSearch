@@ -53,6 +53,11 @@ export class HomePage implements OnInit {
     });
    }
 
+   filterItems()
+   {
+    this.router.navigateByUrl("home/filter-items");
+   }
+
    updateItems(){
 
 

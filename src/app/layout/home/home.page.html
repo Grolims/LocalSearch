@@ -12,6 +12,7 @@
   <p>
     <button type="button"(click)="addSalepoint()">Add all addSalepoint </button>
   </p>
+  <ion-button type="button"(click)="filterItems()">Filter items </ion-button>
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-label>{{item.name}}</ion-label>
@@ -24,8 +25,10 @@
       <ion-badge color="success">{{item.label}}</ion-badge>
     </ion-item>
   </ion-list>
-  <ion-searchbar animated></ion-searchbar>
+  <ion-searchbar animated>
 
+
+  </ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let salepoint of salepoints">
       <ion-label>{{salepoint.address}}</ion-label>

@@ -17,5 +17,9 @@
   [leafletLayers]="mapMarkers"
   (leafletMapReady)="onMapReady($event)">
 </div>
-<ion-button> Go to User Page</ion-button>
+
 </ion-content>
+<ion-footer>
+  <ion-button (click)="goHome()">  Home page </ion-button>
+  <ion-button (click)="goProfile()"> My profile </ion-button>
+</ion-footer>

@@ -19,7 +19,8 @@ const routes: Routes = [
   {
     path: 'update-items',
     loadChildren: () => import('./update-items/update-items.module').then( m => m.UpdateItemsPageModule)
-  }
+  },
+
 ];
 
 @NgModule({

@@ -21,6 +21,8 @@ export class ItemDetailPage implements OnInit {
     this.data = this.navParamService.getNavData();
   }
 
+ 
+
   ngOnInit() {
   }
 

@@ -35,6 +35,9 @@
       name="Picture" ></ion-input>
   </ion-item>
 
+  <ion-button (click)="takePicture()">Take picture</ion-button>
+  <img *ngIf="data.picture" [src]="data.picture" />
+
     <ion-item>
         <ion-label position="floating">Price</ion-label>
         <ion-input type="number" #price = "ngModel"placeholder="Price" [(ngModel)]="data.price"

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>filter-items</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-item>
+    <label>Prix:</label>
+    <ion-range min="1000" max="2000" step="100" snaps="true" color="secondary"></ion-range>
+  </ion-item>
+
+  <ion-list>
+    <ion-item *ngFor="let item of items">
+      <ion-label>{{item.type}}</ion-label>
+      <ion-checkbox>slot="end" [(ngModel)]="entry.isChecked"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>
