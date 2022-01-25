@@ -9,6 +9,8 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { SalepointResponse, SalepointResponseValue } from '../models/salepoint';
 import { Salepointservice } from '../services/salepoint.service';
 
+import { IonRouterOutlet } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-layout',
@@ -28,6 +30,7 @@ export class LayoutPage implements OnInit {
     private geolocation: Geolocation,
     private salepointService: Salepointservice,
 
+    public routerOutlet: IonRouterOutlet
   ) {
 
     this.mapOptions = {
