@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Itemservice } from 'src/app/services/item.service';
 import { ItemResponseValue } from 'src/app/models/item';
 import { NgForm } from "@angular/forms";
+import { NavparamService } from 'src/app/navparam.service';
 
 @Component({
   selector: 'app-filter-items',
@@ -11,7 +12,7 @@ import { NgForm } from "@angular/forms";
 export class FilterItemsPage implements OnInit {
 
 
-  constructor(private itemService: Itemservice) { }
+  constructor(private itemService: Itemservice,private navParamService:NavparamService) { }
 
   ngOnInit() {
 
@@ -40,9 +41,19 @@ export class FilterItemsPage implements OnInit {
   };
 
 
+
+
+
+
+  changeValue(event: any)
+  {
+    console.log(event.detail)
+  }
+
   save()
   {
     console.log(this.types);
+    this.navParamService.setNavData(this.types)
   }
 
 }
