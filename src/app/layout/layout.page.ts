@@ -9,6 +9,10 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { SalepointResponse, SalepointResponseValue } from '../models/salepoint';
 import { Salepointservice } from '../services/salepoint.service';
 
+import { ModalController } from '@ionic/angular';
+import { HomePage } from '../layout/home/home.page';
+
+
 import { IonRouterOutlet } from '@ionic/angular';
 
 
@@ -30,6 +34,7 @@ export class LayoutPage implements OnInit {
     private geolocation: Geolocation,
     private salepointService: Salepointservice,
 
+    public modalController: ModalController,
     public routerOutlet: IonRouterOutlet
   ) {
 
@@ -54,6 +59,8 @@ export class LayoutPage implements OnInit {
 
 
   }
+
+  
 
   addSalepoint() {
 
@@ -81,6 +88,7 @@ export class LayoutPage implements OnInit {
   onMapReady(map: Map) {
     this.map = map;
     setTimeout(() => map.invalidateSize(), 0);
+    
   }
 
   logOut() {
@@ -91,11 +99,13 @@ export class LayoutPage implements OnInit {
 
   goHome()
   {
+    
     this.router.navigateByUrl("/home");
   }
   goProfile()
   {
     this.router.navigateByUrl("/home/profile");
+    
   }
 
 }
