@@ -15,8 +15,6 @@ export class FilterItemsPage implements OnInit {
 
   ngOnInit() {
 
-
-
   }
 
   public types = [

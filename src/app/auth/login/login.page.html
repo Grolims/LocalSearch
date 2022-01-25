@@ -46,9 +46,10 @@
 
     <div class="ion-padding">
       <!-- Submit button -->
-      <ion-button type="submit" expand="block" [disabled]="loginForm.invalid"
-        >Log in</ion-button
-      >
+      <ion-button type="submit" expand="block" [disabled]="loginForm.invalid">Log in</ion-button>
+
+
+      <ion-button color = "secondary" expand="block"  (click)="openRegistration()">Registration</ion-button>
 
       <!-- Error message displayed if the login failed -->
       <ion-text color="danger" *ngIf="loginError"

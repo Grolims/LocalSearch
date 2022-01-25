@@ -31,6 +31,10 @@ export class LoginPage {
     };
   }
 
+  openRegistration()
+  {
+    this.router.navigateByUrl("/registration");
+  }
   /**
    * Called when the login form is submitted.
    */

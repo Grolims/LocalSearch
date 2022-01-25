@@ -19,6 +19,19 @@ export class  Itemservice {
 
  }
 
+ delItem(itemId): Observable<ItemResponse> {
+  return this.http
+    .delete<ItemResponse>("https://localsearch-ch.herokuapp.com/items/"+itemId);
+
+ }
+
+ postItem(item): Observable<ItemResponse> {
+  return this.http
+    .post<ItemResponse>("https://localsearch-ch.herokuapp.com/items/", item);
+
+ }
+
+
 
 }
 

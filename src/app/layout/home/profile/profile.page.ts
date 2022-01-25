@@ -60,7 +60,7 @@ export class ProfilePage implements OnInit {
         }, {
           text: 'Delete',
           handler: () => {
-            this.httpClient.delete("https://localsearch-ch.herokuapp.com/items/"+oneItem._id)
+            this.itemService.delItem(oneItem._id)
             .subscribe(data => {
               console.log(data);
             }, error => {

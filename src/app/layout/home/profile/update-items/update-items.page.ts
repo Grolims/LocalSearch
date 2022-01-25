@@ -59,7 +59,7 @@ export class UpdateItemsPage implements OnInit {
       return;
     }
       console.log(this.data.name);
-    this.httpClient.patch("https://localsearch-ch.herokuapp.com/items/"+this.data._id, this.data)
+    this.httpClient.patch("https://localsearch-ch.herokuapp.com/items/"+ this.data._id, this.data)
     .subscribe(data => {
 
       console.log(data);

@@ -9,7 +9,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { PictureService } from 'src/app/picture/picture.service';
 import { Itemservice } from 'src/app/services/item.service';
-
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-create-item',
@@ -22,7 +22,7 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(public httpClient: HttpClient, private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService) {
+  constructor(public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
 
@@ -87,7 +87,6 @@ export class CreateItemPage implements OnInit {
   createItem(form: NgForm){
 
 
-
     if (form.invalid) {
       return;
     }
@@ -95,15 +94,18 @@ export class CreateItemPage implements OnInit {
     console.log(this.items)
 
 
-    this.httpClient.post("https://localsearch-ch.herokuapp.com/items", this.items)
+    this.itemService.postItem(this.items)
     .subscribe(data => {
 
       console.log(data);
+
      }, error => {
       this.postError = true;
       console.warn(`Post failed: ${error.message}`);
       console.log(error);
     });
+
+    this.router.navigateByUrl("home/profile");
 
     this.postOK = true;
 
