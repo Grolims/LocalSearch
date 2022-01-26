@@ -10,6 +10,8 @@ import { HomePage } from './home.page';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { SalePointDetailPageModule } from './sale-point-detail/sale-point-detail.module';
+
 
 @NgModule({
   imports: [
@@ -18,7 +20,8 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     IonicModule,
     HomePageRoutingModule,
     LeafletModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    SalePointDetailPageModule
   ],
   declarations: [HomePage]
 })

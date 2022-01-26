@@ -40,8 +40,10 @@ export class HomePage implements OnInit {
 
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
+  itemsCache:ItemResponseValue[] = [];
+
   constructor(private itemService: Itemservice,
-    
+
     private salepointService: Salepointservice,
     private router: Router,
     private navParamService:NavparamService,
@@ -52,9 +54,6 @@ export class HomePage implements OnInit {
     public modalController: ModalController,
     private geolocation: Geolocation,
     ) {
-
-
-
 
       this.mapOptions = {
         layers: [
@@ -69,11 +68,16 @@ export class HomePage implements OnInit {
     this.addSalepoint();
    this.filtreBol = true;
     this.data = this.navParamService.getNavData();
-    this.addItem();
+
 
 
 
   }
+
+  stopSearch()
+{
+    this.items =  [];
+}
 
   filter()
   {
@@ -92,7 +96,7 @@ export class HomePage implements OnInit {
 
     console.log(tab);
   }
-  
+
 
 
   addItem() {
@@ -105,16 +109,16 @@ export class HomePage implements OnInit {
 
 
     });
-    console.log(this.data) 
+    console.log(this.data)
 
    }
 
-   
+
 
    async presentSalepoint() {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
-      initialBreakpoint: 0.9, 
+      initialBreakpoint: 0.9,
       breakpoints: [0, 0.9]
     });
     return await modal.present();
@@ -125,9 +129,9 @@ export class HomePage implements OnInit {
     this.navParamService.setNavData(salepoint);
 
     this.presentSalepoint();
-    
 
-    
+
+
    // this.router.navigateByUrl("home/sale-point-detail");
    }
 
@@ -142,6 +146,11 @@ export class HomePage implements OnInit {
 
 
     });
+   }
+
+   detailItem()
+   {
+
    }
 
    filterItems()
@@ -165,8 +174,8 @@ export class HomePage implements OnInit {
     { val: 'Boissons', isChecked: false },
     { val: 'Autre', isChecked: false }
   ];
-   
-   
+
+
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
@@ -178,7 +187,7 @@ export class HomePage implements OnInit {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
 
-    
+
   }
 
   onMapReady(map: Map) {
@@ -193,6 +202,19 @@ export class HomePage implements OnInit {
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }
+
+  addItEmpty()
+  {
+   if (this.items.length == 0) {
+     this.addItem();
+   }
+  }
+  closeSearchBar()
+    {
+      console.log("tset");
+      this.items=[];
+    }
+
 
   goHome()
   {
