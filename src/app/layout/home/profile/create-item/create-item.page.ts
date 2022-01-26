@@ -98,11 +98,15 @@ export class CreateItemPage implements OnInit {
 
     console.log(this.items)
 
+    this.postError = false;
 
     this.itemService.postItem(this.items)
     .subscribe(data => {
 
       console.log(data);
+    this.navParamService.setNavData(this.items);
+
+    this.router.navigateByUrl("home/profile");
 
      }, error => {
       this.postError = true;
@@ -111,10 +115,6 @@ export class CreateItemPage implements OnInit {
     });
 
     this.postOK = true;
-
-    this.navParamService.setNavData(this.items);
-
-    this.router.navigateByUrl("home/profile");
 
 
 

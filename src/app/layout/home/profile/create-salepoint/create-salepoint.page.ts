@@ -50,11 +50,14 @@ export class CreateSalepointPage implements OnInit {
       return;
     }
 
+    this.postError = false;
+
     console.log(this.salepoints)
     this.httpClient.post("https://localsearch-ch.herokuapp.com/salepoints", this.salepoints)
     .subscribe(data => {
       console.log(data);
      }, error => {
+       this.postError = true;
       console.warn(`Post failed: ${error.message}`);
       console.log(error);
     });

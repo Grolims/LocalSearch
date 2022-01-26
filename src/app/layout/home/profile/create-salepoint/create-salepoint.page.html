@@ -35,9 +35,11 @@
       </ion-item>
 
 
-
-    <ion-button type="submit" [disabled]="salepointForm.invalid">Submit</ion-button>
+ <ion-button type="submit" [disabled]="salepointForm.invalid">Submit</ion-button>
+ <ion-text color="danger" *ngIf="postError"
+ >Error</ion-text>
   </form>
+
 
 
 
