@@ -117,7 +117,6 @@ export class CreateItemPage implements OnInit {
     this.postOK = true;
 
 
-
   }
 
   takePicture()
