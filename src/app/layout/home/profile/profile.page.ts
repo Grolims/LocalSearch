@@ -42,6 +42,12 @@ export class ProfilePage implements OnInit {
     this.router.navigateByUrl("home/profile/create-item");
   }
 
+  createNewSalepoint()
+  {
+    console.log("create buttun")
+    this.router.navigateByUrl("home/profile/create-salepoint");
+  }
+
   async deleteItem(oneItem)
   {
 

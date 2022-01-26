@@ -25,8 +25,10 @@ export class CreateItemPage implements OnInit {
   constructor(public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
-
+    this.authservice.getUser$().subscribe(user=> this.idSa = user._id)
    }
+
+   idSa:string;
 
   public types = [
     { val: 'Fruit'},
@@ -77,7 +79,11 @@ export class CreateItemPage implements OnInit {
 
     this.salepointService.getSalepoint().subscribe(salepoint => {
       salepoint.data.forEach(element => {
-        this.salepoints.push(element);
+        if (element.userId == this.idSa)
+        {
+          this.salepoints.push(element);
+        }
+
       });
 
 
