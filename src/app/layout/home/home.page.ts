@@ -14,6 +14,7 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 import { IonRouterOutlet } from '@ionic/angular';
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
+import * as internal from 'stream';
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,7 @@ export class HomePage implements OnInit {
 
 
   searchTerm: string;
+  searchPrice;
   mapOptions: MapOptions;
   map: Map;
   mapMarkers: Marker[] = [];
