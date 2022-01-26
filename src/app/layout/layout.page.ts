@@ -9,6 +9,10 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 import { SalepointResponse, SalepointResponseValue } from '../models/salepoint';
 import { Salepointservice } from '../services/salepoint.service';
 
+// Salepoint with IDs imports
+import { CustomMarker, SalepointMarkerResponseValue } from '../models/salepointmarker';
+import { SalepointMarkerResponse } from '../models/salepointmarker';
+
 import { ModalController } from '@ionic/angular';
 import { HomePage } from '../layout/home/home.page';
 
@@ -24,8 +28,9 @@ import { IonRouterOutlet } from '@ionic/angular';
 export class LayoutPage implements OnInit {
   mapOptions: MapOptions;
   map: Map;
-  mapMarkers: Marker[] = [];
+  mapMarkers: CustomMarker[] = [];
   salepoints: SalepointResponseValue[] = [];
+  salepointMarkers: SalepointMarkerResponseValue[] = [];
 
   constructor(
     private auth: AuthService,
@@ -51,12 +56,6 @@ export class LayoutPage implements OnInit {
 
     this.addSalepoint();
 
-    // this.mapMarkers = [
-    //   marker([46.778186, 6.641524], { icon: defaultIcon }),
-    //   marker([46.780796, 6.647395], { icon: defaultIcon }),
-    //   marker([46.784992, 6.652267], { icon: defaultIcon })
-    // ];
-
 
   }
 
@@ -64,14 +63,26 @@ export class LayoutPage implements OnInit {
 
   addSalepoint() {
 
-    this.salepointService.getSalepoint().subscribe(salepoint => {
+    this.salepointService.getSalepointIDs().subscribe(salepoint => {
       salepoint.data.forEach(element => {
         this.salepoints.push(element);
-        this.mapMarkers.push(marker(element.location.coordinates, {icon: defaultIcon}));
+
+        const newMarker = marker(
+          element.location.coordinates,
+          {icon: defaultIcon},
+          ).on('click', this.markerClick);
+
+          
+        this.mapMarkers.push(newMarker);
       });
 
 
     });
+  }
+
+  markerClick(e) {
+    console.log(e.target);
+    console.log()
   }
 
   ngOnInit() {
