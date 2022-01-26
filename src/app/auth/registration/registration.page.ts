@@ -20,8 +20,6 @@ export class RegistrationPage implements OnInit {
     username: null,
     admin: false,
     password:null,
-
-
   };
 
 

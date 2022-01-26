@@ -7,7 +7,8 @@ import { NavparamService } from 'src/app/navparam.service';
 import { HttpClient } from '@angular/common/http';
 import { element } from 'protractor';
 import { AlertController } from '@ionic/angular';
-
+import { Salepointservice } from 'src/app/services/salepoint.service';
+import { SalepointResponseValue } from 'src/app/models/salepoint';
 
 @Component({
   selector: 'app-profile',
@@ -17,15 +18,23 @@ import { AlertController } from '@ionic/angular';
 export class ProfilePage implements OnInit {
 
   items:ItemResponseValue[] = [];
+  salepoints:SalepointResponseValue[] = [];
+  data:any = 0;
 
-  constructor(public alertController: AlertController, public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService) {
+  constructor(public alertController: AlertController, public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService, private salepointService: Salepointservice) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
+    this.authservice.getUser$().subscribe(user=> this.idSa = user._id)
+    this.data = this.navParamService.getNavData();
+    console.log(this.data);
     this.addItem();
+    this.addSalepoint();
+
 
   }
   id:string;
+  idSa:string;
 
   tabVide:boolean = false;
 
@@ -105,8 +114,24 @@ export class ProfilePage implements OnInit {
    if (this.items.length = 0) {
      this.tabVide = true;
    }
+
+
   }
 
+  addSalepoint() {
+
+    this.salepointService.getSalepoint().subscribe(salepoint => {
+      salepoint.data.forEach(element => {
+        if (element.userId == this.idSa)
+        {
+          this.salepoints.push(element);
+        }
+
+      });
+
+
+    });
+  }
 
 
 

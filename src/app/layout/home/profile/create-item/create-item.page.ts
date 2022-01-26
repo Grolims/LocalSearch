@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { PictureService } from 'src/app/picture/picture.service';
 import { Itemservice } from 'src/app/services/item.service';
 import { Router } from "@angular/router";
+import { NavparamService } from 'src/app/navparam.service';
 
 @Component({
   selector: 'app-create-item',
@@ -22,7 +23,7 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
+  constructor(private navParamService:NavparamService,public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
     this.authservice.getUser$().subscribe(user=> this.idSa = user._id)
@@ -43,8 +44,6 @@ export class CreateItemPage implements OnInit {
     { val: "Bio"},
     { val: "Vegan"},
   ];
-
-
 
   items:ItemResponseValue = {
 
@@ -111,9 +110,13 @@ export class CreateItemPage implements OnInit {
       console.log(error);
     });
 
+    this.postOK = true;
+
+    this.navParamService.setNavData(this.items);
+
     this.router.navigateByUrl("home/profile");
 
-    this.postOK = true;
+
 
   }
 

@@ -10,16 +10,25 @@
 <ion-text color="danger" *ngIf="tabVide">
  You are not create items
   </ion-text >
-  <ion-text>List of your item create </ion-text>
+  <ion-text>Mes items </ion-text>
   <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-label>{{item.name}}</ion-label>
       <ion-label>{{item.description}}</ion-label>
       <ion-label>{{item.price}} CHF </ion-label>
+      <ion-img [src]="item.picture"></ion-img>
       <ion-button color="warning" (click)="updateItem(item)">Change item</ion-button>
       <ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>
     </ion-item>
   </ion-list>
+
+  <ion-text>Mes salepoints</ion-text>
+  <ion-list>
+  <ion-item *ngFor="let salepoint of salepoints">
+    <ion-label>{{salepoint.address}}</ion-label>
+    <ion-img [src]="salepoint.picture"></ion-img>
+  </ion-item>
+</ion-list>
 
   <ion-button expand="block" (click)="createNewitem()">create new item</ion-button>
   <ion-button expand="block" (click)="createNewSalepoint()">Create new salepoint</ion-button>
