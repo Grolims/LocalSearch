@@ -12,6 +12,7 @@ import { defaultIcon } from '../default-marker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
+import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 import * as internal from 'stream';
@@ -42,6 +43,7 @@ export class HomePage implements OnInit {
 
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
+    public modalController: ModalController,
     private geolocation: Geolocation,
     ) {
 
@@ -84,6 +86,8 @@ export class HomePage implements OnInit {
 
     console.log(tab);
   }
+  
+
 
   addItem() {
 
@@ -141,6 +145,9 @@ export class HomePage implements OnInit {
     { val: 'Boissons', isChecked: false },
     { val: 'Autre', isChecked: false }
   ];
+   
+   
+
   ngOnInit() {
     // Geoposition is an interface that describes the position object
     this.geolocation.getCurrentPosition().then((position) => {
@@ -160,6 +167,7 @@ export class HomePage implements OnInit {
 
   logOut() {
     console.log("logging out...");
+    this.modalController.dismiss()
     this.auth.logOut();
     this.router.navigateByUrl("/login");
   }

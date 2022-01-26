@@ -8,11 +8,12 @@
   -->
   <ion-modal
   [isOpen]="true"
-  [breakpoints]="[0.1, 0.3, 0.6, 0.8]"
+  [breakpoints]="[0.3, 0.6, 0.9]"
   [initialBreakpoint]="0.3"
   [backdropBreakpoint]="0.7"
-
-
+  backdropDismiss="false"
+  
+  
   >
   <ng-template>
 
@@ -21,7 +22,13 @@
 
       <ion-toolbar>
         <ion-title size="large">Home</ion-title>
-        <ion-button (click)="goProfile()"> My profile </ion-button>
+        
+        <ion-buttons slot="end">
+          <ion-button (click)="goProfile()"> My profile </ion-button>
+          <ion-button (click)="logOut()">
+            <ion-icon name="log-out"></ion-icon>
+          </ion-button>
+        </ion-buttons>
       </ion-toolbar>
       <ion-toolbar>
         <ion-searchbar
