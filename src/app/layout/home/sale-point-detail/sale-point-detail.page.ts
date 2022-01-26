@@ -5,6 +5,7 @@ import { Itemservice } from 'src/app/services/item.service';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
 import { Router } from '@angular/router';
 
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-sale-point-detail',
@@ -19,7 +20,7 @@ export class SalePointDetailPage implements OnInit {
   data:any = 0;
 
 
-  constructor(private navParamService:NavparamService, private router: Router, private itemService: Itemservice,) {
+  constructor(private navParamService:NavparamService,public modalController: ModalController, private router: Router, private itemService: Itemservice,) {
 
     this.data = this.navParamService.getNavData();
     console.log(this.data._id);
@@ -55,6 +56,10 @@ export class SalePointDetailPage implements OnInit {
     this.router.navigateByUrl("home/item-detail");
    }
 
+
+   dismissModal() {
+    this.modalController.dismiss();
+  }
 
 
   ngOnInit() {

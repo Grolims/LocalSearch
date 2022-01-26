@@ -48,7 +48,7 @@ export class HomePage implements OnInit {
     private router: Router,
     private navParamService:NavparamService,
 
-   // private salePointDetailPage: SalePointDetailPage,
+   //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
@@ -147,6 +147,9 @@ export class HomePage implements OnInit {
 
     });
    }
+
+
+   
 
    detailItem()
    {
