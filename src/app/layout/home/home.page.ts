@@ -14,8 +14,12 @@ import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
+import { SalePointDetailPage } from './sale-point-detail/sale-point-detail.page';
+
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 import * as internal from 'stream';
+
+
 
 @Component({
   selector: 'app-home',
@@ -37,10 +41,12 @@ export class HomePage implements OnInit {
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
   constructor(private itemService: Itemservice,
+    
     private salepointService: Salepointservice,
     private router: Router,
     private navParamService:NavparamService,
 
+   // private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
@@ -99,16 +105,30 @@ export class HomePage implements OnInit {
 
 
     });
-    console.log(this.data)
+    console.log(this.data) 
 
    }
 
+   
 
+   async presentSalepoint() {
+    const modal = await this.modalController.create({
+      component: SalePointDetailPage,
+      initialBreakpoint: 0.9, 
+      breakpoints: [0, 0.9]
+    });
+    return await modal.present();
+  }
 
    openSalepoint(salepoint)
    {
     this.navParamService.setNavData(salepoint);
-    this.router.navigateByUrl("home/sale-point-detail");
+
+    this.presentSalepoint();
+    
+
+    
+   // this.router.navigateByUrl("home/sale-point-detail");
    }
 
    addSalepoint() {
@@ -157,6 +177,8 @@ export class HomePage implements OnInit {
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
+
+    
   }
 
   onMapReady(map: Map) {

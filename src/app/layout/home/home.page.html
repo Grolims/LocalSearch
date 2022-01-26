@@ -8,8 +8,8 @@
   -->
   <ion-modal
   [isOpen]="true"
-  [breakpoints]="[0.3, 0.6, 0.9]"
-  [initialBreakpoint]="0.3"
+  [breakpoints]="[0.3, 0.6, 1]"
+  [initialBreakpoint]="0.3" 
   [backdropBreakpoint]="0.7"
   backdropDismiss="false"
   
@@ -17,10 +17,8 @@
   >
   <ng-template>
 
-
-    <ion-content>
-
-      <ion-toolbar>
+    <ion-header>
+<ion-toolbar>
         <ion-title size="large">Home</ion-title>
         
         <ion-buttons slot="end">
@@ -37,7 +35,14 @@
         animated="true"></ion-searchbar>
       </ion-toolbar>
 
+    </ion-header>
 
+    <ion-content>
+
+      
+
+
+      
       <p>
         <button type="button"(click)="addItem()">Add all item </button>
       </p>
@@ -67,6 +72,7 @@
 
       </ion-list>
 
+    
 
 
     </ion-content>
