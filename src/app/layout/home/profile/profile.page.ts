@@ -48,7 +48,7 @@ export class ProfilePage implements OnInit {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
       header: 'Delete'+ oneItem.name,
-      message: 'Message <strong>Sure you want delete </strong>'+oneItem.name +"?",
+      message: 'Message <strong> Sure you want delete </strong>'+ oneItem.name +"?",
       buttons: [
         {
           text: 'Cancel',

@@ -13,10 +13,13 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { NavparamService } from './navparam.service';
+import { UserExtractPipe } from './user-extract.pipe';
+import { SearchFilterPipe } from './search-filter.pipe';
+
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, UserExtractPipe, SearchFilterPipe],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule, FormsModule,ReactiveFormsModule],
   providers: [NavparamService,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true,}],

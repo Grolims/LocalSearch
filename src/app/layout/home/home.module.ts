@@ -9,7 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   imports: [
@@ -17,7 +17,8 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    LeafletModule
+    LeafletModule,
+    Ng2SearchPipeModule
   ],
   declarations: [HomePage]
 })
