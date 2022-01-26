@@ -23,6 +23,7 @@ export class SalePointDetailPage implements OnInit {
 
     this.data = this.navParamService.getNavData();
     console.log(this.data._id);
+
     this.addItem();
 
   }
@@ -30,22 +31,22 @@ export class SalePointDetailPage implements OnInit {
   tabVide:boolean = false;
 
   addItem() {
-
-
     this.itemService.getItem().subscribe(item => {
       item.data.forEach(element => {
         if (element.salepointId == this.data._id)
         {
-          console.log(element.salepointId);
-          console.log(this.data._id);
+
           this.items.push(element);
         }
       });
+
     });
 
     if (this.items.length = 0) {
       this.tabVide = true;
     }
+
+  console.log(this.items);
    }
 
    openItem(item)

@@ -133,7 +133,7 @@ export class ProfilePage implements OnInit {
     });
   }
 
-
+  ionViewWillEnter
 
  ngOnInit() {
  }
