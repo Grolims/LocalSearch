@@ -68,6 +68,7 @@ export class HomePage implements OnInit {
       center: latLng(46.778186, 6.641524)
     };
     this.addSalepoint();
+    this.addItemCache();
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
@@ -87,11 +88,18 @@ export class HomePage implements OnInit {
   ];
 
   price:any =0;
+  listItemBool:boolean = false;
 
   changeValue(event: any)
   {
     //console.log(event.detail.value)
+
     this.price = event.detail.value;
+    console.log(event.detail.value.lower)
+    let result = this.itemsCache.filter(it => it.price >= event.detail.value.lower && it.price <= event.detail.value.upper);
+    //console.log(result);
+    this.items = result
+    console.log(result);
 
   }
 
@@ -100,10 +108,6 @@ export class HomePage implements OnInit {
   }
 
   filter() {
-
-    const result = this.items.filter(it => it.price < this.data[1].upper && it.price > this.data[1].lower);
-    console.log(result);
-
     let tab = [];
     this.data[0].forEach(element => {
       if (element.isChecked = true) {
@@ -118,17 +122,18 @@ export class HomePage implements OnInit {
 
 
 
-  addItem() {
+  addItemCache() {
 
     this.itemService.getItem().subscribe(item => {
       item.data.forEach(element => {
-        this.items.push(element);
+        this.itemsCache.push(element);
 
       });
 
 
     });
     console.log(this.data)
+
 
   }
 
@@ -154,7 +159,7 @@ export class HomePage implements OnInit {
 
   openSalepoint(salepoint) {
     this.navParamService.setNavData(salepoint);
-
+    this.locateSalepoint();
     this.presentSalepoint();
 
 
@@ -209,14 +214,12 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("home/filter-items");
   }
 
-  updateItems() {
 
 
+  locateSalepoint()
+  {
+    this.map.setView(latLng(this.salepoints[0].location.coordinates));
   }
-
-
-
-
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
@@ -230,7 +233,11 @@ export class HomePage implements OnInit {
 
 
   }
-
+  addItem()
+  {
+    this.items = this.itemsCache;
+    console.log(this.items);
+  }
 
   addSalepointId(items)
 {
@@ -271,9 +278,13 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
+  /**
+   * Ajoute les items si clicl sur la searchbar
+   */
   addItEmpty() {
     if (this.items.length == 0) {
       this.addItem();
+      this.listItemBool = true;
     }
   }
   closeSearchBar() {
