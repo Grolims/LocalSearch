@@ -1,7 +1,7 @@
 <ion-header>
   <div class="img">
 
-    <!--<ion-img *ngIf="data.picture" [src]="salepoint.picture"></ion-img>-->
+    <ion-img *ngIf="data.picture" [src]="item.picture"></ion-img>
 
   </div>
   
@@ -14,7 +14,7 @@
       <h1 class="titleItem">{{data.name}}</h1> 
       <p class="typeItem">{{data.type}}</p>
   </div> 
-     
+      
     <div class="prix">
       <p class="priceLabel">{{data.price}}.-</p>
     </div> 

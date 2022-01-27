@@ -60,10 +60,11 @@
   <swiper [slidesPerView]="2.5" [scrollbar]="{hide: true}"[freeMode]="true" > 
     <ng-template swiperSlide *ngFor="let item of items">
       <ion-card (click)="openItem(item)">
-        <ion-card-header class="cardHeader">
-          <img *ngIf="item.picture" [src]="item.picture" />
-          
-        </ion-card-header>
+        <!--<ion-card-header class="cardHeader">-->
+          <div class="divImage">
+          <img class="imageItem" *ngIf="item.picture" [src]="item.picture" />
+          </div>
+        <!--</ion-card-header>-->
       
         <ion-card-content>
 
