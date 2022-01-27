@@ -118,8 +118,8 @@ export class HomePage implements OnInit {
   async presentSalepoint() {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
-      initialBreakpoint: 0.9,
-      breakpoints: [0, 0.9]
+      initialBreakpoint: 0.4,
+      breakpoints: [0, 0.4, 0.9]
     });
     return await modal.present();
   }
@@ -127,8 +127,8 @@ export class HomePage implements OnInit {
   async presentSalepointItemDetail() {
     const modal = await this.modalController.create({
       component: ItemDetailPage,
-      initialBreakpoint: 0.9,
-      breakpoints: [0, 0.9]
+      initialBreakpoint: 0.4,
+      breakpoints: [0, 0.4, 0.9]
     });
     return await modal.present();
   }
