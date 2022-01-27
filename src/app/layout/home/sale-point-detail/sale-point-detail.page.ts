@@ -58,8 +58,10 @@ export class SalePointDetailPage implements OnInit {
 
 
    dismissModal() {
-    this.modalController.dismiss();
-  }
+     console.log("salepoint")
+    
+    //this.modalController.dismiss();
+}
 
 
   ngOnInit() {
