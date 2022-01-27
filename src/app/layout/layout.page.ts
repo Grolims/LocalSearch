@@ -11,7 +11,7 @@ import { Salepointservice } from '../services/salepoint.service';
 
 // Salepoint with IDs imports
 import { SalepointMarkerResponseValue } from '../models/salepointmarker';
-import { CustomMarker } from '../models/AltMarker'; 
+import { CustomMarker } from '../models/AltMarker';
 import { SalepointMarkerResponse } from '../models/salepointmarker';
 
 import { ModalController } from '@ionic/angular';
@@ -60,7 +60,7 @@ export class LayoutPage implements OnInit {
 
   }
 
-  
+
 
   addSalepoint() {
 
@@ -104,7 +104,7 @@ export class LayoutPage implements OnInit {
   onMapReady(map: Map) {
     this.map = map;
     setTimeout(() => map.invalidateSize(), 0);
-    
+
   }
 
   logOut() {
@@ -115,13 +115,13 @@ export class LayoutPage implements OnInit {
 
   goHome()
   {
-    
+
     this.router.navigateByUrl("/home");
   }
   goProfile()
   {
     this.router.navigateByUrl("/home/profile");
-    
+
   }
 
 }

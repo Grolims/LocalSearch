@@ -7,6 +7,7 @@ import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { PictureService } from 'src/app/picture/picture.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-salepoint',
@@ -15,7 +16,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class CreateSalepointPage implements OnInit {
 
-  constructor(public httpClient: HttpClient, private pictureService: PictureService, private authservice: AuthService) {
+  constructor(public toastController: ToastController, public httpClient: HttpClient, private pictureService: PictureService, private authservice: AuthService) {
 
     this.authservice.getUser$().subscribe(user=> this.salepoints.userId = user._id)
   }
@@ -43,6 +44,17 @@ export class CreateSalepointPage implements OnInit {
     userId: null,
   };
   postError: boolean;
+  postOk:boolean;
+  errorMsg:string;
+  errorComplte:string;
+
+  async sucessToast() {
+    const toast = await this.toastController.create({
+      message: 'Salepoint create with success.',
+      duration: 2000
+    });
+    toast.present();
+  }
 
   createSalepoint(form: NgForm){
 
@@ -56,10 +68,15 @@ export class CreateSalepointPage implements OnInit {
     this.httpClient.post("https://localsearch-ch.herokuapp.com/salepoints", this.salepoints)
     .subscribe(data => {
       console.log(data);
+      this.postOk = true;
+      this.sucessToast();
      }, error => {
        this.postError = true;
       console.warn(`Post failed: ${error.message}`);
       console.log(error);
+      this.errorMsg = error.message;
+      this.errorComplte = error.error;
+
     });
 
   }

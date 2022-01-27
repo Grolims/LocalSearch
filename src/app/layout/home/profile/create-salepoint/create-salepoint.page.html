@@ -37,8 +37,14 @@
 
  <ion-button type="submit" [disabled]="salepointForm.invalid">Submit</ion-button>
  <ion-text color="danger" *ngIf="postError"
- >Error</ion-text>
+ >Erreur: {{errorMsg}}</ion-text>
+
+ <ion-text color="danger" [innerHTML]="errorComplte"></ion-text>
   </form>
+
+
+  <ion-text color="success" *ngIf="postOk"
+  >Crée avec succès</ion-text>
 
 
 

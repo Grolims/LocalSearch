@@ -60,6 +60,7 @@
       <ion-select-option *ngFor="let label of labels" [value]="label.val">{{label.val}}</ion-select-option>
     </ion-select>
 
+
       </ion-item>
 
          <!-- pas besoin de controle value par défaut-->
@@ -68,12 +69,16 @@
           <ion-select placeholder="Select type" [(ngModel)]="items.salepointId" [ngModelOptions]="{standalone: true}">
             <ion-select-option *ngFor="let salepoint of salepoints" [value]="salepoint._id"  >{{salepoint.address}} </ion-select-option>
           </ion-select>
+          <ion-text color="danger"*ngIf="salepointVide()"> Vous devez créer un point de vente pour ajouter des items</ion-text>
        </ion-item>
+
 
     <ion-button type="submit" xpand="block" [disabled]="itemForm.invalid">Submit</ion-button>
 
     <ion-text color="danger" *ngIf="postError">
-      invalid</ion-text>
+      Erreur: {{errorMsg}}</ion-text>
+
+      <ion-text color="danger" [innerHTML]="errorComplte"></ion-text>
   </form>
 
   <ion-text color="success" *ngIf="postOK">

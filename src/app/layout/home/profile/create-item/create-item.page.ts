@@ -11,6 +11,7 @@ import { PictureService } from 'src/app/picture/picture.service';
 import { Itemservice } from 'src/app/services/item.service';
 import { Router } from "@angular/router";
 import { NavparamService } from 'src/app/navparam.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-item',
@@ -23,7 +24,7 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(private navParamService:NavparamService,public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
+  constructor(public toastController: ToastController, private navParamService:NavparamService,public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
     this.authservice.getUser$().subscribe(user=> this.idSa = user._id)
@@ -62,7 +63,10 @@ export class CreateItemPage implements OnInit {
   postOK:boolean;
   postError:boolean;
   greeting: string;
+  errorMsg:string;
+  salepointBool:boolean = false;
   displayedGreeting: string;
+  errorComplte:string;
 
   displayGreeting() {
     this.displayedGreeting = this.greeting;
@@ -73,6 +77,21 @@ export class CreateItemPage implements OnInit {
 
   }
 
+  salepointVide()
+  {
+    if(this.salepoints.length == 0)
+    {
+     return this.salepointBool = true;
+    }
+  }
+
+  async sucessToast() {
+    const toast = await this.toastController.create({
+      message: 'Items create with success.',
+      duration: 2000
+    });
+    toast.present();
+  }
 
   addSalepoint() {
 
@@ -105,6 +124,9 @@ export class CreateItemPage implements OnInit {
     .subscribe(data => {
 
       console.log(data);
+      this.postOK = true;
+      this.sucessToast();
+
     this.navParamService.setNavData(this.items);
 
     this.router.navigateByUrl("home/profile");
@@ -112,10 +134,12 @@ export class CreateItemPage implements OnInit {
      }, error => {
       this.postError = true;
       console.warn(`Post failed: ${error.message}`);
+      this.errorMsg = error.message
+      this.errorComplte = error.error;
       console.log(error);
     });
 
-    this.postOK = true;
+
 
 
   }
