@@ -53,29 +53,42 @@
 
 
 
-        <ion-list>
-          <ion-item *ngFor="let item of items| filter:searchTerm">
-            <ion-label>{{item.name}}</ion-label>
-            <ion-label>{{item.description}}</ion-label>
-            <ion-label>{{item.price}} CHF </ion-label>
+        <ion-list> 
+          <ion-list-header> Résultat de la recherche </ion-list-header>
+
+          <ion-item (click)="locateItem(item)" *ngFor="let item of items">
             <ion-thumbnail slot="start">
               <ion-img [src]="item.picture"></ion-img>
-            </ion-thumbnail>
-            <ion-button color="warning" (click)="locateItem(item)">Locate item</ion-button>
-            <!-- <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
-            <ion-badge color="success">{{item.label}}</ion-badge>
+            </ion-thumbnail> 
+            <ion-label>
+              <p>
+                {{item.name}}
+              </p>
+
+              <ion-badge color="success">
+                {{item.label}}
+
+              </ion-badge>
+            </ion-label>
+            <!--<ion-label>{{item.description}}</ion-label>--> 
+            
+            <ion-label slot="end">{{item.price}} CHF </ion-label>
+            
+            <!-- <ion-button color="warning" (click)="locateItem(item)">Locate item</ion-button>
+            <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
+            
           </ion-item>
         </ion-list>
 
         <ion-list>
-          <ion-item *ngFor="let salepoint of salepoints">
+          <ion-item (click)="openSalepoint(salepoint)" *ngFor="let salepoint of salepoints">
             <ion-label>{{salepoint.address}}</ion-label>
-            <ion-item-option (click)="openSalepoint(salepoint)">Salepoint detail </ion-item-option>
+           <!-- <ion-item-option (click)="openSalepoint(salepoint)">Salepoint detail </ion-item-option>-->
           </ion-item>
 
         </ion-list>
 
-
+ 
 
 
       </ion-content>

@@ -229,8 +229,8 @@ export class HomePage implements OnInit {
   async presentSalepointItemDetail() {
     const modal = await this.modalController.create({
       component: ItemDetailPage,
-      initialBreakpoint: 0.4,
-      breakpoints: [0, 0.4, 0.9],
+      initialBreakpoint: 0.48,
+      breakpoints: [0, 0.48, 0.9],
       id: "item"
     });
     //this.service.storeModal(modal);// storing modal instances in an array

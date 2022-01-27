@@ -6,6 +6,11 @@ import { SalepointResponseValue } from 'src/app/models/salepoint';
 import { Router } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
+import { ItemDetailPage } from 'src/app/layout/home/item-detail/item-detail.page';
+
+import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode } from 'swiper';
+
+SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode]);
 
 @Component({
   selector: 'app-sale-point-detail',
@@ -50,10 +55,23 @@ export class SalePointDetailPage implements OnInit {
   console.log(this.items);
    }
 
+
+   async presentSalepointItemDetail() {
+    const modal = await this.modalController.create({
+      component: ItemDetailPage,
+      initialBreakpoint: 0.48,
+      breakpoints: [0, 0.48, 0.9],
+      id: "item"
+    });
+    //this.service.storeModal(modal);// storing modal instances in an array
+    return await modal.present();
+  }
+
    openItem(item)
    {
     this.navParamService.setNavData(item);
-    this.router.navigateByUrl("home/item-detail");
+    this.presentSalepointItemDetail();
+    //this.router.navigateByUrl("home/item-detail");
    }
 
 

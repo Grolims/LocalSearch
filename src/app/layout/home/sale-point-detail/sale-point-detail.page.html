@@ -27,7 +27,7 @@
 
   </ion-item>
 -->
-<p>{{data.address}}</p> 
+<p class="address">{{data.address}}</p> 
 </div>
 
   
@@ -45,8 +45,10 @@
       
       
     </p>
+
   
 </div>
+
   <!-- <ion-item >
     <ion-label> Date de création :{{data.creationDate}} </ion-label>
   </ion-item>-->
@@ -55,9 +57,9 @@
 
   
 
-  <swiper [slidesPerView]="2.5"  [loop]="true"> 
+  <swiper [slidesPerView]="2.5" [scrollbar]="{hide: true}"[freeMode]="true" > 
     <ng-template swiperSlide *ngFor="let item of items">
-      <ion-card>
+      <ion-card (click)="openItem(item)">
         <ion-card-header class="cardHeader">
           <img *ngIf="item.picture" [src]="item.picture" />
           
