@@ -44,7 +44,7 @@
           <ion-list>
             <ion-item *ngFor="let entry of types">
               <ion-label>{{entry.val}}</ion-label>
-              <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
+              <ion-checkbox (ionChange) ="changeValueCheckbox($event)" slot="end" [(ngModel)]="entry.isChecked"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
             </ion-item>
           </ion-list>
           <ion-button type="submit" xpand="block">Appliquer les filtres</ion-button>

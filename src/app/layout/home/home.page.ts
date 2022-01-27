@@ -80,11 +80,11 @@ export class HomePage implements OnInit {
 
   public types = [
     { val: 'Fruit', isChecked: true },
-    { val: 'Viande', isChecked: false },
-    { val: 'Légumes', isChecked: false },
-    { val: 'Céréales', isChecked: false },
-    { val: 'Boissons', isChecked: false },
-    { val: 'Autre', isChecked: false }
+    { val: 'Viande', isChecked: true},
+    { val: 'Légumes', isChecked: true },
+    { val: 'Céréales', isChecked: true },
+    { val: 'Boissons', isChecked: true},
+    { val: 'Autre', isChecked: true}
   ];
 
   price:any =0;
@@ -102,6 +102,29 @@ export class HomePage implements OnInit {
     console.log(result);
 
   }
+
+  changeValueCheckbox(event: any)
+  {
+
+    let result;
+    let name = event.explicitOriginalTarget.firstChild.data;
+    let isCheck = event.detail.checked;
+    console.log("changeCheck")
+    console.log(isCheck);
+
+      if(isCheck == false){
+         result = this.items.filter(it=> it.type != name )
+         this.items = result;
+      }else{
+        result = this.itemsCache.filter(it=> it.type == name )
+          result.forEach(element => {
+            this.items.push(element);
+          });
+      }
+
+    }
+
+
 
   stopSearch() {
     this.items = [];
@@ -138,7 +161,7 @@ export class HomePage implements OnInit {
   }
 
 
-  
+
 
   async presentSalepoint() {
     const modal = await this.modalController.create({
@@ -148,11 +171,11 @@ export class HomePage implements OnInit {
       backdropBreakpoint: 0.6,
       id: "salepoint"
 
-      
-      
+
+
     });
 
-    
+
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
