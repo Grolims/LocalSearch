@@ -76,6 +76,25 @@ export class HomePage implements OnInit {
 
   }
 
+
+  public types = [
+    { val: 'Fruit', isChecked: true },
+    { val: 'Viande', isChecked: false },
+    { val: 'Légumes', isChecked: false },
+    { val: 'Céréales', isChecked: false },
+    { val: 'Boissons', isChecked: false },
+    { val: 'Autre', isChecked: false }
+  ];
+
+  price:any =0;
+
+  changeValue(event: any)
+  {
+    //console.log(event.detail.value)
+    this.price = event.detail.value;
+
+  }
+
   stopSearch() {
     this.items = [];
   }
@@ -143,6 +162,12 @@ export class HomePage implements OnInit {
     // this.router.navigateByUrl("home/sale-point-detail");
   }
 
+
+    save()
+    {
+
+    }
+
   addSalepoint() {
 
     this.salepointService.getSalepointIDs().subscribe(salepoint => {
@@ -190,14 +215,6 @@ export class HomePage implements OnInit {
   }
 
 
-  public types = [
-    { val: 'Fruit', isChecked: true },
-    { val: 'Viande', isChecked: false },
-    { val: 'Légumes', isChecked: false },
-    { val: 'Céréales', isChecked: false },
-    { val: 'Boissons', isChecked: false },
-    { val: 'Autre', isChecked: false }
-  ];
 
 
 

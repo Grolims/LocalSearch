@@ -35,6 +35,22 @@
           <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
         </ion-toolbar>
 
+        <form #Form="ngForm" (ngSubmit)="save()" >
+          <ion-item>
+            <label>Prix:</label>
+            <ion-range min="1" max="200" step="1" dual-knobs="true"  pin ="true" color="secondary"  (ionChange) ="changeValue($event)"></ion-range>
+
+          </ion-item>
+
+          <ion-list>
+            <ion-item *ngFor="let entry of types">
+              <ion-label>{{entry.val}}</ion-label>
+              <ion-checkbox slot="end" [(ngModel)]="entry.isChecked"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+          <ion-button type="submit" xpand="block">Appliquer les filtres</ion-button>
+        </form>
+
         <p>
           <button type="button" (click)="addItem()">Add all item </button>
         </p>
