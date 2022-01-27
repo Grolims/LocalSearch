@@ -34,11 +34,11 @@
             placeholder="Recherche un item spécifique" [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
           <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
         </ion-toolbar>
-        <div *ngIf="listItemBool">
+        <div *ngIf="listItemBool" (click)="testClick()">
         <form #Form="ngForm" (ngSubmit)="save()" >
           <ion-item>
             <label>Prix:</label>
-            <ion-range min="1" max="200" step="1" dual-knobs="true"  pin ="true" color="secondary"  (ionChange) ="changeValue($event)"></ion-range>
+            <ion-range min="1" max="200" step="1" dual-knobs="true"  pin ="true" color="secondary" (ionChange) ="changeValue($event)"></ion-range>
 
           </ion-item>
           <ion-list>

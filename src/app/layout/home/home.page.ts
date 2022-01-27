@@ -77,6 +77,8 @@ export class HomePage implements OnInit {
 
   }
 
+  lower = 0;
+  upper = 120;
 
   public types = [
     { val: 'Fruit', isChecked: true },
@@ -87,8 +89,51 @@ export class HomePage implements OnInit {
     { val: 'Autre', isChecked: true}
   ];
 
+
+
+
   price:any =0;
   listItemBool:boolean = false;
+
+
+  testClick()
+  {
+
+
+  }
+
+  filterAll(event: any)
+  {
+/*
+    let result;
+    let name = event.explicitOriginalTarget.firstChild.data;
+    let isCheck = event.detail.checked;
+    console.log("changeCheck")
+    console.log(isCheck);
+
+      if(isCheck == false){
+         result = this.items.filter(it=> it.type != name )
+         this.items = result;
+      }else{
+        result = this.itemsCache.filter(it=> it.type == name )
+          result.forEach(element => {
+
+            this.items.push(element);
+          });
+
+      }
+
+*/
+
+  }
+
+  testChange(event: any)
+  {
+
+  this.lower = event.detail.value.lower
+  this.upper = event.detail.value.upper
+  console.log(this.upper);
+  }
 
   changeValue(event: any)
   {
@@ -113,10 +158,11 @@ export class HomePage implements OnInit {
     console.log(isCheck);
 
       if(isCheck == false){
-         result = this.items.filter(it=> it.type != name )
+         result = this.items.filter(it=> it.type != name && it.price >= this.lower && it.price <= this.upper)
          this.items = result;
       }else{
-        result = this.itemsCache.filter(it=> it.type == name )
+        console.log(this.upper);
+        result = this.itemsCache.filter(it=> it.type == name  && it.price >= this.lower && it.price <= this.upper)
           result.forEach(element => {
             this.items.push(element);
           });
