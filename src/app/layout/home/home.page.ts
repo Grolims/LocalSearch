@@ -158,11 +158,11 @@ export class HomePage implements OnInit {
     console.log(isCheck);
 
       if(isCheck == false){
-         result = this.items.filter(it=> it.type != name && it.price >= this.lower && it.price <= this.upper)
+         result = this.items.filter(it=> it.type != name /* && it.price >= this.lower && it.price <= this.upper*/)
          this.items = result;
       }else{
         console.log(this.upper);
-        result = this.itemsCache.filter(it=> it.type == name  && it.price >= this.lower && it.price <= this.upper)
+        result = this.itemsCache.filter(it=> it.type == name  /*&& it.price >= this.lower && it.price <= this.upper*/)
           result.forEach(element => {
             this.items.push(element);
           });
