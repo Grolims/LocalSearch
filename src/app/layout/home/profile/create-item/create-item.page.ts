@@ -76,6 +76,7 @@ export class CreateItemPage implements OnInit {
 
   addSalepoint() {
 
+    //recup par id car pas le possibilité de le faire depuis l'api
     this.salepointService.getSalepoint().subscribe(salepoint => {
       salepoint.data.forEach(element => {
         if (element.userId == this.idSa)

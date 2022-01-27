@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
   map: Map;
   mapMarkers: Marker[] = [];
   data:any = 0;
+
   filtreBol;
   public searchFilter: any = '';
 
@@ -48,11 +49,12 @@ export class HomePage implements OnInit {
     private router: Router,
     private navParamService:NavparamService,
 
-   //private salePointDetailPage: SalePointDetailPage,
+   // private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,
+    private authservice: AuthService,
     ) {
 
       this.mapOptions = {
@@ -68,10 +70,33 @@ export class HomePage implements OnInit {
     this.addSalepoint();
    this.filtreBol = true;
     this.data = this.navParamService.getNavData();
+      this.addSalepoint();
+    this.authservice.getUser$().subscribe(user=> this.idSa = user._id);
 
 
+  }
+
+  idSa:string;
+
+addSalepointId(items)
+{
+  this.salepointService.getSalepointIDs().subscribe(salepoint => {
+    salepoint.data.forEach(element => {
+      if (element._id == items.salepointId)
+      {
+        this.salepoints.push(element);
+      }
+
+    });
 
 
+  });
+}
+
+  locateItem(items)
+  {
+    this.addSalepointId(items);
+    this.map.setView(latLng(this.salepoints[0].location.coordinates));
   }
 
   stopSearch()
@@ -124,6 +149,12 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
+  locate()
+  {
+    console.log(this.salepoints)
+   // this.map.setView(latLng(0, 0));
+  }
+
    openSalepoint(salepoint)
    {
     this.navParamService.setNavData(salepoint);
@@ -147,9 +178,6 @@ export class HomePage implements OnInit {
 
     });
    }
-
-
-   
 
    detailItem()
    {
