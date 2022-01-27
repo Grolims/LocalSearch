@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { AuthService } from "src/app/auth/auth.service";
 import { latLng, Map, MapOptions, marker, Marker, tileLayer } from 'leaflet';
 import { defaultIcon } from '../default-marker';
+import { CustomMarker } from 'src/app/models/AltMarker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
@@ -33,40 +34,40 @@ export class HomePage implements OnInit {
   searchPrice;
   mapOptions: MapOptions;
   map: Map;
-  mapMarkers: Marker[] = [];
-  data:any = 0;
+  mapMarkers: CustomMarker[] = [];
+  data: any = 0;
   filtreBol;
   public searchFilter: any = '';
 
-  items:ItemResponseValue[] = [];
-  salepoints:SalepointResponseValue[] = [];
-  itemsCache:ItemResponseValue[] = [];
+  items: ItemResponseValue[] = [];
+  salepoints: SalepointResponseValue[] = [];
+  itemsCache: ItemResponseValue[] = [];
 
   constructor(private itemService: Itemservice,
 
     private salepointService: Salepointservice,
     private router: Router,
-    private navParamService:NavparamService,
+    private navParamService: NavparamService,
 
-   //private salePointDetailPage: SalePointDetailPage,
+    //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,
-    ) {
+  ) {
 
-      this.mapOptions = {
-        layers: [
-          tileLayer(
-            'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-            { maxZoom: 18 }
-          )
-        ],
-        zoom: 13,
-        center: latLng(46.778186, 6.641524)
-      };
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
     this.addSalepoint();
-   this.filtreBol = true;
+    this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
 
@@ -74,15 +75,13 @@ export class HomePage implements OnInit {
 
   }
 
-  stopSearch()
-{
-    this.items =  [];
-}
+  stopSearch() {
+    this.items = [];
+  }
 
-  filter()
-  {
+  filter() {
 
-    const result = this.items.filter(it => it.price < this.data[1].upper &&  it.price > this.data[1].lower);
+    const result = this.items.filter(it => it.price < this.data[1].upper && it.price > this.data[1].lower);
     console.log(result);
 
     let tab = [];
@@ -111,11 +110,11 @@ export class HomePage implements OnInit {
     });
     console.log(this.data)
 
-   }
+  }
 
 
 
-   async presentSalepoint() {
+  async presentSalepoint() {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
       initialBreakpoint: 0.9,
@@ -124,52 +123,64 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-   openSalepoint(salepoint)
-   {
+  openSalepoint(salepoint) {
     this.navParamService.setNavData(salepoint);
 
     this.presentSalepoint();
 
 
 
-   // this.router.navigateByUrl("home/sale-point-detail");
-   }
+    // this.router.navigateByUrl("home/sale-point-detail");
+  }
 
-   addSalepoint() {
+  addSalepoint() {
 
-    this.salepointService.getSalepoint().subscribe(salepoint=> {
+    this.salepointService.getSalepointIDs().subscribe(salepoint => {
       salepoint.data.forEach(element => {
-
         this.salepoints.push(element);
-        this.mapMarkers.push(marker(element.location.coordinates, {icon: defaultIcon}));
+
+        const newMarker: CustomMarker = marker(
+          element.location.coordinates,
+          {icon: defaultIcon},
+          ).on('click', this.markerClick);
+
+        newMarker.options.title = element.address
+        newMarker.id = element._id;
+
+        this.mapMarkers.push(newMarker);
       });
 
 
     });
-   }
+  }
+
+  markerClick(e) {
+    let salepointId = e.target.id;
+
+    // Add clicked salepoint logic here
+    console.log(salepointId);
+  }
 
 
-   
 
-   detailItem()
-   {
 
-   }
+  detailItem() {
 
-   filterItems()
-   {
-     this.filtreBol = false;
-     console.log(this.filtreBol);
+  }
+
+  filterItems() {
+    this.filtreBol = false;
+    console.log(this.filtreBol);
     this.router.navigateByUrl("home/filter-items");
-   }
+  }
 
-   updateItems(){
-
-
-   }
+  updateItems() {
 
 
-   public types = [
+  }
+
+
+  public types = [
     { val: 'Fruit', isChecked: true },
     { val: 'Viande', isChecked: false },
     { val: 'Légumes', isChecked: false },
@@ -206,26 +217,22 @@ export class HomePage implements OnInit {
     this.router.navigateByUrl("/login");
   }
 
-  addItEmpty()
-  {
-   if (this.items.length == 0) {
-     this.addItem();
-   }
-  }
-  closeSearchBar()
-    {
-      console.log("tset");
-      this.items=[];
+  addItEmpty() {
+    if (this.items.length == 0) {
+      this.addItem();
     }
+  }
+  closeSearchBar() {
+    console.log("tset");
+    this.items = [];
+  }
 
 
-  goHome()
-  {
+  goHome() {
 
     //this.router.navigateByUrl("/home");
   }
-  goProfile()
-  {
+  goProfile() {
     //this.router.navigateByUrl("/home/profile");
 
   }
