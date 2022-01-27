@@ -1,6 +1,3 @@
-import { Marker } from "leaflet";
-
-
 export type SalepointMarkerResponse = {
     data: SalepointMarkerResponseValue[];
 }
@@ -16,7 +13,3 @@ export type SalepointMarkerResponseValue = {
     userId: string;
     _id: string,
 };
-
-export interface CustomMarker extends Marker {
-    id?: string
-}

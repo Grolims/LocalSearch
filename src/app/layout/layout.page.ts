@@ -10,7 +10,8 @@ import { SalepointResponse, SalepointResponseValue } from '../models/salepoint';
 import { Salepointservice } from '../services/salepoint.service';
 
 // Salepoint with IDs imports
-import { CustomMarker, SalepointMarkerResponseValue } from '../models/salepointmarker';
+import { SalepointMarkerResponseValue } from '../models/salepointmarker';
+import { CustomMarker } from '../models/AltMarker'; 
 import { SalepointMarkerResponse } from '../models/salepointmarker';
 
 import { ModalController } from '@ionic/angular';
@@ -67,12 +68,14 @@ export class LayoutPage implements OnInit {
       salepoint.data.forEach(element => {
         this.salepoints.push(element);
 
-        const newMarker = marker(
+        const newMarker: CustomMarker = marker(
           element.location.coordinates,
           {icon: defaultIcon},
           ).on('click', this.markerClick);
 
-          
+        newMarker.options.title = element.address
+        newMarker.id = element._id;
+
         this.mapMarkers.push(newMarker);
       });
 
@@ -81,8 +84,10 @@ export class LayoutPage implements OnInit {
   }
 
   markerClick(e) {
-    console.log(e.target);
-    console.log()
+    let salepointId = e.target.id;
+
+    // Add clicked salepoint logic here
+    console.log(salepointId);
   }
 
   ngOnInit() {
