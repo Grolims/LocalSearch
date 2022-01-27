@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { SwiperModule } from 'swiper/angular';
 
 
 
@@ -14,7 +15,8 @@ import { SalePointDetailPage } from './sale-point-detail.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    SalePointDetailPageRoutingModule
+    SalePointDetailPageRoutingModule,
+    SwiperModule
   ],
   declarations: [SalePointDetailPage],
 

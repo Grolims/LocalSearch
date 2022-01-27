@@ -4,7 +4,7 @@
     background-color: gray;
 }
 
-h1, p, h4 {
+h1, p, h4, h3, h2{
     margin-left: 10px;
     
 }
@@ -14,9 +14,37 @@ h1{
     
 }
 p{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    text-align: left;
 }
 h4{
 
     font-weight: lighter;
+}
+.section{
+    border-bottom: 1px solid rgb(207, 207, 207);
+    margin-bottom: 20px;
+}
+ion-card-title{
+
+    font-size: 15px;
+}
+ion-card{
+    width: 200px;
+   
+}
+.cardHeader{
+    background-color: gray;
+    height: 100px;
+    margin-bottom: 5px;
+    
+}
+ion-label{
+
+   font-size: 11px;
+
+
+}
+.descriptionItem{
+    font-size: 11px;
 }
