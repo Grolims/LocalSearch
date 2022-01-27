@@ -9,8 +9,7 @@ const routes: Routes = [
     component: SalePointDetailPage
   },
   {
-    path: 'item-detail',
-    loadChildren: () => import('../../../Layout/Home/SalePointDetail/item-detail/item-detail.module').then( m => m.ItemDetailPageModule)
+
   }
 ];
 

@@ -19,6 +19,7 @@ import { SalePointDetailPage } from './sale-point-detail/sale-point-detail.page'
 
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 import * as internal from 'stream';
+import { ItemDetailPage } from './item-detail/item-detail.page';
 
 
 
@@ -123,6 +124,15 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
+  async presentSalepointItemDetail() {
+    const modal = await this.modalController.create({
+      component: ItemDetailPage,
+      initialBreakpoint: 0.9,
+      breakpoints: [0, 0.9]
+    });
+    return await modal.present();
+  }
+
   openSalepoint(salepoint) {
     this.navParamService.setNavData(salepoint);
 
@@ -201,6 +211,33 @@ export class HomePage implements OnInit {
       console.warn(`Could not retrieve user position because: ${err.message}`);
     });
 
+
+  }
+
+
+  addSalepointId(items)
+{
+  this.salepointService.getSalepointIDs().subscribe(salepoint => {
+    salepoint.data.forEach(element => {
+      if (element._id == items.salepointId)
+      {
+        this.salepoints.push(element);
+      }
+
+    });
+
+
+  });
+}
+
+
+  locateItem(items)
+  {
+    this.addSalepointId(items);
+    this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    this.navParamService.setNavData(items);
+
+    this.presentSalepointItemDetail();
 
   }
 
