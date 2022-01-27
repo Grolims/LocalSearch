@@ -4,9 +4,9 @@
   <!-- Sheet Modal
   [backdropDismiss]="false"
   -->
-  <ion-modal [isOpen]="true" 
-  [breakpoints]="[0.15, 0.5, 1]" 
-  [initialBreakpoint]="0.5" 
+  <ion-modal [isOpen]="true"
+  [breakpoints]="[0.15, 0.5, 1]"
+  [initialBreakpoint]="0.5"
   [backdropBreakpoint]="0.5"
     backdropDismiss="false">
     <ng-template>
@@ -23,16 +23,17 @@
             </ion-button>
           </ion-buttons>
         </ion-toolbar>
-        <ion-toolbar>
-          <ion-searchbar (click)="addItEmpty()" show-cancel-button="focus" (ionCancel)="closeSearchBar()"
-            placeholder="Recherche un item spécifique" [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
-          <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
-        </ion-toolbar>
 
       </ion-header>
 
       <ion-content fullscreen>
 
+        <ion-toolbar>
+
+          <ion-searchbar (click)="addItEmpty()" show-cancel-button="focus" (ionCancel)="closeSearchBar()"
+            placeholder="Recherche un item spécifique" [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
+          <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
+        </ion-toolbar>
 
         <p>
           <button type="button" (click)="addItem()">Add all item </button>
@@ -50,7 +51,7 @@
             <ion-thumbnail slot="start">
               <ion-img [src]="item.picture"></ion-img>
             </ion-thumbnail>
-            <ion-button color="warning" (click)="detailItems(item)">Change item</ion-button>
+            <ion-button color="warning" (click)="locateItem(item)">Locate item</ion-button>
             <!-- <ion-button color="danger" (click)="update()">Supprimmer l'item</ion-button>-->
             <ion-badge color="success">{{item.label}}</ion-badge>
           </ion-item>
