@@ -274,6 +274,7 @@ export class HomePage implements OnInit {
   }
 
   openSalepoint(salepoint) {
+    console.log(salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
     this.presentSalepoint();
@@ -324,7 +325,7 @@ export class HomePage implements OnInit {
         result.push(element);
       }
     });
-    this.openSalepoint(result)
+    this.openSalepoint(result[0])
   }
 
 

@@ -1,32 +1,32 @@
 <ion-header>
   <div class="img">
 
-    <ion-img *ngIf="data.picture" [src]="item.picture"></ion-img>
+    <ion-img *ngIf="data.picture" [src]="data.picture"></ion-img>
 
   </div>
-  
+
 </ion-header>
 
 <ion-content>
   <!-- <h4>Mode de paiement</h4>-->
-  <div class="container"> 
-    <div class="title"> 
-      <h1 class="titleItem">{{data.name}}</h1> 
+  <div class="container">
+    <div class="title">
+      <h1 class="titleItem">{{data.name}}</h1>
       <p class="typeItem">{{data.type}}</p>
-  </div> 
-      
+  </div>
+
     <div class="prix">
       <p class="priceLabel">{{data.price}}.-</p>
-    </div> 
+    </div>
   </div>
   <div class="section">
     <h4>Label</h4>
   <p>
-    
+
     <ion-chip>
       <ion-label>{{data.label}}</ion-label>
     </ion-chip>
-    
+
   </p>
 </div>
 <h4>Description</h4>

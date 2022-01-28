@@ -28,7 +28,7 @@ export class SalePointDetailPage implements OnInit {
   constructor(private navParamService:NavparamService,public modalController: ModalController, private router: Router, private itemService: Itemservice,) {
 
     this.data = this.navParamService.getNavData();
-    console.log(this.data._id);
+    console.log(this.data);
 
     this.addItem();
 
@@ -77,7 +77,7 @@ export class SalePointDetailPage implements OnInit {
 
    dismissModal() {
      console.log("salepoint")
-    
+
     //this.modalController.dismiss();
 }
 
