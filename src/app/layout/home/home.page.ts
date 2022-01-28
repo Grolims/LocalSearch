@@ -20,6 +20,7 @@ import { SalePointDetailPage } from './sale-point-detail/sale-point-detail.page'
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 import * as internal from 'stream';
 import { ItemDetailPage } from './item-detail/item-detail.page';
+import { element } from 'protractor';
 
 
 
@@ -43,6 +44,7 @@ export class HomePage implements OnInit {
   items: ItemResponseValue[] = [];
   salepoints: SalepointResponseValue[] = [];
   itemsCache: ItemResponseValue[] = [];
+  items3: ItemResponseValue[] = [];
 
   constructor(private itemService: Itemservice,
 
@@ -94,7 +96,7 @@ export class HomePage implements OnInit {
 
   price:any =0;
   listItemBool:boolean = false;
-
+  listeEstFiltrer:boolean = false;
 
   testClick()
   {
@@ -127,12 +129,31 @@ export class HomePage implements OnInit {
 
   }
 
+  updateBare()
+  {
+
+    console.log(this.listeEstFiltrer);
+    console.log("UbadateBarre");
+    if (this.listeEstFiltrer == false)
+    {
+      let result = this.itemsCache.filter(it => it.price >= this.lower && it.price <= this.upper);
+      console.log(result);
+      this.items = result
+    }else if ( this.listeEstFiltrer == true)
+    {
+
+      let result = this.items3.filter(it => it.price >= this.lower && it.price <= this.upper);
+      this.items =result;
+    }
+
+  }
+
   testChange(event: any)
   {
 
   this.lower = event.detail.value.lower
   this.upper = event.detail.value.upper
-  console.log(this.upper);
+  console.log("change sur la bare");
   }
 
   changeValue(event: any)
@@ -152,6 +173,7 @@ export class HomePage implements OnInit {
   {
 
     let result;
+    let tab
     let name = event.explicitOriginalTarget.firstChild.data;
     let isCheck = event.detail.checked;
     console.log("changeCheck")
@@ -159,14 +181,22 @@ export class HomePage implements OnInit {
 
       if(isCheck == false){
          result = this.items.filter(it=> it.type != name /* && it.price >= this.lower && it.price <= this.upper*/)
+         this.items3 = result
          this.items = result;
+         this.listeEstFiltrer = true;
       }else{
         console.log(this.upper);
-        result = this.itemsCache.filter(it=> it.type == name  /*&& it.price >= this.lower && it.price <= this.upper*/)
+        result = this.itemsCache.filter(it=> it.type == name)
           result.forEach(element => {
             this.items.push(element);
+
           });
+          this.listeEstFiltrer = false;
+
+
       }
+
+
 
     }
 
