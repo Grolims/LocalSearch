@@ -224,7 +224,6 @@ export class HomePage implements OnInit {
 
     return tab;
 
-    console.log(tab);
   }
 
 
@@ -296,7 +295,7 @@ export class HomePage implements OnInit {
         const newMarker: CustomMarker = marker(
           element.location.coordinates,
           {icon: defaultIcon},
-          ).on('click', ()=> {this.markerClick(event)});
+          ).on('click', (e)=> {this.markerClick(e)});
 
         newMarker.options.title = element.address
         newMarker.id = element._id;
@@ -314,12 +313,13 @@ export class HomePage implements OnInit {
   }
 
   markerClick(e) {
-    let result;
-    let idsalepoint = e.ta
-    console.log("IDtargt: "+ idsalepoint);
+    let result = [];
+    const clickedSalepoint = e.target.id;
+    console.log("This is the salepoint " + clickedSalepoint)
+    // console.log("IDtargt: "+ idsalepoint);
     this.salepoints.forEach(element => {
-      console.log(element._id);
-      if (element._id == idsalepoint) {
+      // console.log(element._id);
+      if (element._id == clickedSalepoint) {
         console.log("id identique");
         result.push(element);
       }
