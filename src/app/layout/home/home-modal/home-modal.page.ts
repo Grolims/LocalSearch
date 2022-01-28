@@ -60,7 +60,7 @@ export class HomeModalPage implements OnInit {
     private auth: AuthService,
     //public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
-    private geolocation: Geolocation,) { 
+    private geolocation: Geolocation,) {
 
       this.addSalepoint();
     this.addItemCache();
@@ -68,10 +68,10 @@ export class HomeModalPage implements OnInit {
     this.data = this.navParamService.getNavData();
 
     this.items3 = this.itemsCache;
-      
+
     }
 
-  
+
 
   lower = 0;
   upper = 120;
@@ -213,7 +213,7 @@ export class HomeModalPage implements OnInit {
 
   }
 
-  
+
 
 
 
@@ -231,9 +231,9 @@ export class HomeModalPage implements OnInit {
     });
 
     modal.onWillDismiss().then(() => this.didDismiss());
- 
+
     //modal.onDidDismiss().then(() => this.didDismiss());
- 
+
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
@@ -242,12 +242,12 @@ export class HomeModalPage implements OnInit {
 
     console.log(" MODAL modal terminée puis creation home modal")
     this.presentHome();
-  } 
+  }
 
   async presentHome() {
     const modal = await this.modalController.create({
       component: HomeModalPage,
-      
+
       initialBreakpoint: 0.5,
       breakpoints: [0.15, 0.5, 1],
       backdropBreakpoint: 0.5,
@@ -287,24 +287,24 @@ export class HomeModalPage implements OnInit {
     });
 
     modal.onWillDismiss().then(() => this.didDismiss());
- 
+
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
-  
+
 
   openSalepoint(salepoint) {
     console.log("YEAAAAHHHH MODAL"+salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
-    this.modalController.dismiss(undefined, undefined, 'home'); 
+    this.modalController.dismiss(undefined, undefined, 'home');
     this.presentSalepoint();
     // this.router.navigateByUrl("home/sale-point-detail");
   }
 
 
     save()
-    { 
+    {
 
     }
 
@@ -329,7 +329,7 @@ export class HomeModalPage implements OnInit {
     });
   }
 
-  
+
 
   goToSalepoint()
   {
@@ -437,6 +437,7 @@ export class HomeModalPage implements OnInit {
   closeSearchBar() {
 
     this.items = [];
+     this.listItemBool = false;
   }
 
 
@@ -447,7 +448,7 @@ export class HomeModalPage implements OnInit {
   goProfile() {
     //this.router.navigateByUrl("/home/profile");
 
-    this.modalController.dismiss(undefined, undefined, 'home'); 
+    this.modalController.dismiss(undefined, undefined, 'home');
     this.presentProfil();
   }
 

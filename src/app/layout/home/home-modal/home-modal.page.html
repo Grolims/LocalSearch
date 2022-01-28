@@ -22,7 +22,7 @@
       placeholder="Recherche un item spécifique" [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
     <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
   </ion-toolbar>
-  <div *ngIf="listItemBool" (click)="testClick()">
+  <div *ngIf="listItemBool">
   <form #Form="ngForm" (ngSubmit)="save()" >
     <ion-item>
       <label>Prix:</label>
@@ -35,11 +35,10 @@
         <ion-checkbox (ionChange) ="changeValueCheckbox($event)" slot="end" [(ngModel)]="entry.isChecked"  [ngModelOptions]="{standalone: true}"></ion-checkbox>
       </ion-item>
     </ion-list>
-    <ion-button type="submit" xpand="block">Appliquer les filtres</ion-button>
   </form>
 </div>
 
-  <ion-list> 
+  <ion-list>
     <ion-list-header> Résultat de la recherche </ion-list-header>
 
     <ion-item  (click)="locateItem(item)" *ngFor="let item of items">

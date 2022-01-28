@@ -14,6 +14,10 @@ import { ModalController } from '@ionic/angular';
 import { HomeModalPage } from '../home-modal/home-modal.page';
 import { CreateItemPage } from './create-item/create-item.page';
 import { CreateSalepointPage } from './create-salepoint/create-salepoint.page';
+import { ItemDetailPage } from '../item-detail/item-detail.page';
+import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
+
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.page.html',
@@ -147,7 +151,7 @@ export class ProfilePage implements OnInit {
  async presentHome() {
   const modal = await this.modalController.create({
     component: HomeModalPage,
-    
+
     initialBreakpoint: 0.5,
     breakpoints: [0.15, 0.5, 1],
     backdropBreakpoint: 0.5,
@@ -162,7 +166,7 @@ export class ProfilePage implements OnInit {
 async presentCreateSalepoint() {
   const modal = await this.modalController.create({
     component: CreateSalepointPage,
-    
+
     initialBreakpoint: 0.5,
     breakpoints: [0.15, 0.5, 1],
     backdropBreakpoint: 0.5,
@@ -173,15 +177,35 @@ async presentCreateSalepoint() {
   });
   console.log("createSalepoint modal créé")
 
-  
+
  // this.service.storeModal(modal);// storing modal instances in an array
   return await modal.present();
 }
 
+async presentSalepoint() {
+  const modal = await this.modalController.create({
+    component: SalePointDetailPage,
+    initialBreakpoint: 0.48,
+    breakpoints: [0, 0.48, 0.9],
+    id: "item"
+  });
+  return await modal.present();
+}
+
+
+openSalepoint(salepoint) {
+  console.log("YEAAAAHHHH MODAL"+salepoint)
+  this.navParamService.setNavData(salepoint);
+  this.modalController.dismiss(undefined, undefined, 'home');
+  this.presentSalepoint();
+  // this.router.navigateByUrl("home/sale-point-detail");
+}
+
+
 async presentCreateItem() {
   const modal = await this.modalController.create({
     component: CreateItemPage,
-    
+
     initialBreakpoint: 0.5,
     breakpoints: [0.15, 0.5, 1],
     backdropBreakpoint: 0.5,
@@ -192,7 +216,7 @@ async presentCreateItem() {
   });
   console.log("createItem modal créé")
 
-  
+
  // this.service.storeModal(modal);// storing modal instances in an array
   return await modal.present();
 }

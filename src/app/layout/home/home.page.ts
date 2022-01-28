@@ -33,7 +33,7 @@ import { HomeModalPage } from './home-modal/home-modal.page';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
- 
+
 
   searchTerm: string;
   searchPrice;
@@ -79,8 +79,8 @@ export class HomePage implements OnInit {
 
     this.items3 = this.itemsCache;
 
-    
-    
+
+
 
   }
 
@@ -249,11 +249,11 @@ export class HomePage implements OnInit {
     this.presentHome();
    // this.openSalepoint();
   }
- 
+
   async presentHome() {
     const modal = await this.modalController.create({
       component: HomeModalPage,
-      
+
       initialBreakpoint: 0.5,
       breakpoints: [0.15, 0.5, 1],
       backdropBreakpoint: 0.5,
@@ -283,7 +283,7 @@ export class HomePage implements OnInit {
 
     });
 
-    
+
   modal.onWillDismiss().then(() => this.didDismiss());
  //modal.onDidDismiss().then(() => this.didDismiss());
    // this.service.storeModal(modal);// storing modal instances in an array
@@ -291,7 +291,7 @@ export class HomePage implements OnInit {
   }
 
 
-  
+
   async presentSalepointItemDetail() {
     const modal = await this.modalController.create({
       component: ItemDetailPage,
@@ -325,7 +325,7 @@ export class HomePage implements OnInit {
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
     this.presentSalepoint();
-    
+
     // this.router.navigateByUrl("home/sale-point-detail");
   }
 
@@ -463,13 +463,14 @@ export class HomePage implements OnInit {
   closeSearchBar() {
 
     this.items = [];
+    this.listItemBool = false;
   }
 
   didDismiss(){
 
     console.log(" HOME modal terminée puis creation home modal")
     this.presentHome();
-  } 
+  }
   goHome() {
 
     //this.router.navigateByUrl("/home");
@@ -477,7 +478,7 @@ export class HomePage implements OnInit {
   goProfile() {
     //this.router.navigateByUrl("/home/profile");
 
-    this.modalController.dismiss(undefined, undefined, 'home'); 
+    this.modalController.dismiss(undefined, undefined, 'home');
     this.presentProfil();
   }
 
