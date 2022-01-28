@@ -9,6 +9,7 @@ import { SwiperModule } from 'swiper/angular';
 import { SalePointDetailPageRoutingModule } from './sale-point-detail-routing.module';
 
 import { SalePointDetailPage } from './sale-point-detail.page';
+import { ItemDetailPageModule } from '../item-detail/item-detail.module';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { SalePointDetailPage } from './sale-point-detail.page';
     FormsModule,
     IonicModule,
     SalePointDetailPageRoutingModule,
-    SwiperModule
+    SwiperModule,
+    ItemDetailPageModule
   ],
   declarations: [SalePointDetailPage],
 
