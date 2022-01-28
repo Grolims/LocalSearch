@@ -13,40 +13,59 @@ import { ToastController } from '@ionic/angular';
   selector: 'app-create-salepoint',
   templateUrl: './create-salepoint.page.html',
   styleUrls: ['./create-salepoint.page.scss'],
+  styles: ['.map {height: 40vh}'],
 })
 export class CreateSalepointPage implements OnInit {
 
-  constructor(public toastController: ToastController, public httpClient: HttpClient, private pictureService: PictureService, private authservice: AuthService) {
+  map: Map;
+  mapOptions: MapOptions;
 
-    this.authservice.getUser$().subscribe(user=> this.salepoints.userId = user._id)
+  constructor(
+    public toastController: ToastController,
+    public httpClient: HttpClient,
+    private pictureService: PictureService,
+    private authservice: AuthService) {
+
+    this.mapOptions = {
+      layers: [
+        tileLayer(
+          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+          { maxZoom: 18 }
+        )
+      ],
+      zoom: 13,
+      center: latLng(46.778186, 6.641524)
+    };
+
+    this.authservice.getUser$().subscribe(user => this.salepoints.userId = user._id)
   }
 
   public paymentMethods = [
-    { val: "Card"},
-    { val: "Twint"},
-    { val: "Cash"},
+    { val: "Card" },
+    { val: "Twint" },
+    { val: "Cash" },
   ];
 
-  public arrayCoord =[
+  public arrayCoord = [
     512,
     536
   ]
 
-  salepoints:SalepointResponseValue = {
+  salepoints: SalepointResponseValue = {
     location: {
       type: "Point",
       coordinates: [46.78122855934512,
         6.640899487443858]
     },
     address: null,
-    picture:null,
+    picture: null,
     paymentMethod: "Cash",
     userId: null,
   };
   postError: boolean;
-  postOk:boolean;
-  errorMsg:string;
-  errorComplte:string;
+  postOk: boolean;
+  errorMsg: string;
+  errorComplte: string;
 
   async sucessToast() {
     const toast = await this.toastController.create({
@@ -56,7 +75,7 @@ export class CreateSalepointPage implements OnInit {
     toast.present();
   }
 
-  createSalepoint(form: NgForm){
+  createSalepoint(form: NgForm) {
 
     if (form.invalid) {
       return;
@@ -66,29 +85,42 @@ export class CreateSalepointPage implements OnInit {
 
     console.log(this.salepoints)
     this.httpClient.post("https://localsearch-ch.herokuapp.com/salepoints", this.salepoints)
-    .subscribe(data => {
-      console.log(data);
-      this.postOk = true;
-      this.sucessToast();
-     }, error => {
-       this.postError = true;
-      console.warn(`Post failed: ${error.message}`);
-      console.log(error);
-      this.errorMsg = error.message;
-      this.errorComplte = error.error;
+      .subscribe(data => {
+        console.log(data);
+        this.postOk = true;
+        this.sucessToast();
+      }, error => {
+        this.postError = true;
+        console.warn(`Post failed: ${error.message}`);
+        console.log(error);
+        this.errorMsg = error.message;
+        this.errorComplte = error.error;
 
-    });
+      });
 
   }
 
-  takePicture()
-  {
+  takePicture() {
     this.pictureService.takeAndUploadPicture()
-    .subscribe(pict=> {
-      console.log(pict)
-      this.salepoints.picture = pict.url
-    })
+      .subscribe(pict => {
+        console.log(pict)
+        this.salepoints.picture = pict.url
+      })
   }
+
+  onMapReady(map: Map) {
+    this.map = map;
+    map.on('click', <LeafletMouseEvent>(e) => { 
+      let coords = e.latlng
+      this.salepoints.location.coordinates = [coords.lat, coords.lng];
+     });
+    setTimeout(() => map.invalidateSize(), 0);
+  }
+
+  mapClick(e) {
+
+  }
+
   ngOnInit() {
   }
 

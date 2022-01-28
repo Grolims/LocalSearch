@@ -306,9 +306,11 @@ export class HomePage implements OnInit {
 
   markerClick(e) {
     let salepointId = e.target.id;
+    
+    console.log(`You clicked`)
 
     // Add clicked salepoint logic here
-    console.log(salepointId);
+    // console.log(salepointId);
   }
 
 

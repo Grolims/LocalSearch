@@ -4,6 +4,10 @@
   </ion-toolbar>
 </ion-header>
 
+<div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
+    (leafletMapReady)="onMapReady($event)">
+  </div>
+
 <ion-content>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
