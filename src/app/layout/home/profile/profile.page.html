@@ -21,36 +21,36 @@
       <ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>
     </ion-item>
   </ion-list>-->
-  <h2>Liste des items </h2> 
+  <h2>Liste des items </h2>
 
-  
 
-  <swiper [slidesPerView]="2.5" [scrollbar]="{hide: true}"[freeMode]="true" > 
+
+  <swiper [slidesPerView]="2.5" [scrollbar]="{hide: true}"[freeMode]="true" >
     <ng-template swiperSlide *ngFor="let item of items">
       <ion-card (click)="openItem(item)">
         <!--<ion-card-header class="cardHeader">-->
           <div class="divImage">
           <!-- <img class="imageItem" *ngIf="item.picture" [src]="item.picture" />-->
-          
+
             <ion-img class="imageItem" *ngIf="item.picture" [src]="item.picture"></ion-img>
-          
+
           </div>
         <!--</ion-card-header>-->
-      
+
         <ion-card-content>
 
           <ion-card-title>{{item.name}}</ion-card-title>
           <ion-card-subtitle>{{item.price}} CHF</ion-card-subtitle>
           <ion-chip>
-            
+
             <ion-label>{{item.label}}</ion-label>
           </ion-chip>
           <!-- <p class="descriptionItem">{{item.description}}</p>-->
         </ion-card-content>
       </ion-card>
     </ng-template>
-    
-    
+
+
   </swiper>
 
   <ion-text>Mes salepoints</ion-text>
