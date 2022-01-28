@@ -4,6 +4,7 @@ import { Salepointservice } from 'src/app/services/salepoint.service';
 import { ItemResponse } from 'src/app/models/item';
 import { ItemResponseValue } from 'src/app/models/item';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
+import { SalepointMarkerResponseValue } from 'src/app/models/salepointmarker';
 import { NavparamService } from 'src/app/navparam.service';
 import { Router } from '@angular/router';
 import { AuthService } from "src/app/auth/auth.service";
@@ -42,7 +43,7 @@ export class HomePage implements OnInit {
   public searchFilter: any = '';
 
   items: ItemResponseValue[] = [];
-  salepoints: SalepointResponseValue[] = [];
+  salepoints: SalepointMarkerResponseValue[] = [];
   itemsCache: ItemResponseValue[] = [];
   items3: ItemResponseValue[] = [];
 
@@ -132,8 +133,7 @@ export class HomePage implements OnInit {
   updateBare()
   {
 
-    console.log(this.listeEstFiltrer);
-    console.log("UbadateBarre");
+
     if (this.listeEstFiltrer == false)
     {
       let result = this.itemsCache.filter(it => it.price >= this.lower && it.price <= this.upper);
@@ -162,7 +162,7 @@ export class HomePage implements OnInit {
     //console.log(event.detail.value)
 
     this.price = event.detail.value;
-    console.log(event.detail.value.lower)
+
     let result = this.itemsCache.filter(it => it.price >= event.detail.value.lower && it.price <= event.detail.value.upper);
     //console.log(result);
     this.items = result
@@ -176,8 +176,8 @@ export class HomePage implements OnInit {
     let tab
     let name = event.explicitOriginalTarget.firstChild.data;
     let isCheck = event.detail.checked;
-    console.log("changeCheck")
-    console.log(isCheck);
+
+
 
       if(isCheck == false){
          result = this.items.filter(it=> it.type != name /* && it.price >= this.lower && it.price <= this.upper*/)
@@ -239,7 +239,6 @@ export class HomePage implements OnInit {
 
 
     });
-    console.log(this.data)
 
 
   }
@@ -297,7 +296,7 @@ export class HomePage implements OnInit {
         const newMarker: CustomMarker = marker(
           element.location.coordinates,
           {icon: defaultIcon},
-          ).on('click', this.markerClick);
+          ).on('click', ()=> {this.markerClick(event)});
 
         newMarker.options.title = element.address
         newMarker.id = element._id;
@@ -315,12 +314,17 @@ export class HomePage implements OnInit {
   }
 
   markerClick(e) {
-    let salepointId = e.target.id;
-    
-    console.log(`You clicked`)
-
-    // Add clicked salepoint logic here
-    // console.log(salepointId);
+    let result;
+    let idsalepoint = e.ta
+    console.log("IDtargt: "+ idsalepoint);
+    this.salepoints.forEach(element => {
+      console.log(element._id);
+      if (element._id == idsalepoint) {
+        console.log("id identique");
+        result.push(element);
+      }
+    });
+    this.openSalepoint(result)
   }
 
 
@@ -330,7 +334,6 @@ export class HomePage implements OnInit {
 
   filterItems() {
     this.filtreBol = false;
-    console.log(this.filtreBol);
     this.router.navigateByUrl("home/filter-items");
   }
 
@@ -356,7 +359,7 @@ export class HomePage implements OnInit {
   addItem()
   {
     this.items = this.itemsCache;
-    console.log(this.items);
+
   }
 
   addSalepointId(items)
@@ -408,7 +411,7 @@ export class HomePage implements OnInit {
     }
   }
   closeSearchBar() {
-    console.log("tset");
+
     this.items = [];
   }
 
