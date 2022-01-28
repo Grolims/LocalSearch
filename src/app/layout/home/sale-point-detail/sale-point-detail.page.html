@@ -62,7 +62,10 @@
       <ion-card (click)="openItem(item)">
         <!--<ion-card-header class="cardHeader">-->
           <div class="divImage">
-          <img class="imageItem" *ngIf="item.picture" [src]="item.picture" />
+          <!-- <img class="imageItem" *ngIf="item.picture" [src]="item.picture" />-->
+          
+            <ion-img class="imageItem" *ngIf="item.picture" [src]="item.picture"></ion-img>
+          
           </div>
         <!--</ion-card-header>-->
       

@@ -36,35 +36,35 @@ ion-card-title{
 
     font-size: 15px;
 }
-.imageItem{
-    object-fit: cover;
-    
-    width: 100%;
-    height: 100px;
-}
 
 ion-card{
-    width: 200px;
-   
+    width: 220px;
+    height: 220px;
 }
 .divImage{
-    background-color: rgb(255, 255, 255);
-    
-    width: 100%;
+    background-color: rgb(224, 28, 28);
+    //align-items: center; 
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%; 
     height: 100px;
 }
 .cardHeader{
-    background-color: gray;
-   // height: 100px;
+    background-color: gray; 
     margin-bottom: 5px;
     
 }
 ion-label{
-
    font-size: 11px;
-
 
 }
 .descriptionItem{
     font-size: 11px;
+}
+.imageItem{  
+    height: 100px;
+    object-fit: cover;
+    
+    
 }
