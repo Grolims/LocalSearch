@@ -137,12 +137,12 @@ export class HomePage implements OnInit {
     if (this.listeEstFiltrer == false)
     {
       let result = this.itemsCache.filter(it => it.price >= this.lower && it.price <= this.upper);
-      console.log(result);
-      console.log(this.items3);
+
+
       this.items = result
     }else if ( this.listeEstFiltrer == true)
     {
-        console.log(this.items3)
+
       let result = this.items3.filter(it => it.price >= this.lower && it.price <= this.upper);
       this.items = result;
     }
@@ -154,7 +154,7 @@ export class HomePage implements OnInit {
 
   this.lower = event.detail.value.lower
   this.upper = event.detail.value.upper
-  console.log("change sur la bare");
+
   }
 
   changeValue(event: any)
@@ -166,7 +166,6 @@ export class HomePage implements OnInit {
     let result = this.itemsCache.filter(it => it.price >= event.detail.value.lower && it.price <= event.detail.value.upper);
     //console.log(result);
     this.items = result
-    console.log(result);
 
   }
 
@@ -186,19 +185,15 @@ export class HomePage implements OnInit {
          this.types.forEach(element => {
            if(element.isChecked == false)
            {
-             console.log(element);
               let result =this.items3.filter(it=> it.type != element.val)
-              console.log(result);
               this.items3 = result;
            }
          });
 
          this.items = result;
-         console.log(this.items3);
-         console.log(this.items);
          this.listeEstFiltrer = true;
       }else{
-        console.log(this.upper);
+
         result = this.itemsCache.filter(it=> it.type == name)
           result.forEach(element => {
             this.items.push(element);
