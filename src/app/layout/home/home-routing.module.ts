@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'filter-items',
     loadChildren: () => import('./filter-items/filter-items.module').then( m => m.FilterItemsPageModule)
+  },
+  {
+    path: 'home-modal',
+    loadChildren: () => import('./home-modal/home-modal.module').then( m => m.HomeModalPageModule)
   }
 ];
 

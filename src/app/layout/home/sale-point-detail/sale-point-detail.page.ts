@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 import { ItemDetailPage } from 'src/app/layout/home/item-detail/item-detail.page';
 
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode } from 'swiper';
+import { HomeModalPage } from '../home-modal/home-modal.page';
+
 
 SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode]);
 
@@ -55,6 +57,37 @@ export class SalePointDetailPage implements OnInit {
   console.log(this.items);
    }
 
+   async presentHome() {
+    const modal = await this.modalController.create({
+      component: HomeModalPage,
+      
+      initialBreakpoint: 0.5,
+      breakpoints: [0.15, 0.5, 1],
+      backdropBreakpoint: 0.5,
+      id: "home"
+
+
+
+    });
+    console.log("home modal créé")
+
+    
+   // this.service.storeModal(modal);// storing modal instances in an array
+    return await modal.present();
+  }
+
+  dismissModal() {
+    console.log("salepoint");
+
+   this.modalController.dismiss();
+   
+} 
+didDismiss(){
+
+  console.log("modal terminée puis creation home modal")
+  this.presentHome();
+}
+
 
    async presentSalepointItemDetail() {
     const modal = await this.modalController.create({
@@ -75,11 +108,7 @@ export class SalePointDetailPage implements OnInit {
    }
 
 
-   dismissModal() {
-     console.log("salepoint")
-
-    //this.modalController.dismiss();
-}
+   
 
 
   ngOnInit() {

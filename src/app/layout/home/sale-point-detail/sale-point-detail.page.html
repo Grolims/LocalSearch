@@ -17,8 +17,12 @@
     <!--<ion-img *ngIf="data.picture" [src]="salepoint.picture"></ion-img>-->
 
   </div>
-</ion-header>
+  
+</ion-header> 
 <ion-content>
+  <ion-button  (click)="dismissModal()">
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-button>
 
   <div class="section">
     <h1>Point de vente </h1>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Itemservice } from 'src/app/services/item.service';
 import { Salepointservice } from 'src/app/services/salepoint.service';
 import { ItemResponse } from 'src/app/models/item';
@@ -9,31 +10,31 @@ import { NavparamService } from 'src/app/navparam.service';
 import { Router } from '@angular/router';
 import { AuthService } from "src/app/auth/auth.service";
 import { latLng, Map, MapOptions, marker, Marker, tileLayer } from 'leaflet';
-import { defaultIcon } from '../default-marker';
+import { defaultIcon } from '../../default-marker';
 import { CustomMarker } from 'src/app/models/AltMarker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 import { ModalController } from '@ionic/angular';
-import { IonRouterOutlet } from '@ionic/angular';
-import { SalePointDetailPage } from './sale-point-detail/sale-point-detail.page';
+//import { IonRouterOutlet } from '@ionic/angular';
+import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
 
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
 import * as internal from 'stream';
-import { ItemDetailPage } from './item-detail/item-detail.page';
+import { ItemDetailPage } from '../item-detail/item-detail.page';
 import { element } from 'protractor';
 
-import { ProfilePage } from './profile/profile.page';
-import { HomeModalPage } from './home-modal/home-modal.page';
+import { ProfilePage } from '../profile/profile.page';
+
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
+  selector: 'app-home-modal',
+  templateUrl: './home-modal.page.html',
+  styleUrls: ['./home-modal.page.scss'],
 })
-export class HomePage implements OnInit {
- 
+export class HomeModalPage implements OnInit {
+
 
   searchTerm: string;
   searchPrice;
@@ -57,32 +58,20 @@ export class HomePage implements OnInit {
 
     //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
-    public routerOutlet: IonRouterOutlet,
+    //public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
-    private geolocation: Geolocation,
-  ) {
+    private geolocation: Geolocation,) { 
 
-    this.mapOptions = {
-      layers: [
-        tileLayer(
-          'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-          { maxZoom: 18 }
-        )
-      ],
-      zoom: 13,
-      center: latLng(46.778186, 6.641524)
-    };
-    this.addSalepoint();
+      this.addSalepoint();
     this.addItemCache();
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
     this.items3 = this.itemsCache;
+      
+    }
 
-    
-    
-
-  }
+  
 
   lower = 0;
   upper = 120;
@@ -109,30 +98,8 @@ export class HomePage implements OnInit {
 
   }
 
-  filterAll(event: any)
-  {
-/*
-    let result;
-    let name = event.explicitOriginalTarget.firstChild.data;
-    let isCheck = event.detail.checked;
-    console.log("changeCheck")
-    console.log(isCheck);
+  filterAll(event: any){}
 
-      if(isCheck == false){
-         result = this.items.filter(it=> it.type != name )
-         this.items = result;
-      }else{
-        result = this.itemsCache.filter(it=> it.type == name )
-          result.forEach(element => {
-
-            this.items.push(element);
-          });
-
-      }
-
-*/
-
-  }
 
   updateBare()
   {
@@ -245,27 +212,8 @@ export class HomePage implements OnInit {
 
 
   }
-  ionViewDidEnter() {
-    this.presentHome();
-   // this.openSalepoint();
-  }
- 
-  async presentHome() {
-    const modal = await this.modalController.create({
-      component: HomeModalPage,
-      
-      initialBreakpoint: 0.5,
-      breakpoints: [0.15, 0.5, 1],
-      backdropBreakpoint: 0.5,
-      id: "home"
 
-    });
-
-
-    console.log("home modal créé")
-   // this.service.storeModal(modal);// storing modal instances in an array
-    return await modal.present();
-  }
+  
 
 
 
@@ -275,23 +223,46 @@ export class HomePage implements OnInit {
       component: SalePointDetailPage,
       initialBreakpoint: 0.6,
       breakpoints: [0, 0.6, 1],
-      backdropBreakpoint: 0.4,
-      swipeToClose: true,
+      backdropBreakpoint: 0.6,
       id: "salepoint"
 
 
 
     });
 
-    
-  modal.onWillDismiss().then(() => this.didDismiss());
- //modal.onDidDismiss().then(() => this.didDismiss());
+    modal.onWillDismiss().then(() => this.didDismiss());
+ 
+    //modal.onDidDismiss().then(() => this.didDismiss());
+ 
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
+  didDismiss(){
 
-  
+    console.log(" MODAL modal terminée puis creation home modal")
+    this.presentHome();
+  } 
+
+  async presentHome() {
+    const modal = await this.modalController.create({
+      component: HomeModalPage,
+      
+      initialBreakpoint: 0.5,
+      breakpoints: [0.15, 0.5, 1],
+      backdropBreakpoint: 0.5,
+      id: "home"
+
+
+
+    });
+
+
+    console.log("home modal créé")
+   // this.service.storeModal(modal);// storing modal instances in an array
+    return await modal.present();
+  }
+
   async presentSalepointItemDetail() {
     const modal = await this.modalController.create({
       component: ItemDetailPage,
@@ -315,23 +286,25 @@ export class HomePage implements OnInit {
 
     });
 
-
+    modal.onWillDismiss().then(() => this.didDismiss());
+ 
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
+  
 
   openSalepoint(salepoint) {
-    console.log("YEAAAAHHHH CARTE"+salepoint)
+    console.log("YEAAAAHHHH MODAL"+salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
+    this.modalController.dismiss(undefined, undefined, 'home'); 
     this.presentSalepoint();
-    
     // this.router.navigateByUrl("home/sale-point-detail");
   }
 
 
     save()
-    {
+    { 
 
     }
 
@@ -356,6 +329,8 @@ export class HomePage implements OnInit {
     });
   }
 
+  
+
   goToSalepoint()
   {
 
@@ -370,7 +345,6 @@ export class HomePage implements OnInit {
       // console.log(element._id);
       if (element._id == clickedSalepoint) {
         console.log("id identique");
-        this.modalController.dismiss()
         result.push(element);
       }
     });
@@ -391,7 +365,7 @@ export class HomePage implements OnInit {
 
   locateSalepoint()
   {
-    this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
   }
 
   ngOnInit() {
@@ -431,7 +405,7 @@ export class HomePage implements OnInit {
   locateItem(items)
   {
     this.addSalepointId(items);
-    this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
     this.navParamService.setNavData(items);
 
     this.presentSalepointItemDetail();
@@ -465,11 +439,7 @@ export class HomePage implements OnInit {
     this.items = [];
   }
 
-  didDismiss(){
 
-    console.log(" HOME modal terminée puis creation home modal")
-    this.presentHome();
-  } 
   goHome() {
 
     //this.router.navigateByUrl("/home");
