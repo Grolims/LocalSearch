@@ -74,7 +74,7 @@ export class HomePage implements OnInit {
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
-
+    this.items3 = this.itemsCache;
 
 
   }
@@ -138,12 +138,13 @@ export class HomePage implements OnInit {
     {
       let result = this.itemsCache.filter(it => it.price >= this.lower && it.price <= this.upper);
       console.log(result);
+      console.log(this.items3);
       this.items = result
     }else if ( this.listeEstFiltrer == true)
     {
-
+        console.log(this.items3)
       let result = this.items3.filter(it => it.price >= this.lower && it.price <= this.upper);
-      this.items =result;
+      this.items = result;
     }
 
   }
@@ -181,17 +182,29 @@ export class HomePage implements OnInit {
 
       if(isCheck == false){
          result = this.items.filter(it=> it.type != name /* && it.price >= this.lower && it.price <= this.upper*/)
-         this.items3 = result
+
+         this.types.forEach(element => {
+           if(element.isChecked == false)
+           {
+             console.log(element);
+              let result =this.items3.filter(it=> it.type != element.val)
+              console.log(result);
+              this.items3 = result;
+           }
+         });
+
          this.items = result;
+         console.log(this.items3);
+         console.log(this.items);
          this.listeEstFiltrer = true;
       }else{
         console.log(this.upper);
         result = this.itemsCache.filter(it=> it.type == name)
           result.forEach(element => {
             this.items.push(element);
+            this.items3.push(element);
 
           });
-          this.listeEstFiltrer = false;
 
 
       }
@@ -271,9 +284,6 @@ export class HomePage implements OnInit {
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
     this.presentSalepoint();
-
-
-
     // this.router.navigateByUrl("home/sale-point-detail");
   }
 
@@ -304,14 +314,17 @@ export class HomePage implements OnInit {
     });
   }
 
+  goToSalepoint()
+  {
+
+  }
+
   markerClick(e) {
     let salepointId = e.target.id;
 
     // Add clicked salepoint logic here
     console.log(salepointId);
   }
-
-
 
 
   detailItem() {
