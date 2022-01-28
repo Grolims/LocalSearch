@@ -11,12 +11,10 @@
 <ion-content>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
-      <ion-input [hidden] = "true" placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
+      <ion-input placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
       name="Coordinate" required></ion-input>
 
-      <ion-item lines="none">
-        Coordonnées : {{displayedCoord}}
-      </ion-item>
+
 
       <ion-input type="text" #address="ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
       name="Address" required min-length="6" max-length="200" ></ion-input>
