@@ -5,16 +5,20 @@
 </ion-header>
 
 <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
-    (leafletMapReady)="onMapReady($event)">
+    (leafletMapReady)="onMapReady($event)" (leafletClick)="displayCoord()">
   </div>
 
 <ion-content>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
-      <ion-input placeholder="Coordinate" [(ngModel)]="salepoints.location.coordinates"
+      <ion-input [hidden] = "true" placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
       name="Coordinate" required></ion-input>
 
-      <ion-input type="text" #address= "ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
+      <ion-item lines="none">
+        Coordonnées : {{displayedCoord}}
+      </ion-item>
+
+      <ion-input type="text" #address="ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
       name="Address" required min-length="6" max-length="200" ></ion-input>
 
       <ion-item lines="none" *ngIf="address.invalid && address.touched">

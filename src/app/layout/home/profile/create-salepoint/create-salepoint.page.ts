@@ -9,6 +9,7 @@ import { PictureService } from 'src/app/picture/picture.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-create-salepoint',
   templateUrl: './create-salepoint.page.html',
@@ -66,6 +67,7 @@ export class CreateSalepointPage implements OnInit {
   postOk: boolean;
   errorMsg: string;
   errorComplte: string;
+  displayedCoord: any;
 
   async sucessToast() {
     const toast = await this.toastController.create({
@@ -73,6 +75,11 @@ export class CreateSalepointPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  displayCoord()
+  {
+    this.displayedCoord = this.salepoints.location.coordinates;
   }
 
   createSalepoint(form: NgForm) {
@@ -110,11 +117,14 @@ export class CreateSalepointPage implements OnInit {
 
   onMapReady(map: Map) {
     this.map = map;
-    map.on('click', <LeafletMouseEvent>(e) => { 
+    map.on('click', <LeafletMouseEvent>(e) => {
       let coords = e.latlng
       this.salepoints.location.coordinates = [coords.lat, coords.lng];
+      this.displayCoord();
      });
     setTimeout(() => map.invalidateSize(), 0);
+
+
   }
 
   mapClick(e) {

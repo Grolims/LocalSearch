@@ -14,7 +14,9 @@
       <ion-label>{{item.name}}</ion-label>
       <ion-label>{{item.description}}</ion-label>
       <ion-label>{{item.price}} CHF </ion-label>
-      <ion-img [src]="item.picture"></ion-img>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="item.picture"></ion-img>
+      </ion-thumbnail>
       <ion-button color="warning" (click)="updateItem(item)">Change item</ion-button>
       <ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>
     </ion-item>
