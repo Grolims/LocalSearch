@@ -37,6 +37,7 @@ export class ProfilePage implements OnInit {
     this.data = this.navParamService.getNavData();
     console.log(this.data);
     this.addItem();
+    console.log(this.items)
     this.addSalepoint();
 
 
@@ -169,7 +170,7 @@ async presentCreateSalepoint() {
 
     initialBreakpoint: 1,
     breakpoints: [0, 1],
-    
+
     id: "createSalepoint"
 
 
@@ -197,7 +198,7 @@ openSalepoint(salepoint) {
   console.log("YEAAAAHHHH MODAL"+salepoint)
   this.navParamService.setNavData(salepoint);
   this.modalController.dismiss(undefined, undefined, 'home');
-  this.presentSalepoint();
+    this.presentSalepoint();
   // this.router.navigateByUrl("home/sale-point-detail");
 }
 

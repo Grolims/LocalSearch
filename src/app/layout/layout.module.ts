@@ -14,7 +14,7 @@ import { LayoutPage } from './layout.page';
     FormsModule,
     IonicModule,
     LayoutPageRoutingModule,
-    LeafletModule
+    LeafletModule,
   ],
   declarations: [LayoutPage]
 })

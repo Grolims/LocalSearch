@@ -16,13 +16,14 @@ import { NavparamService } from './navparam.service';
 import { UserExtractPipe } from './user-extract.pipe';
 import { SearchFilterPipe } from './search-filter.pipe';
 import { SwiperModule } from "swiper/angular";
+import { ProfilePageModule } from './layout/home/profile/profile.module';
 
 
 
 @NgModule({
   declarations: [AppComponent, UserExtractPipe, SearchFilterPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule, FormsModule,ReactiveFormsModule, SwiperModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule, FormsModule,ReactiveFormsModule, SwiperModule,BrowserModule],
   providers: [NavparamService,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true,}],
   bootstrap: [AppComponent],
 

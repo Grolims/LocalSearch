@@ -10,9 +10,9 @@ import { HomePage } from './home.page';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { SalePointDetailPageModule } from './sale-point-detail/sale-point-detail.module';
 import { ItemDetailPageModule } from './item-detail/item-detail.module';
 import { HomeModalPageModule } from './home-modal/home-modal.module'
+
 
 @NgModule({
   imports: [
@@ -22,9 +22,9 @@ import { HomeModalPageModule } from './home-modal/home-modal.module'
     HomePageRoutingModule,
     LeafletModule,
     Ng2SearchPipeModule,
-    SalePointDetailPageModule,
     ItemDetailPageModule,
-    HomeModalPageModule
+    HomeModalPageModule,
+
   ],
   declarations: [HomePage]
 })
