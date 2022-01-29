@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import { PictureService } from 'src/app/picture/picture.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ToastController } from '@ionic/angular';
+import { defaultIcon } from 'src/app/layout/default-marker';
 
 
 @Component({
@@ -19,6 +20,7 @@ import { ToastController } from '@ionic/angular';
 export class CreateSalepointPage implements OnInit {
 
   map: Map;
+  mapMarkers: Marker[] = [];
   mapOptions: MapOptions;
 
   constructor(
@@ -121,14 +123,15 @@ export class CreateSalepointPage implements OnInit {
       let coords = e.latlng
       this.salepoints.location.coordinates = [coords.lat, coords.lng];
       this.displayCoord();
+      this.addMarker(coords);
      });
     setTimeout(() => map.invalidateSize(), 0);
-
-
   }
 
-  mapClick(e) {
-
+  addMarker(coords) {
+    const newMarker = marker(coords, {icon: defaultIcon});
+    this.mapMarkers.pop();
+    this.mapMarkers.push(newMarker);
   }
 
   ngOnInit() {
