@@ -18,6 +18,8 @@
     <div class="prix">
       <p class="priceLabel">{{data.price}}.-</p>
     </div>
+
+
   </div>
   <div class="section">
     <h4>Label</h4>
@@ -31,6 +33,10 @@
 </div>
 <h4>Description</h4>
 <p>{{data.description}}</p>
+<h4>Point de vente </h4>
+<ion-item *ngFor="let salep of salepoints">
+  <ion-label class="priceLabel">{{salep.address}}.-</ion-label>
+</ion-item>
   <!--
   <ion-item >
     <ion-label>Nom:{{data.name}}</ion-label>
