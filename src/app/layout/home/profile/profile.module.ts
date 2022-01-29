@@ -7,8 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { ProfilePageRoutingModule } from './profile-routing.module';
 
 import { ProfilePage } from './profile.page';
-import { CreateItemPageModule } from './create-item/create-item.module';
-import { CreateSalepointPageModule } from './create-salepoint/create-salepoint.module';
+import { CreateItemPageModule } from 'src/app/Layout/Home/profile/create-item/create-item.module';
+import { CreateSalepointPageModule } from 'src/app/Layout/Home/profile/create-salepoint/create-salepoint.module';
 
 
 

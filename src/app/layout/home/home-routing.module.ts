@@ -10,11 +10,11 @@ const routes: Routes = [
   },
   {
     path: 'profile',
-    loadChildren: () => import('../../Layout/Home/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('../../Layout/home/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
     path: 'sale-point-detail',
-    loadChildren: () => import('../../Layout/Home/sale-point-detail/sale-point-detail.module').then( m => m.SalePointDetailPageModule)
+    loadChildren: () => import('../../Layout/home/sale-point-detail/sale-point-detail.module').then( m => m.SalePointDetailPageModule)
   },
   {
     path: 'item-detail',

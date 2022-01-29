@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { UpdateItemsPageRoutingModule } from './update-items-routing.module';
+import { UpdateItemsPageRoutingModule } from 'src/app/layout/home/profile/update-items/update-items-routing.module';
 
-import { UpdateItemsPage } from './update-items.page';
+import { UpdateItemsPage } from 'src/app/Layout/home/profile/update-items/update-items.page';
 
 @NgModule({
   imports: [

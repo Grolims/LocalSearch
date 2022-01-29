@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CreateSalepointPageRoutingModule } from './create-salepoint-routing.module';
+import { CreateSalepointPageRoutingModule } from 'src/app/Layout/home/profile/create-salepoint/create-salepoint-routing.module';
 
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { CreateSalepointPage } from './create-salepoint.page';
