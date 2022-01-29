@@ -167,9 +167,9 @@ async presentCreateSalepoint() {
   const modal = await this.modalController.create({
     component: CreateSalepointPage,
 
-    initialBreakpoint: 0.5,
-    breakpoints: [0.15, 0.5, 1],
-    backdropBreakpoint: 0.5,
+    initialBreakpoint: 1,
+    breakpoints: [0, 1],
+    
     id: "createSalepoint"
 
 

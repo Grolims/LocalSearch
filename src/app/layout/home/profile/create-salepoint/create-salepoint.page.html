@@ -4,11 +4,13 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
-    (leafletMapReady)="onMapReady($event)" (leafletClick)="displayCoord()">
-  </div>
+
 
 <ion-content>
+
+<div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
+    (leafletMapReady)="onMapReady($event)" (leafletClick)="displayCoord()">
+  </div>  
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
       <ion-input placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
@@ -41,8 +43,8 @@
       </ion-item>
 
 
- <ion-button type="submit" [disabled]="salepointForm.invalid">Submit</ion-button>
- <ion-text color="danger" *ngIf="postError"
+ <ion-button type="submit" (click)="dismiss()" [disabled]="salepointForm.invalid">Submit</ion-button>
+ <ion-text color="danger" *ngIf="postError" 
  >Erreur: {{errorMsg}}</ion-text>
 
  <ion-text color="danger" [innerHTML]="errorComplte"></ion-text>
