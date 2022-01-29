@@ -12,7 +12,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SalePointDetailPageModule } from 'src/app/Layout/Home/sale-point-detail/sale-point-detail.module';
 import { ItemDetailPageModule } from 'src/app/Layout/home/item-detail/item-detail.module';
 import { ProfilePageModule } from 'src/app/layout/home/profile/profile.module';
-import { CreateSalepointPageModule } from '../profile/create-salepoint/create-salepoint.module';
+import { CreateSalepointPageModule } from 'src/app/layout/home/profile/create-salepoint/create-salepoint.module';
 
 
 @NgModule({
@@ -25,8 +25,8 @@ import { CreateSalepointPageModule } from '../profile/create-salepoint/create-sa
     Ng2SearchPipeModule,
     SalePointDetailPageModule,
     ItemDetailPageModule,
-    ProfilePageModule,
     CreateSalepointPageModule,
+    ProfilePageModule,
 
 
   ],

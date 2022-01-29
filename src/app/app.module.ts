@@ -23,7 +23,7 @@ import { ProfilePageModule } from './layout/home/profile/profile.module';
 @NgModule({
   declarations: [AppComponent, UserExtractPipe, SearchFilterPipe],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule, FormsModule,ReactiveFormsModule, SwiperModule,BrowserModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot(), LeafletModule, FormsModule,ReactiveFormsModule, SwiperModule],
   providers: [NavparamService,{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Geolocation, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true,}],
   bootstrap: [AppComponent],
 
