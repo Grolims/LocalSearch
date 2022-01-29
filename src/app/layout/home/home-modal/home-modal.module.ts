@@ -11,7 +11,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { SalePointDetailPageModule } from '../sale-point-detail/sale-point-detail.module';
 import { ItemDetailPageModule } from '../item-detail/item-detail.module';
-import { ProfilePageModule } from '../profile/profile.module';
+
 
 @NgModule({
   imports: [
@@ -23,7 +23,6 @@ import { ProfilePageModule } from '../profile/profile.module';
     Ng2SearchPipeModule,
     SalePointDetailPageModule,
     ItemDetailPageModule,
-    ProfilePageModule,
 
   ],
   declarations: [HomeModalPage]
