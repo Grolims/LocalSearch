@@ -39,9 +39,9 @@
 </div>
 
   <ion-list>
-    <ion-list-header> Résultat de la recherche </ion-list-header>
 
-    <ion-item  (click)="locateItem(item)" *ngFor="let item of items">
+
+    <ion-item  (click)="locateItem(item)" *ngFor="let item of items | filter:searchTerm">
       <ion-thumbnail slot="start">
         <ion-img [src]="item.picture"></ion-img>
       </ion-thumbnail>
@@ -66,6 +66,7 @@
   </ion-list>
 
   <ion-list>
+    <h2>List des points de ventes</h2>
     <ion-item (click)="openSalepoint(salepoint)" *ngFor="let salepoint of salepoints">
       <ion-label>{{salepoint.address}}</ion-label>
      <!-- <ion-item-option (click)="openSalepoint(salepoint)">Salepoint detail </ion-item-option>-->
