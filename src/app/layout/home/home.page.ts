@@ -478,8 +478,7 @@ export class HomePage implements OnInit {
   goProfile() {
     //this.router.navigateByUrl("/home/profile");
 
-    this.modalController.dismiss(undefined, undefined, 'home');
-    this.presentProfil();
+    this.modalController.dismiss(undefined, undefined, 'home');   this.presentProfil();
   }
 
 }
