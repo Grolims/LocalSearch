@@ -92,18 +92,15 @@ export class HomeModalPage implements OnInit {
   listItemBool:boolean = false;
   listeEstFiltrer:boolean = false;
 
-  testClick()
-  {
-
-
-  }
 
   filterAll(event: any){}
 
 
+  /**
+   * Filtre sur la barre de recherhce
+   */
   updateBare()
   {
-
 
     if (this.listeEstFiltrer == false)
     {
@@ -120,6 +117,10 @@ export class HomeModalPage implements OnInit {
 
   }
 
+  /**
+   * Change la valeur upper et lower à chaque event de la searchbar
+   * @param event evenement
+   */
   testChange(event: any)
   {
 
@@ -130,21 +131,24 @@ export class HomeModalPage implements OnInit {
 
   changeValue(event: any)
   {
-    //console.log(event.detail.value)
+
 
     this.price = event.detail.value;
 
     let result = this.itemsCache.filter(it => it.price >= event.detail.value.lower && it.price <= event.detail.value.upper);
-    //console.log(result);
+
     this.items = result
 
   }
 
+  /**
+   *Méthode de trie en fonction des checkbox
+   * @param event event checkbox true or false
+   */
   changeValueCheckbox(event: any)
   {
 
     let result;
-    let tab
     let name = event.explicitOriginalTarget.firstChild.data;
     let isCheck = event.detail.checked;
 
@@ -181,6 +185,9 @@ export class HomeModalPage implements OnInit {
 
 
 
+    /**
+     * reset du tab apres la recherche
+     */
   stopSearch() {
     this.items = [];
   }
@@ -199,6 +206,7 @@ export class HomeModalPage implements OnInit {
 
 
 
+  //ajout des items au tabCach
   addItemCache() {
 
     this.itemService.getItem().subscribe(item => {
@@ -212,9 +220,6 @@ export class HomeModalPage implements OnInit {
 
 
   }
-
-
-
 
 
 
@@ -282,17 +287,21 @@ export class HomeModalPage implements OnInit {
       backdropBreakpoint: 0.5,
       id: "profil"
 
- 
+
 
     });
 
-    //modal.onDidDismiss().then(() => this.didDismiss()); 
+    //modal.onDidDismiss().then(() => this.didDismiss());
 
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
 
+  /**
+   * Ouverture du modal salpoint detail
+   * @param salepoint
+   */
   openSalepoint(salepoint) {
     //console.log("YEAAAAHHHH MODAL"+salepoint)
     this.navParamService.setNavData(salepoint);
@@ -303,11 +312,11 @@ export class HomeModalPage implements OnInit {
   }
 
 
-    save()
-    {
 
-    }
 
+  /**
+   * Ajout des salepoints et marker sur la carte
+   */
   addSalepoint() {
 
     this.salepointService.getSalepointIDs().subscribe(salepoint => {
@@ -331,11 +340,9 @@ export class HomeModalPage implements OnInit {
 
 
 
-  goToSalepoint()
-  {
 
-  }
 
+  /**gestion de click sur marker salepoint */
   markerClick(e) {
     let result = [];
     const clickedSalepoint = e.target.id;
@@ -352,10 +359,6 @@ export class HomeModalPage implements OnInit {
   }
 
 
-  detailItem() {
-
-  }
-
   filterItems() {
     this.filtreBol = false;
     this.router.navigateByUrl("home/filter-items");
@@ -363,6 +366,9 @@ export class HomeModalPage implements OnInit {
 
 
 
+  /**
+   * redirige la carte vers le salpoint selectionné (ne marche pas dans le modal)
+   */
   locateSalepoint()
   {
     //this.map.setView(latLng(this.salepoints[0].location.coordinates));
@@ -376,7 +382,7 @@ export class HomeModalPage implements OnInit {
       this.map.setView(latLng(coords.latitude, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
-    }); 
+    });
 
 
   }
@@ -386,6 +392,10 @@ export class HomeModalPage implements OnInit {
 
   }
 
+  /**
+   * Ajout des salepoint correspondants à un articles
+   * @param items
+   */
   addSalepointId(items)
 {
   this.salepointService.getSalepointIDs().subscribe(salepoint => {
@@ -402,6 +412,10 @@ export class HomeModalPage implements OnInit {
 }
 
 
+/**
+ * Localisation du salepoint de l'item et redirection de la carte ver ce derner , ouverture des la page detail item
+ * @param items
+ */
   locateItem(items)
   {
     this.addSalepointId(items);
@@ -418,7 +432,7 @@ export class HomeModalPage implements OnInit {
 
   }
 
-  
+
 
   /**
    * Ajoute les items si clicl sur la searchbar
@@ -436,10 +450,7 @@ export class HomeModalPage implements OnInit {
   }
 
 
-  goHome() {
 
-    //this.router.navigateByUrl("/home");
-  }
   goProfile() {
     //this.router.navigateByUrl("/home/profile");
 
@@ -448,6 +459,6 @@ export class HomeModalPage implements OnInit {
   }
 
 
-  
+
 
 }

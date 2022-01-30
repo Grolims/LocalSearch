@@ -6,7 +6,7 @@
       <ion-button (click)="goProfile()">
         <ion-icon size="large" class="profil" name="person-circle-outline"></ion-icon>
       </ion-button>
-      
+
     </ion-buttons>
   </ion-toolbar>
 
@@ -21,7 +21,7 @@
     <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
   </ion-toolbar>
   <div *ngIf="listItemBool">
-  <form #Form="ngForm" (ngSubmit)="save()" >
+  <form #Form="ngForm" >
     <ion-item>
       <label>Prix:</label>
       <ion-range min="1" max="200" step="1" dual-knobs="true"  pin ="true" color="secondary" (ionChange)="testChange($event)"(ionChange)="updateBare()"></ion-range>
