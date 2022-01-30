@@ -74,18 +74,18 @@ export class ProfilePage implements OnInit {
 
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Delete'+ oneItem.name,
-      message: 'Message <strong> Sure you want delete </strong>'+ oneItem.name +"?",
+      header: 'Attention',
+      message: 'Êtes-vous sûr de vouloir supprimer définitivement '+ oneItem.name +" ?",
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Annuler',
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
             console.log('Confirm Cancel');
           }
         }, {
-          text: 'Delete',
+          text: 'Supprimer',
           handler: () => {
             this.itemService.delItem(oneItem._id)
             .subscribe(data => {
@@ -185,7 +185,7 @@ async presentCreateItem() {
 
 
   });
-  console.log("createSalepoint modal créé")
+  //console.log("createSalepoint modal créé")
 
 
  // this.service.storeModal(modal);// storing modal instances in an array
@@ -223,7 +223,7 @@ async presentSalepoint() {
 
 
 openSalepoint(salepoint) {
-  console.log("YEAAAAHHHH MODAL"+salepoint)
+  //console.log("YEAAAAHHHH MODAL"+salepoint)
   this.navParamService.setNavData(salepoint);
   this.modalController.dismiss(undefined, undefined, 'home');
     this.presentSalepoint();
@@ -233,8 +233,8 @@ openSalepoint(salepoint) {
 async presentSalepointItemDetail() {
   const modal = await this.modalController.create({
     component: ItemDetailPage,
-    initialBreakpoint: 0.48,
-    breakpoints: [0, 0.48, 0.9],
+    initialBreakpoint: 0.9,
+    breakpoints: [0, 0.6, 0.9],
     id: "item"
   });
   //this.service.storeModal(modal);// storing modal instances in an array

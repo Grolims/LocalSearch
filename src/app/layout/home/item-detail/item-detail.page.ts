@@ -60,7 +60,7 @@ export class ItemDetailPage implements OnInit {
 
 
     });
-    console.log("home modal créé")
+    
 
     
    // this.service.storeModal(modal);// storing modal instances in an array
