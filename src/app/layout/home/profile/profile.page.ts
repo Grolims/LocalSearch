@@ -180,7 +180,7 @@ async presentCreateItem() {
     initialBreakpoint: 1,
     breakpoints: [0, 1],
 
-    id: "createSalepoint"
+    id: "createItem"
 
 
 
@@ -199,7 +199,7 @@ async presentUpdateItems() {
     initialBreakpoint: 1,
     breakpoints: [0, 1],
 
-    id: "createSalepoint"
+    id: "updateSalepoint"
 
 
 
@@ -214,9 +214,10 @@ async presentUpdateItems() {
 async presentSalepoint() {
   const modal = await this.modalController.create({
     component: SalePointDetailPage,
-    initialBreakpoint: 0.48,
-    breakpoints: [0, 0.48, 0.9],
-    id: "item"
+    initialBreakpoint: 0.6,
+    breakpoints: [0.6, 1],
+    backdropBreakpoint: 0.6,
+    id: "salepoint"
   });
   return await modal.present();
 }
@@ -225,7 +226,7 @@ async presentSalepoint() {
 openSalepoint(salepoint) {
   //console.log("YEAAAAHHHH MODAL"+salepoint)
   this.navParamService.setNavData(salepoint);
-  this.modalController.dismiss(undefined, undefined, 'home');
+  this.modalController.dismiss(undefined, undefined, 'profil');
     this.presentSalepoint();
   // this.router.navigateByUrl("home/sale-point-detail");
 }
