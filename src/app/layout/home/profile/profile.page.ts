@@ -27,6 +27,8 @@ import { Subscription } from 'rxjs';
 })
 export class ProfilePage implements OnInit {
 
+  isProfilModal = true;
+
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
   data:any = 0;
@@ -210,7 +212,6 @@ async presentCreateItem() {
 async presentUpdateItems() {
   const modal = await this.modalController.create({
     component: UpdateItemsPage,
-
     initialBreakpoint: 1,
     breakpoints: [0, 1],
 
@@ -229,6 +230,7 @@ async presentUpdateItems() {
 async presentSalepoint() {
   const modal = await this.modalController.create({
     component: SalePointDetailPage,
+    componentProps: { isProfilModal: this.isProfilModal },
     initialBreakpoint: 0.6,
     breakpoints: [0.6, 1],
     backdropBreakpoint: 0.6,

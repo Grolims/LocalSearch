@@ -37,7 +37,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomePage implements OnInit {
 
-
+  isHomeModal = true;
   searchTerm: string;
   searchPrice;
   mapOptions: MapOptions;
@@ -140,6 +140,7 @@ export class HomePage implements OnInit {
   async presentSalepoint() {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
+      componentProps: { isHomeModal: this.isHomeModal },
       initialBreakpoint: 0.6,
       breakpoints: [0.6, 1],
       backdropBreakpoint: 0.6,

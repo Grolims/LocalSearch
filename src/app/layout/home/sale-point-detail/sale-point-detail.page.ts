@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NavparamService } from 'src/app/navparam.service';
 import { ItemResponseValue } from 'src/app/models/item';
 import { Itemservice } from 'src/app/services/item.service';
@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 import { ModalController } from '@ionic/angular';
 import { ItemDetailPage } from 'src/app/layout/home/item-detail/item-detail.page';
+import { ProfilePage } from '../profile/profile.page';
 
 import SwiperCore, { Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode } from 'swiper';
 import { HomeModalPage } from '../home-modal/home-modal.page';
@@ -21,7 +22,10 @@ SwiperCore.use([Autoplay, Keyboard, Pagination, Scrollbar, Zoom, FreeMode]);
 })
 export class SalePointDetailPage implements OnInit {
 
+  @Input() isHomeModal: boolean;
+  @Input() isProfilModal: boolean;
 
+  
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
   data:any = 0;
@@ -76,11 +80,30 @@ export class SalePointDetailPage implements OnInit {
     return await modal.present();
   }
 
+  async presentProfil() {
+    const modal = await this.modalController.create({
+      component: ProfilePage,
+      initialBreakpoint: 0.5,
+      breakpoints: [0.5, 1],
+      backdropBreakpoint: 0.5,
+      id: "profil"
+    });
+    return await modal.present();
+  }
+
   dismissModal() {
     console.log("salepoint");
 
    this.modalController.dismiss();
-   this.presentHome();
+   if(this.isHomeModal == true){
+     console.log("Yeah CEST HOME")
+     this.presentHome();
+   }
+
+   if(this.isProfilModal == true){
+     console.log("Yeah CEST PROFIL")
+     this.presentProfil();
+   }
    
 } 
 didDismiss(){

@@ -11,6 +11,7 @@ import { ModalController } from '@ionic/angular';
 import { HomeModalPage } from '../home-modal/home-modal.page';
 import { DataService } from 'src/app/services/data.service';
 import { Subscription } from 'rxjs';
+import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
 
 @Component({
   selector: 'app-item-detail',
@@ -78,15 +79,33 @@ export class ItemDetailPage implements OnInit {
   }
 
   dismissModal() {
-    console.log("salepoint");
+    
 
    this.modalController.dismiss();
    //this.presentHome();
    
 } 
+async presentSalepoint() {
+  const modal = await this.modalController.create({
+    component: SalePointDetailPage,
+    initialBreakpoint: 0.6,
+    breakpoints: [0.6, 1],
+    backdropBreakpoint: 0.6,
+    id: "salepoint"
+  });
+
+  //modal.onWillDismiss().then(() => this.didDismiss());
+
+  //modal.onDidDismiss().then(() => this.didDismiss());
+
+ // this.service.storeModal(modal);// storing modal instances in an array
+  return await modal.present();
+}
 
   openSalepoint(salepoint) {
-    this.dataService.changeMessage(salepoint)
+    this.dataService.changeMessage(salepoint);
+    this.presentSalepoint();
+    this.dismissModal();
   }  
 
   ngOnInit() {

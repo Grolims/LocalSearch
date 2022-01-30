@@ -37,7 +37,10 @@ import { DataService } from 'src/app/services/data.service';
 })
 export class HomeModalPage implements OnInit, OnDestroy {
 
+  isHomeModal = true;
+  
 
+  
   searchTerm: string;
   searchPrice;
   mapOptions: MapOptions;
@@ -231,12 +234,14 @@ export class HomeModalPage implements OnInit, OnDestroy {
   async presentSalepoint() {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
+      componentProps: { isHomeModal: this.isHomeModal },
       initialBreakpoint: 0.6,
       breakpoints: [0.6, 1],
       backdropBreakpoint: 0.6,
       id: "salepoint"
     });
 
+    
     //modal.onWillDismiss().then(() => this.didDismiss());
 
     //modal.onDidDismiss().then(() => this.didDismiss());
@@ -260,6 +265,8 @@ export class HomeModalPage implements OnInit, OnDestroy {
       backdropBreakpoint: 0.5,
       id: "home"
     });
+
+    
 
 
     //console.log("home modal créé")
@@ -286,17 +293,13 @@ export class HomeModalPage implements OnInit, OnDestroy {
       backdropBreakpoint: 0.5,
       id: "profil"
     });
-
-    //modal.onDidDismiss().then(() => this.didDismiss());
-
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
   async closeModal() {
     const emitData: string = "Closed";
     await this.modalController.dismiss(emitData);
-  }
+  } 
 
 
   /**
@@ -307,7 +310,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
     this.dataService.changeMessage(salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
-    this.modalController.dismiss(undefined, undefined, 'home');
+    this.modalController.dismiss();
     this.presentSalepoint();
     // this.router.navigateByUrl("home/sale-point-detail");
   }
