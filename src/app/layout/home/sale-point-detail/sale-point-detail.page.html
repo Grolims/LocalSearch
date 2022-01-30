@@ -12,7 +12,7 @@
 -->
 
 <ion-header  >
-  <div class="divimg">
+  <div *ngIf="data.picture" class="divimg">
 
     <ion-img class="imgTitle" *ngIf="data.picture" [src]="data.picture"></ion-img> 
 
@@ -36,11 +36,7 @@
   
   <div class="section">
     <h1>Point de vente </h1>
-  <!-- <ion-item >
-    <ion-label>Point de vente de la {{data.address}}</ion-label>
-
-  </ion-item>
--->
+  
 <p class="address">{{data.address}}</p> 
 </div>
 
