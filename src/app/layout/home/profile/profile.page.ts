@@ -9,13 +9,13 @@ import { element } from 'protractor';
 import { AlertController } from '@ionic/angular';
 import { Salepointservice } from 'src/app/services/salepoint.service';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
-
 import { ModalController } from '@ionic/angular';
 import { HomeModalPage } from '../home-modal/home-modal.page';
 import { CreateItemPage } from './create-item/create-item.page';
 import { CreateSalepointPage } from './create-salepoint/create-salepoint.page';
 import { ItemDetailPage } from '../item-detail/item-detail.page';
 import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
+
 
 
 @Component({
@@ -29,7 +29,7 @@ export class ProfilePage implements OnInit {
   salepoints:SalepointResponseValue[] = [];
   data:any = 0;
 
-  constructor(public alertController: AlertController,public modalController: ModalController,  public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService, private salepointService: Salepointservice) {
+  constructor(public alertController: AlertController,private auth: AuthService, public modalController: ModalController,  public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService, private salepointService: Salepointservice) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
@@ -51,13 +51,14 @@ export class ProfilePage implements OnInit {
   updateItem(oneItem)
   {
     this.navParamService.setNavData(oneItem);
-    this.router.navigateByUrl("home/profile/update-items");
+    //this.router.navigateByUrl("home/profile/update-items");
   }
 
   createNewitem()
   {
     console.log("create buttun")
-    this.router.navigateByUrl("home/profile/create-item");
+    this.presentCreateItem();
+    //this.router.navigateByUrl("home/profile/create-item");
   }
 
   createNewSalepoint()
@@ -141,6 +142,7 @@ export class ProfilePage implements OnInit {
 
 
     });
+    
   }
 
   ionViewWillEnter
@@ -149,24 +151,30 @@ export class ProfilePage implements OnInit {
  }
 
 
- async presentHome() {
-  const modal = await this.modalController.create({
-    component: HomeModalPage,
+ 
 
-    initialBreakpoint: 0.5,
-    breakpoints: [0.15, 0.5, 1],
-    backdropBreakpoint: 0.5,
-    id: "home"
+async presentCreateSalepoint() {
+  const modal = await this.modalController.create({
+    component: CreateSalepointPage,
+
+    initialBreakpoint: 1,
+    breakpoints: [0, 1],
+
+    id: "createSalepoint"
+
+
+
   });
-  console.log("home modal créé")
+  console.log("createSalepoint modal créé")
+
 
  // this.service.storeModal(modal);// storing modal instances in an array
   return await modal.present();
 }
 
-async presentCreateSalepoint() {
+async presentCreateItem() {
   const modal = await this.modalController.create({
-    component: CreateSalepointPage,
+    component: CreateItemPage,
 
     initialBreakpoint: 1,
     breakpoints: [0, 1],
@@ -203,23 +211,41 @@ openSalepoint(salepoint) {
 }
 
 
-async presentCreateItem() {
+
+
+async presentHome() {
   const modal = await this.modalController.create({
-    component: CreateItemPage,
+    component: HomeModalPage,
 
     initialBreakpoint: 0.5,
     breakpoints: [0.15, 0.5, 1],
     backdropBreakpoint: 0.5,
-    id: "createItem"
+    id: "home"
 
 
 
   });
-  console.log("createItem modal créé")
 
 
+  //console.log("home modal créé")
  // this.service.storeModal(modal);// storing modal instances in an array
   return await modal.present();
+}
+
+dismissModal() {
+  
+
+ this.modalController.dismiss();
+ this.presentHome();
+ 
+} 
+logOut() {
+  console.log("logging out...");
+  this.router.navigateByUrl("/login");
+  this.modalController.dismiss();
+  this.auth.logOut();
+  
+   
 }
 
 

@@ -12,6 +12,7 @@ import { Itemservice } from 'src/app/services/item.service';
 import { Router } from "@angular/router";
 import { NavparamService } from 'src/app/navparam.service';
 import { ToastController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-item',
@@ -24,7 +25,7 @@ export class CreateItemPage implements OnInit {
 
   ];
 
-  constructor(public toastController: ToastController, private navParamService:NavparamService,public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
+  constructor(public toastController: ToastController,public modalController: ModalController, private navParamService:NavparamService,public httpClient: HttpClient, private itemService: Itemservice,private salepointService: Salepointservice,private pictureService: PictureService, private authservice: AuthService, private router: Router) {
     this.addSalepoint();
     this.authservice.getUser$().subscribe(user=> this.items.userId = user._id)
     this.authservice.getUser$().subscribe(user=> this.idSa = user._id)
@@ -157,5 +158,13 @@ export class CreateItemPage implements OnInit {
 
 
   }
+
+  dismissModal() {
+  
+
+    this.modalController.dismiss();
+    
+    
+   } 
 
 }

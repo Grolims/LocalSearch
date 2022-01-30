@@ -7,6 +7,9 @@ import { SalepointMarkerResponseValue } from 'src/app/models/salepointmarker';
 import { Salepointservice } from 'src/app/services/salepoint.service';
 import { SalepointResponseValue } from 'src/app/models/salepoint';
 
+import { ModalController } from '@ionic/angular';
+import { HomeModalPage } from '../home-modal/home-modal.page';
+
 @Component({
   selector: 'app-item-detail',
   templateUrl: './item-detail.page.html',
@@ -21,7 +24,7 @@ export class ItemDetailPage implements OnInit {
   salepoints:SalepointMarkerResponseValue[] = [];
 
 
-  constructor(private navParamService:NavparamService, private salepointService: Salepointservice, private router: Router, private itemService: Itemservice) {
+  constructor(private navParamService:NavparamService, public modalController: ModalController, private salepointService: Salepointservice, private router: Router, private itemService: Itemservice) {
 
     this.data = this.navParamService.getNavData();
 
@@ -44,6 +47,33 @@ export class ItemDetailPage implements OnInit {
 
     });
   }
+
+  async presentHome() {
+    const modal = await this.modalController.create({
+      component: HomeModalPage,
+      
+      initialBreakpoint: 0.5,
+      breakpoints: [0.15, 0.5, 1],
+      backdropBreakpoint: 0.5,
+      id: "home"
+
+
+
+    });
+    console.log("home modal créé")
+
+    
+   // this.service.storeModal(modal);// storing modal instances in an array
+    return await modal.present();
+  }
+
+  dismissModal() {
+    console.log("salepoint");
+
+   this.modalController.dismiss();
+   //this.presentHome();
+   
+} 
 
 
 

@@ -1,14 +1,20 @@
 <ion-header>
   <ion-toolbar>
     <h1>Mon Profil</h1>
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismissModal()">
+        <ion-icon size="large" class="croix" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <h2 *ngIf="tabVide">Mes items </h2>
 <ion-text color="danger" *ngIf="tabVide">
  You are not create items
   </ion-text >
-  <ion-text>Mes items </ion-text>
+  
    <ion-list>
     <ion-item *ngFor="let item of items">
       <ion-label>{{item.name}}</ion-label>
@@ -21,7 +27,7 @@
       <ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>
     </ion-item>
   </ion-list>
-  <h2>Liste des items </h2>
+  
 
 
 
@@ -53,7 +59,7 @@
 
   </swiper>-->
 
-  <ion-text>Mes salepoints</ion-text>
+  <h2>Mes points de vente</h2>
   <ion-list>
   <ion-item (click)="openSalepoint(salepoint)" *ngFor="let salepoint of salepoints">
     <ion-label>{{salepoint.address}}</ion-label>
@@ -76,7 +82,10 @@
   </ion-item-options>
 </ion-item-sliding>
 
-  <ion-button expand="block" (click)="createNewitem()">create new item</ion-button>
-  <ion-button expand="block" (click)="createNewSalepoint()">Create new salepoint</ion-button>
+  <ion-button size="large" class="create" expand="block" (click)="createNewitem()">Créer un iteme</ion-button>
+  <ion-button size="large" class="create" expand="block" (click)="createNewSalepoint()">Créer un point de vente</ion-button>
+  <div class="deco">
+    <ion-label  expand="block" (click)="logOut()">Se déconnecter</ion-label>
+  </div>
 
 </ion-content>

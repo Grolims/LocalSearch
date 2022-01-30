@@ -13,6 +13,7 @@ import { defaultIcon } from '../default-marker';
 import { CustomMarker } from 'src/app/models/AltMarker';
 import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Icon, IconOptions, icon } from 'leaflet';
 
 import { ModalController } from '@ionic/angular';
 import { IonRouterOutlet } from '@ionic/angular';
@@ -48,6 +49,13 @@ export class HomePage implements OnInit {
   salepoints: SalepointMarkerResponseValue[] = [];
   itemsCache: ItemResponseValue[] = [];
   items3: ItemResponseValue[] = [];
+  positionIcon: Icon = icon({
+    iconUrl: './image/position.png',
+    
+    iconSize: [41, 51], // => random values you have to choose right ones for your case
+    iconAnchor: [20, 51] // => random values too
+  });
+   
 
   constructor(private itemService: Itemservice,
 
@@ -60,6 +68,9 @@ export class HomePage implements OnInit {
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,
+    
+    
+    //private icon: Icon
   ) {
 
     this.mapOptions = {
@@ -69,8 +80,10 @@ export class HomePage implements OnInit {
           { maxZoom: 18 }
         )
       ],
+      zoomControl: false,
+      doubleClickZoom: true,
       zoom: 13,
-      center: latLng(46.778186, 6.641524)
+      center: latLng(46.778186 - 0.02, 6.641524)
     };
     this.addSalepoint();
     this.addItemCache();
@@ -262,7 +275,9 @@ export class HomePage implements OnInit {
     });
 
 
+
     console.log("home modal créé")
+    
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
@@ -274,8 +289,8 @@ export class HomePage implements OnInit {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
       initialBreakpoint: 0.6,
-      breakpoints: [0, 0.6, 1],
-      backdropBreakpoint: 0.4,
+      breakpoints: [0.6, 1],
+      backdropBreakpoint: 0.6,
       swipeToClose: true,
       id: "salepoint"
 
@@ -284,7 +299,7 @@ export class HomePage implements OnInit {
     });
 
 
-  modal.onWillDismiss().then(() => this.didDismiss());
+  //modal.onWillDismiss().then(() => this.didDismiss());
  //modal.onDidDismiss().then(() => this.didDismiss());
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
@@ -323,7 +338,7 @@ export class HomePage implements OnInit {
   openSalepoint(salepoint) {
     console.log("YEAAAAHHHH CARTE"+salepoint)
     this.navParamService.setNavData(salepoint);
-    this.locateSalepoint();
+    this.locateSalepoint(salepoint);
     this.presentSalepoint();
 
     // this.router.navigateByUrl("home/sale-point-detail");
@@ -358,7 +373,7 @@ export class HomePage implements OnInit {
 
   goToSalepoint()
   {
-
+  
   }
 
   markerClick(e) {
@@ -370,7 +385,8 @@ export class HomePage implements OnInit {
       // console.log(element._id);
       if (element._id == clickedSalepoint) {
         console.log("id identique");
-        this.modalController.dismiss()
+        this.modalController.dismiss();
+        
         result.push(element);
       }
     });
@@ -389,20 +405,26 @@ export class HomePage implements OnInit {
 
 
 
-  locateSalepoint()
+  locateSalepoint(salepoint)
   {
-    this.map.setView(latLng(this.salepoints[0].location.coordinates));
+
+    console.log("LOCA " + (salepoint.location.coordinates[0] -0.02));
+    const lat = salepoint.location.coordinates[0] - 0.001;
+    const lon = salepoint.location.coordinates[1];
+    this.map.flyTo(latLng(lat, lon), 18);
   }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
-    this.geolocation.getCurrentPosition().then((position) => {
+   /* this.geolocation.getCurrentPosition().then((position) => {
       const coords = position.coords;
       // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.map.setView(latLng(coords.latitude, coords.longitude));
+      this.map.flyTo(latLng(coords.latitude - 0.02, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
-    });
+    });*/
+
+    this.centerMap();
 
 
   }
@@ -480,5 +502,29 @@ export class HomePage implements OnInit {
 
     this.modalController.dismiss(undefined, undefined, 'home');   this.presentProfil();
   }
+  
 
+  centerMap(){
+
+    
+
+    this.geolocation.getCurrentPosition().then((position) => {
+
+      
+      const coords = position.coords;
+
+      const newMarker: CustomMarker = marker(
+        [coords.latitude,coords.longitude],
+        {icon: this.positionIcon},
+        );
+        
+      this.mapMarkers.push(newMarker);
+      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      this.map.flyTo(latLng(coords.latitude - 0.01, coords.longitude),14);
+      console.log("map centré !!!")
+    }).catch(err => {
+      console.warn(`Could not retrieve user position because: ${err.message}`);
+      
+    });
+  }
 }

@@ -1,9 +1,20 @@
 <ion-header>
-  <div class="img">
+  <div class="divimg">
 
-    <ion-img [src]="data.picture"></ion-img>
+    <ion-img class="imgTitle" [src]="data.picture"></ion-img>
 
   </div>
+
+  <div>
+    
+      
+    <ion-buttons class="quit" slot="end">
+  <ion-button  (click)="dismissModal()">
+    <ion-icon size="large" class="croix" name="close-circle"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+</div>
 
 </ion-header>
 
@@ -35,7 +46,7 @@
 <p>{{data.description}}</p>
 <h4>Point de vente </h4>
 <ion-item *ngFor="let salep of salepoints">
-  <ion-label class="priceLabel">{{salep.address}}.-</ion-label>
+  <ion-label class="priceLabel">{{salep.address}}</ion-label>
 </ion-item>
   <!--
   <ion-item >

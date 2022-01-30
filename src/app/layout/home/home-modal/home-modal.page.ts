@@ -222,7 +222,7 @@ export class HomeModalPage implements OnInit {
     const modal = await this.modalController.create({
       component: SalePointDetailPage,
       initialBreakpoint: 0.6,
-      breakpoints: [0, 0.6, 1],
+      breakpoints: [0.6, 1],
       backdropBreakpoint: 0.6,
       id: "salepoint"
 
@@ -230,7 +230,7 @@ export class HomeModalPage implements OnInit {
 
     });
 
-    modal.onWillDismiss().then(() => this.didDismiss());
+    //modal.onWillDismiss().then(() => this.didDismiss());
 
     //modal.onDidDismiss().then(() => this.didDismiss());
 
@@ -258,7 +258,7 @@ export class HomeModalPage implements OnInit {
     });
 
 
-    console.log("home modal créé")
+    //console.log("home modal créé")
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
@@ -278,15 +278,15 @@ export class HomeModalPage implements OnInit {
     const modal = await this.modalController.create({
       component: ProfilePage,
       initialBreakpoint: 0.5,
-      breakpoints: [0, 0.5, 1],
+      breakpoints: [0.5, 1],
       backdropBreakpoint: 0.5,
       id: "profil"
 
-
+ 
 
     });
 
-    modal.onWillDismiss().then(() => this.didDismiss());
+    //modal.onDidDismiss().then(() => this.didDismiss()); 
 
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
@@ -294,7 +294,7 @@ export class HomeModalPage implements OnInit {
 
 
   openSalepoint(salepoint) {
-    console.log("YEAAAAHHHH MODAL"+salepoint)
+    //console.log("YEAAAAHHHH MODAL"+salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
     this.modalController.dismiss(undefined, undefined, 'home');
@@ -376,7 +376,7 @@ export class HomeModalPage implements OnInit {
       this.map.setView(latLng(coords.latitude, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
-    });
+    }); 
 
 
   }
@@ -418,12 +418,7 @@ export class HomeModalPage implements OnInit {
 
   }
 
-  logOut() {
-    console.log("logging out...");
-    this.modalController.dismiss()
-    this.auth.logOut();
-    this.router.navigateByUrl("/login");
-  }
+  
 
   /**
    * Ajoute les items si clicl sur la searchbar
@@ -451,5 +446,8 @@ export class HomeModalPage implements OnInit {
     this.modalController.dismiss(undefined, undefined, 'home');
     this.presentProfil();
   }
+
+
+  
 
 }

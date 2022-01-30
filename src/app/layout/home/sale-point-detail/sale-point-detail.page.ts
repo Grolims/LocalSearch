@@ -80,6 +80,7 @@ export class SalePointDetailPage implements OnInit {
     console.log("salepoint");
 
    this.modalController.dismiss();
+   this.presentHome();
    
 } 
 didDismiss(){

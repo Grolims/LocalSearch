@@ -11,19 +11,29 @@
 </ion-header>
 -->
 
-<ion-header translucent="true" collapse="condense">
-  <div class="img">
+<ion-header  collapse="condense">
+  <div class="divimg">
 
-    <!--<ion-img *ngIf="data.picture" [src]="salepoint.picture"></ion-img>-->
+   <!-- <ion-img class="imgTitle" *ngIf="data.picture" [src]="salepoint.picture"></ion-img> --> 
 
   </div>
   
+  
+  <div>
+    
+      
+      <ion-buttons class="quit" slot="end">
+    <ion-button  (click)="dismissModal()">
+      <ion-icon size="large" class="croix" name="close-circle"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  </div>
+    
+  
 </ion-header> 
 <ion-content>
-  <ion-button  (click)="dismissModal()">
-    <ion-icon name="close-circle-outline"></ion-icon>
-  </ion-button>
-
+  
   <div class="section">
     <h1>Point de vente </h1>
   <!-- <ion-item >

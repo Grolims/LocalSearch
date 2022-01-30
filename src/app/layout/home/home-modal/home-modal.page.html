@@ -4,11 +4,9 @@
     <h1>Home</h1>
     <ion-buttons slot="end">
       <ion-button (click)="goProfile()">
-        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-icon size="large" class="profil" name="person-circle-outline"></ion-icon>
       </ion-button>
-      <ion-button (click)="logOut()">
-        <ion-icon name="log-out"></ion-icon>
-      </ion-button>
+      
     </ion-buttons>
   </ion-toolbar>
 
@@ -40,7 +38,7 @@
 
   <ion-list>
 
-
+    <h2 *ngIf="listItemBool">Résultats de la recherche</h2>
     <ion-item  (click)="locateItem(item)" *ngFor="let item of items | filter:searchTerm">
       <ion-thumbnail slot="start">
         <ion-img [src]="item.picture"></ion-img>
@@ -66,7 +64,7 @@
   </ion-list>
 
   <ion-list>
-    <h2>List des points de ventes</h2>
+    <h2>Liste des points de ventes</h2>
     <ion-item (click)="openSalepoint(salepoint)" *ngFor="let salepoint of salepoints">
       <ion-label>{{salepoint.address}}</ion-label>
      <!-- <ion-item-option (click)="openSalepoint(salepoint)">Salepoint detail </ion-item-option>-->

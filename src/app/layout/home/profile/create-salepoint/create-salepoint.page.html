@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>createSalepoint</ion-title>
+    <h1>Nouveau point de vente</h1>
+    <ion-buttons slot="end">
+      <ion-button  (click)="dismissModal()">
+        <ion-icon size="large" class="croix" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
+ 
 
 <ion-content>
 
@@ -13,27 +18,24 @@
   </div>  
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
-      <ion-input placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
-      name="Coordinate" required></ion-input>
+     <!-- <ion-input placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
+      name="Coordinate" required></ion-input>--> 
 
 
-
-      <ion-input type="text" #address="ngModel"placeholder="Address" [(ngModel)]="salepoints.address"
+<section><h2>Adresse</h2>
+      <ion-input type="text" #address="ngModel"placeholder="Avenue des sports 20" [(ngModel)]="salepoints.address"
       name="Address" required min-length="6" max-length="200" ></ion-input>
 
       <ion-item lines="none" *ngIf="address.invalid && address.touched">
-        <ion-text color="danger">Address is required.</ion-text>
+        <ion-text color="danger">Address est requis.</ion-text>
       </ion-item>
+    </section>
 
-      <ion-input type="text" placeholder="Picture" [(ngModel)]="salepoints.picture"
-      name="Picture" ></ion-input>
-
-
-    <ion-button (click)="takePicture()">Take picture</ion-button>
-    <img *ngIf="salepoints.picture" [src]="salepoints.picture" />
-
-      <ion-item>
-        <ion-label>Type payment </ion-label>
+      <!-- <ion-input type="text" placeholder="Picture" [(ngModel)]="salepoints.picture"
+      name="Picture" ></ion-input> -->
+      <section><h2>Type de paiement</h2>
+ <ion-item>
+        
 
           <!-- une seul valeur selection en raison de la valeur attendu par l'api sinon pour un tab:-->
           <!--  <ion-select multiple="true" [value]="['Cash', 'Card']"></ion-select>-->
@@ -41,9 +43,18 @@
           <ion-select-option *ngFor="let payment of paymentMethods" [value]="payment.val">{{payment.val}}</ion-select-option>
         </ion-select>
       </ion-item>
+    </section>
+    <section><h2>Photo</h2>
+    <ion-button  class="photo" (click)="takePicture()">
+      <ion-icon name="camera"></ion-icon>
+    </ion-button>
+    <img *ngIf="salepoints.picture" [src]="salepoints.picture" />
+  </section>
+
+     
 
 
- <ion-button type="submit" (click)="dismiss()" [disabled]="salepointForm.invalid">Submit</ion-button>
+ <ion-button size="large" expand="block" type="submit" (click)="dismiss()" [disabled]="salepointForm.invalid">Submit</ion-button>
  <ion-text color="danger" *ngIf="postError" 
  >Erreur: {{errorMsg}}</ion-text>
 
@@ -53,6 +64,7 @@
 
   <ion-text color="success" *ngIf="postOk"
   >Crée avec succès</ion-text>
+
 
 
 

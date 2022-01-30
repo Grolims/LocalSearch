@@ -9,6 +9,7 @@ import { PictureService } from 'src/app/picture/picture.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { ToastController } from '@ionic/angular';
 import { defaultIcon } from 'src/app/layout/default-marker';
+import { ModalController } from '@ionic/angular';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class CreateSalepointPage implements OnInit {
     public toastController: ToastController,
     public httpClient: HttpClient,
     private pictureService: PictureService,
+    public modalController: ModalController,
     private authservice: AuthService) {
 
     this.mapOptions = {
@@ -136,5 +138,13 @@ export class CreateSalepointPage implements OnInit {
 
   ngOnInit() {
   }
+
+  dismissModal() {
+  
+
+    this.modalController.dismiss();
+    
+    
+   } 
 
 }
