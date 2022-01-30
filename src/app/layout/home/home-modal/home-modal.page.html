@@ -17,7 +17,7 @@
   <ion-toolbar>
 
     <ion-searchbar (click)="addItEmpty()" show-cancel-button="focus" (ionCancel)="closeSearchBar()"
-      placeholder="Recherche un item spécifique" [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
+      placeholder="Recherche un produit " [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
     <!-- <ion-button slot="end" (click)="closeSearchBar()"> Annuler </ion-button> -->
   </ion-toolbar>
   <div *ngIf="listItemBool">

@@ -252,7 +252,7 @@ async presentSalepointItemDetail() {
   const modal = await this.modalController.create({
     component: ItemDetailPage,
     initialBreakpoint: 0.9,
-    breakpoints: [0, 0.6, 0.9],
+    breakpoints: [0, 0.9],
     id: "item"
   });
   //this.service.storeModal(modal);// storing modal instances in an array

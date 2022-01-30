@@ -1,4 +1,5 @@
-<ion-header>
+<!-- 
+  <ion-header>
   <ion-toolbar>
     <ion-title>registration</ion-title>
   </ion-toolbar>
@@ -33,6 +34,56 @@
       <ion-button type="submit" xpand="block" [disabled]="userForm.invalid">Submit</ion-button>
        <ion-text color="danger">{{errorMsg}}</ion-text>
     </form>
+
+    
+
   </ion-content>
 
+
+
+</ion-content>
+-->
+
+<ion-header translucent="true">
+  <ion-toolbar>
+    <ion-nav slot="start" root="/login"></ion-nav>
+    <ion-title>S'inscrire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #userForm="ngForm" (submit)="createUser(userForm)">
+    <ion-list>
+
+      <section>
+        <h2>Nom d'utilisateur</h2>
+
+
+        <ion-input type="text" #username="ngModel" placeholder="Steve" [(ngModel)]="users.username" name="Name"
+          min-length="3" max-length="30" required>
+        </ion-input>
+
+        <ion-item lines="none" *ngIf="username.invalid && username.touched">
+          <ion-text color="danger">Username is required.</ion-text>
+        </ion-item>
+      </section>
+      <section>
+        <h2>Mot de passe</h2>
+
+
+        <ion-input type="password" #password="ngModel" placeholder="*****" [(ngModel)]="users.password" name="Name"
+          required>
+        </ion-input>
+
+        <ion-item lines="none" *ngIf="password.invalid && password.touched">
+          <ion-text color="danger">Password is required.</ion-text>
+        </ion-item>
+
+      </section>
+    </ion-list>
+
+    <ion-button type="submit" expand="block" [disabled]="userForm.invalid">Confirmer</ion-button>
+    <ion-text color="danger">{{errorMsg}}</ion-text>
+
+  </form>
 </ion-content>

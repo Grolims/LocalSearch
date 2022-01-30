@@ -10,6 +10,7 @@ import { AuthRequest } from "../../models/auth-request";
  */
 @Component({
   templateUrl: "login.page.html",
+  styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
   /**
@@ -23,6 +24,7 @@ export class LoginPage {
    * (probably because the name or password is incorrect).
    */
   loginError: boolean;
+  
 
   constructor(private auth: AuthService, private router: Router) {
     this.authRequest = {
