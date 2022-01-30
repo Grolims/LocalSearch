@@ -33,6 +33,7 @@ export class LayoutPage implements OnInit {
   salepoints: SalepointResponseValue[] = [];
   salepointMarkers: SalepointMarkerResponseValue[] = [];
 
+
   constructor(
     private auth: AuthService,
     // Inject the router
@@ -54,8 +55,7 @@ export class LayoutPage implements OnInit {
       zoom: 13,
       center: latLng(46.778186, 6.641524)
     };
-
-    this.addSalepoint();
+    this.goHome();
 
 
   }

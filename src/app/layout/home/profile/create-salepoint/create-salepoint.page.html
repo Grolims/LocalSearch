@@ -9,22 +9,22 @@
   </ion-toolbar>
 </ion-header>
 
- 
+
 
 <ion-content>
 
 <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
     (leafletMapReady)="onMapReady($event)" (leafletClick)="displayCoord()">
-  </div>  
+  </div>
   <form #salepointForm = "ngForm" (submit)="createSalepoint(salepointForm)">
 
      <!-- <ion-input placeholder="Coordinate" #location="ngModel" [(ngModel)]="salepoints.location.coordinates"
-      name="Coordinate" required></ion-input>--> 
+      name="Coordinate" required></ion-input>-->
 
 
 <section><h2>Adresse</h2>
       <ion-input type="text" #address="ngModel"placeholder="Avenue des sports 20" [(ngModel)]="salepoints.address"
-      name="Address" required min-length="6" max-length="200" ></ion-input>
+      name="Address" required min-length="3" max-length="300" ></ion-input>
 
       <ion-item lines="none" *ngIf="address.invalid && address.touched">
         <ion-text color="danger">Address est requis.</ion-text>
@@ -35,7 +35,7 @@
       name="Picture" ></ion-input> -->
       <section><h2>Type de paiement</h2>
  <ion-item>
-        
+
 
           <!-- une seul valeur selection en raison de la valeur attendu par l'api sinon pour un tab:-->
           <!--  <ion-select multiple="true" [value]="['Cash', 'Card']"></ion-select>-->
@@ -51,11 +51,11 @@
     <img *ngIf="salepoints.picture" [src]="salepoints.picture" />
   </section>
 
-     
+
 
 
  <ion-button size="large" expand="block" type="submit" (click)="dismiss()" [disabled]="salepointForm.invalid">Créer</ion-button>
- <ion-text color="danger" *ngIf="postError" 
+ <ion-text color="danger" *ngIf="postError"
  >Erreur: {{errorMsg}}</ion-text>
 
  <ion-text color="danger" [innerHTML]="errorComplte"></ion-text>
