@@ -15,7 +15,7 @@ import { CreateItemPage } from './create-item/create-item.page';
 import { CreateSalepointPage } from './create-salepoint/create-salepoint.page';
 import { ItemDetailPage } from '../item-detail/item-detail.page';
 import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
-
+import { UpdateItemsPage } from './update-items/update-items.page';
 
 
 @Component({
@@ -51,6 +51,7 @@ export class ProfilePage implements OnInit {
   updateItem(oneItem)
   {
     this.navParamService.setNavData(oneItem);
+    this.presentUpdateItems();
     //this.router.navigateByUrl("home/profile/update-items");
   }
 
@@ -175,6 +176,25 @@ async presentCreateSalepoint() {
 async presentCreateItem() {
   const modal = await this.modalController.create({
     component: CreateItemPage,
+
+    initialBreakpoint: 1,
+    breakpoints: [0, 1],
+
+    id: "createSalepoint"
+
+
+
+  });
+  console.log("createSalepoint modal créé")
+
+
+ // this.service.storeModal(modal);// storing modal instances in an array
+  return await modal.present();
+}
+
+async presentUpdateItems() {
+  const modal = await this.modalController.create({
+    component: UpdateItemsPage,
 
     initialBreakpoint: 1,
     breakpoints: [0, 1],

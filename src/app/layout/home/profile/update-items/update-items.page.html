@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Update {{data.name}}</ion-title>
+    <h1>Modifier {{data.name}}</h1>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">
+        <ion-icon size="large" class="croix" name="close-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,34 +16,77 @@
 
   <form #itemForm="ngForm" (submit)="updateItems(itemForm)">
 
-    <ion-item>
-      <ion-label position="floating">Name</ion-label>
-      <ion-input  value="custom" type="text" #name = "ngModel" placeholder="Name" [(ngModel)]="data.name"
-        name="Name" required>
-      </ion-input>
-  </ion-item>
 
-      <ion-item lines="none" *ngIf="name.invalid && name.touched">
-        <ion-text color="danger">Name is required.</ion-text>
-      </ion-item>
-
-  <ion-item>
-    <ion-label position="floating">Type de produits</ion-label>
-    <ion-select placeholder="Select type" [(ngModel)]="data.type" [ngModelOptions]="{standalone: true}">
-      <ion-select-option *ngFor="let type of types" [value]="type.val">{{type.val}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Picture</ion-label>
       <ion-input type="text" placeholder="Picture" [(ngModel)]="data.picture"
       name="Picture" ></ion-input>
   </ion-item>
 
   <ion-button (click)="takePicture()">Take picture</ion-button>
-  <img *ngIf="data.picture" [src]="data.picture" />
+  <img *ngIf="data.picture" [src]="data.picture" />-->
 
+
+    <section>
+      <h2>Photo</h2>
+      <!--<ion-item>
+        
+        <ion-input type="text" placeholder="Picture" [(ngModel)]="items.picture"
+        name="Picture" ></ion-input>
+    </ion-item>-->
+
+      <ion-button class="photo" (click)="takePicture()">
+        <ion-icon name="camera"></ion-icon>
+      </ion-button>
+      <img *ngIf="data.picture" [src]="data.picture" />
+    </section>
+
+
+    <!--
     <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input  value="custom" type="text" #name = "ngModel" placeholder="Name" [(ngModel)]="data.name"
+        name="Name" required>
+      </ion-input>
+  </ion-item>-->
+
+
+
+    <section>
+      <h2>Nom</h2>
+
+
+      <ion-input value="custom" type="text" #name="ngModel" placeholder="Name" [(ngModel)]="data.name" name="Name"
+        required>
+      </ion-input>
+
+
+      <ion-item lines="none" *ngIf="name.invalid && name.touched">
+        <ion-text color="danger">Name is required.</ion-text>
+      </ion-item>
+    </section>
+
+    <!--<ion-item>
+    <ion-label position="floating">Type de produits</ion-label>
+    <ion-select placeholder="Select type" [(ngModel)]="data.type" [ngModelOptions]="{standalone: true}">
+      <ion-select-option *ngFor="let type of types" [value]="type.val">{{type.val}}</ion-select-option>
+    </ion-select>
+  </ion-item>-->
+
+    <section>
+      <h2>Type de produit</h2>
+      <ion-item>
+
+        <ion-select interface="action-sheet" placeholder="Select type" [(ngModel)]="data.type"
+          [ngModelOptions]="{standalone: true}">
+          <ion-select-option *ngFor="let type of types" [value]="type.val">{{type.val}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </section>
+
+
+
+    <!--<ion-item>
         <ion-label position="floating">Price</ion-label>
         <ion-input type="number" #price = "ngModel"placeholder="Price" [(ngModel)]="data.price"
         name="Price" required ></ion-input>
@@ -46,26 +94,61 @@
 
       <ion-item lines="none" *ngIf="price.invalid && price.touched">
         <ion-text color="danger">Price is required.</ion-text>
-      </ion-item>
+      </ion-item>-->
 
-      <ion-item>
+    <section>
+      <h2>Prix</h2>
+
+
+      <ion-input type="number" inputmode="decimal" #price="ngModel" placeholder="11.95" [(ngModel)]="data.price"
+        name="Price" required></ion-input>
+
+
+      <ion-item lines="none" *ngIf="price.invalid && price.touched">
+        <ion-text color="danger">Price is required.</ion-text>
+      </ion-item>
+    </section>
+
+    <!-- <ion-item>
 
       <ion-label position="floating">Description</ion-label>
       <ion-input type="text" placeholder="Description" [(ngModel)]="data.description"
       name="Descritpion" ></ion-input>
-      </ion-item>
+      </ion-item>-->
 
-    <ion-item>
+    <section>
+      <h2>Description</h2>
+
+
+      <ion-input type="text" placeholder="Description" [(ngModel)]="data.description" name="Descritpion"></ion-input>
+    </section>
+
+
+
+    <!--<ion-item>
       <ion-label position="floating">Label</ion-label>
-    <ion-select placeholder="Select type" [(ngModel)]="data.label" [ngModelOptions]="{standalone: true}" >
-      <ion-select-option *ngFor="let label of labels" [value]="label.val">{{label.val}}</ion-select-option>
-    </ion-select>
+      <ion-select placeholder="Select type" [(ngModel)]="data.label" [ngModelOptions]="{standalone: true}">
+        <ion-select-option *ngFor="let label of labels" [value]="label.val">{{label.val}}</ion-select-option>
+      </ion-select>
 
+    </ion-item>-->
+
+
+    <section>
+      <h2>Label</h2>
+
+      <ion-item>
+        <ion-select interface="action-sheet" placeholder="Selectionne le label" [(ngModel)]="data.label"
+          [ngModelOptions]="{standalone: true}">
+          <ion-select-option *ngFor="let label of labels" [value]="label.val">{{label.val}}</ion-select-option>
+        </ion-select>
       </ion-item>
+    </section>
+
+    
 
 
-
-    <ion-button type="submit" xpand="block" [disabled]="itemForm.invalid">Submit</ion-button>
+      <ion-button class="submit" size="large" expand="block" type="submit" xpand="block" [disabled]="itemForm.invalid">Modifier</ion-button>
 
   </form>
 
