@@ -75,7 +75,7 @@ export class CreateSalepointPage implements OnInit {
 
   async sucessToast() {
     const toast = await this.toastController.create({
-      message: 'Salepoint create with success.',
+      message: 'Point de vente créé avec succès',
       duration: 2000
     });
     toast.present();
@@ -100,6 +100,7 @@ export class CreateSalepointPage implements OnInit {
         console.log(data);
         this.postOk = true;
         this.sucessToast();
+        this.modalController.dismiss();
       }, error => {
         this.postError = true;
         console.warn(`Post failed: ${error.message}`);

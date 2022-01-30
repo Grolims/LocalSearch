@@ -230,6 +230,24 @@ openSalepoint(salepoint) {
   // this.router.navigateByUrl("home/sale-point-detail");
 }
 
+async presentSalepointItemDetail() {
+  const modal = await this.modalController.create({
+    component: ItemDetailPage,
+    initialBreakpoint: 0.48,
+    breakpoints: [0, 0.48, 0.9],
+    id: "item"
+  });
+  //this.service.storeModal(modal);// storing modal instances in an array
+  return await modal.present();
+}
+
+openItem(item)
+   {
+    this.navParamService.setNavData(item);
+    this.presentSalepointItemDetail();
+    //this.router.navigateByUrl("home/item-detail");
+   }
+
 
 
 

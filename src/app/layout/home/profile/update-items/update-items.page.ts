@@ -9,6 +9,7 @@ import { NavparamService } from 'src/app/navparam.service';
 import { HttpClient } from '@angular/common/http';
 import { PictureService } from 'src/app/picture/picture.service';
 import { ModalController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-update-items',
@@ -21,7 +22,7 @@ export class UpdateItemsPage implements OnInit {
   data:any = 0;
 
 
-  constructor(private pictureService: PictureService,public modalController: ModalController , public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private activatedRoute: ActivatedRoute, private navParamService:NavparamService) {
+  constructor(public toastController: ToastController,private pictureService: PictureService,public modalController: ModalController , public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private activatedRoute: ActivatedRoute, private navParamService:NavparamService) {
 
     this.data = this.navParamService.getNavData();
     console.log(this.data.name);
@@ -70,6 +71,16 @@ export class UpdateItemsPage implements OnInit {
     });
 
     this.postOK = true;
+    this.sucessToast();
+    this.modalController.dismiss();
+  }
+
+  async sucessToast() {
+    const toast = await this.toastController.create({
+      message: 'Le produit a été modifié avec succès',
+      duration: 2000
+    });
+    toast.present();
   }
 
   ngOnInit() {

@@ -88,7 +88,7 @@ export class CreateItemPage implements OnInit {
 
   async sucessToast() {
     const toast = await this.toastController.create({
-      message: 'Items create with success.',
+      message: 'Le produit a été créé avec succès',
       duration: 2000
     });
     toast.present();
@@ -127,10 +127,11 @@ export class CreateItemPage implements OnInit {
       console.log(data);
       this.postOK = true;
       this.sucessToast();
+      this.modalController.dismiss();
 
     this.navParamService.setNavData(this.items);
 
-    this.router.navigateByUrl("home/profile");
+    //this.router.navigateByUrl("home/profile");
 
      }, error => {
       this.postError = true;
