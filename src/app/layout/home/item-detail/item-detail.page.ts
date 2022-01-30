@@ -9,6 +9,8 @@ import { SalepointResponseValue } from 'src/app/models/salepoint';
 
 import { ModalController } from '@ionic/angular';
 import { HomeModalPage } from '../home-modal/home-modal.page';
+import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-item-detail',
@@ -22,9 +24,17 @@ export class ItemDetailPage implements OnInit {
   data:any = 0;
   items:ItemResponseValue[] = [];
   salepoints:SalepointMarkerResponseValue[] = [];
+  focusSalepoint: string;
+  subscription: Subscription;
 
 
-  constructor(private navParamService:NavparamService, public modalController: ModalController, private salepointService: Salepointservice, private router: Router, private itemService: Itemservice) {
+  constructor(
+    private navParamService:NavparamService,
+    public modalController: ModalController,
+    private salepointService: Salepointservice,
+    private router: Router,
+    private itemService: Itemservice,
+    private dataService: DataService) {
 
     this.data = this.navParamService.getNavData();
 
@@ -75,9 +85,16 @@ export class ItemDetailPage implements OnInit {
    
 } 
 
-
+  openSalepoint(salepoint) {
+    this.dataService.changeMessage(salepoint)
+  }  
 
   ngOnInit() {
+    this.subscription = this.dataService.currentMessage.subscribe(message => this.focusSalepoint = message);
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
 }

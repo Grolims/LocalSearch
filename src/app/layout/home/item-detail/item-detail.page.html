@@ -46,7 +46,7 @@
 <p>{{data.description}}</p>
 <h4>Point de vente </h4>
 <ion-item *ngFor="let salep of salepoints">
-  <ion-label class="priceLabel">{{salep.address}}</ion-label>
+  <ion-label class="priceLabel" (click)="openSalepoint(salep)">{{salep.address}}</ion-label>
 </ion-item>
   <!--
   <ion-item >
