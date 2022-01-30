@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Itemservice } from 'src/app/services/item.service';
 import { Salepointservice } from 'src/app/services/salepoint.service';
@@ -25,6 +25,8 @@ import { ItemDetailPage } from '../item-detail/item-detail.page';
 import { element } from 'protractor';
 
 import { ProfilePage } from '../profile/profile.page';
+import { Subscription } from 'rxjs';
+import { DataService } from 'src/app/services/data.service';
 
 
 
@@ -33,12 +35,16 @@ import { ProfilePage } from '../profile/profile.page';
   templateUrl: './home-modal.page.html',
   styleUrls: ['./home-modal.page.scss'],
 })
-export class HomeModalPage implements OnInit {
+export class HomeModalPage implements OnInit, OnDestroy {
 
 
   searchTerm: string;
   searchPrice;
+  mapOptions: MapOptions;
+  map: Map;
   mapMarkers: CustomMarker[] = [];
+  focusSalepoint: string;
+  subscription: Subscription;
   data: any = 0;
   filtreBol;
   public searchFilter: any = '';
@@ -53,6 +59,7 @@ export class HomeModalPage implements OnInit {
     private salepointService: Salepointservice,
     private router: Router,
     private navParamService: NavparamService,
+    private dataService: DataService,
 
     //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
@@ -61,7 +68,6 @@ export class HomeModalPage implements OnInit {
     private geolocation: Geolocation,) {
 
       this.addSalepoint();
-      console.log("addsalehommodal")
     this.addItemCache();
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
@@ -229,9 +235,6 @@ export class HomeModalPage implements OnInit {
       breakpoints: [0.6, 1],
       backdropBreakpoint: 0.6,
       id: "salepoint"
-
-
-
     });
 
     //modal.onWillDismiss().then(() => this.didDismiss());
@@ -256,9 +259,6 @@ export class HomeModalPage implements OnInit {
       breakpoints: [0.15, 0.5, 1],
       backdropBreakpoint: 0.5,
       id: "home"
-
-
-
     });
 
 
@@ -285,9 +285,6 @@ export class HomeModalPage implements OnInit {
       breakpoints: [0.5, 1],
       backdropBreakpoint: 0.5,
       id: "profil"
-
-
-
     });
 
     //modal.onDidDismiss().then(() => this.didDismiss());
@@ -296,13 +293,18 @@ export class HomeModalPage implements OnInit {
     return await modal.present();
   }
 
+  async closeModal() {
+    const emitData: string = "Closed";
+    await this.modalController.dismiss(emitData);
+  }
+
 
   /**
    * Ouverture du modal salpoint detail
    * @param salepoint
    */
   openSalepoint(salepoint) {
-    //console.log("YEAAAAHHHH MODAL"+salepoint)
+    this.dataService.changeMessage(salepoint)
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint();
     this.modalController.dismiss(undefined, undefined, 'home');
@@ -322,7 +324,15 @@ export class HomeModalPage implements OnInit {
       salepoint.data.forEach(element => {
         this.salepoints.push(element);
 
+        const newMarker: CustomMarker = marker(
+          element.location.coordinates,
+          {icon: defaultIcon},
+          ).on('click', (e)=> {this.markerClick(e)});
 
+        newMarker.options.title = element.address
+        newMarker.id = element._id;
+
+        this.mapMarkers.push(newMarker);
       });
 
 
@@ -333,7 +343,21 @@ export class HomeModalPage implements OnInit {
 
 
 
-
+  /**gestion de click sur marker salepoint */
+  markerClick(e) {
+    let result = [];
+    const clickedSalepoint = e.target.id;
+    console.log("This is the salepoint " + clickedSalepoint)
+    // console.log("IDtargt: "+ idsalepoint);
+    this.salepoints.forEach(element => {
+      // console.log(element._id);
+      if (element._id == clickedSalepoint) {
+        console.log("id identique");
+        result.push(element);
+      }
+    });
+    this.openSalepoint(result[0])
+  }
 
 
   filterItems() {
@@ -348,16 +372,27 @@ export class HomeModalPage implements OnInit {
    */
   locateSalepoint()
   {
-    console.log("LOCA " + (this.salepoints[0].location.coordinates[0] -0.02));
-    const lat = this.salepoints[0].location.coordinates[0] - 0.001;
-    const lon = this.salepoints[0].location.coordinates[1];
-
+    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
   }
 
   ngOnInit() {
+    // Geoposition is an interface that describes the position object
+    this.geolocation.getCurrentPosition().then((position) => {
+      const coords = position.coords;
+      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      this.map.setView(latLng(coords.latitude, coords.longitude));
+    }).catch(err => {
+      console.warn(`Could not retrieve user position because: ${err.message}`);
+    });
 
+    this.subscription = this.dataService.currentMessage.subscribe(message => this.focusSalepoint = message);
 
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   addItem()
   {
     this.items = this.itemsCache;
@@ -395,6 +430,12 @@ export class HomeModalPage implements OnInit {
     this.navParamService.setNavData(items);
 
     this.presentSalepointItemDetail();
+
+  }
+
+  onMapReady(map: Map) {
+    this.map = map;
+    setTimeout(() => map.invalidateSize(), 0);
 
   }
 

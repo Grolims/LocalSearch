@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { Itemservice } from 'src/app/services/item.service';
 import { Salepointservice } from 'src/app/services/salepoint.service';
 import { ItemResponse } from 'src/app/models/item';
@@ -26,6 +26,8 @@ import { element } from 'protractor';
 
 import { ProfilePage } from './profile/profile.page';
 import { HomeModalPage } from './home-modal/home-modal.page';
+import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -42,6 +44,8 @@ export class HomePage implements OnInit {
   map: Map;
   mapMarkers: CustomMarker[] = [];
   data: any = 0;
+  focusSalepoint: string;
+  subscription: Subscription;
   filtreBol;
   public searchFilter: any = '';
 
@@ -62,6 +66,7 @@ export class HomePage implements OnInit {
     private salepointService: Salepointservice,
     private router: Router,
     private navParamService: NavparamService,
+    private dataService: DataService,
 
     //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
@@ -111,15 +116,6 @@ export class HomePage implements OnInit {
   }
 
 
-
-
-
-
-
-
-
-
-
   ionViewDidEnter() {
     this.presentHome();
    // this.openSalepoint();
@@ -128,18 +124,12 @@ export class HomePage implements OnInit {
   async presentHome() {
     const modal = await this.modalController.create({
       component: HomeModalPage,
-
       initialBreakpoint: 0.5,
       breakpoints: [0.15, 0.5, 1],
       backdropBreakpoint: 0.5,
-      id: "home"
+      id: "home",
 
     });
-
-
-
-    console.log("home modal créé")
-
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
@@ -155,11 +145,7 @@ export class HomePage implements OnInit {
       backdropBreakpoint: 0.6,
       swipeToClose: true,
       id: "salepoint"
-
-
-
     });
-
 
   //modal.onWillDismiss().then(() => this.didDismiss());
  //modal.onDidDismiss().then(() => this.didDismiss());
@@ -239,10 +225,7 @@ export class HomePage implements OnInit {
   markerClick(e) {
     let result = [];
     const clickedSalepoint = e.target.id;
-    console.log("This is the salepoint " + clickedSalepoint)
-    // console.log("IDtargt: "+ idsalepoint);
     this.salepoints.forEach(element => {
-      // console.log(element._id);
       if (element._id == clickedSalepoint) {
         console.log("id identique");
         this.modalController.dismiss();
@@ -251,6 +234,7 @@ export class HomePage implements OnInit {
       }
     });
     this.openSalepoint(result[0])
+    console.log(this.focusSalepoint)
   }
 
 
@@ -258,27 +242,26 @@ export class HomePage implements OnInit {
 
   locateSalepoint(salepoint)
   {
-
-    console.log("LOCA " + (salepoint.location.coordinates[0] -0.02));
     const lat = salepoint.location.coordinates[0] - 0.001;
     const lon = salepoint.location.coordinates[1];
     this.map.flyTo(latLng(lat, lon), 18);
   }
 
   ngOnInit() {
-    // Geoposition is an interface that describes the position object
-   /* this.geolocation.getCurrentPosition().then((position) => {
-      const coords = position.coords;
-      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.map.flyTo(latLng(coords.latitude - 0.02, coords.longitude));
-    }).catch(err => {
-      console.warn(`Could not retrieve user position because: ${err.message}`);
-    });*/
-
     this.centerMap();
-
-
+    this.subscription = this.dataService.currentMessage.subscribe(message => {
+      if (!(message === 'none')) {
+        this.locateSalepoint(message);
+        this.focusSalepoint = message;
+      } 
+    
+    })
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   addItem()
   {
     this.items = this.itemsCache;

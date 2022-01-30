@@ -13,6 +13,7 @@ import { CreateSalepointPageModule } from '../profile/create-salepoint/create-sa
 import { ItemDetailPageModule } from '../item-detail/item-detail.module';
 import { ProfilePageModule } from '../profile/profile.module';
 import { SalePointDetailPageModule } from '../sale-point-detail/sale-point-detail.module';
+import { DataService } from 'src/app/services/data.service';
 
 
 
@@ -28,9 +29,9 @@ import { SalePointDetailPageModule } from '../sale-point-detail/sale-point-detai
     ItemDetailPageModule,
     CreateSalepointPageModule,
     ProfilePageModule,
-
-
   ],
-  declarations: [HomeModalPage]
+  declarations: [HomeModalPage],
+  providers: [DataService]
+
 })
 export class HomeModalPageModule {}
