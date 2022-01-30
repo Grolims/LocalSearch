@@ -49,11 +49,11 @@ export class CreateItemPage implements OnInit {
 
   items:ItemResponseValue = {
 
-    name: "Pomme",
+    name: null,
     type: "Fruit",
     description: null,
     picture:null,
-    label:"Bio",
+    label:"Bio", 
     price:null,
     userId:null,
     salepointId: null,
