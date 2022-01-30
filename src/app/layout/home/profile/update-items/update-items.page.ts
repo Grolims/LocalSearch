@@ -66,10 +66,12 @@ export class UpdateItemsPage implements OnInit {
 
       console.log(data);
      }, error => {
+
       console.warn(`Post failed: ${error.message}`);
       console.log(error);
     });
 
+    //devrais pas ètre ici en cas d'erreur mais l'api renvoie une erreur alors que le patch fonctionne
     this.postOK = true;
     this.sucessToast();
     this.modalController.dismiss();
@@ -88,7 +90,7 @@ export class UpdateItemsPage implements OnInit {
 
   dismissModal() {
     this.modalController.dismiss();
-   } 
+   }
 
 }
 

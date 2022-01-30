@@ -112,6 +112,8 @@ export class ProfilePage implements OnInit {
               console.log(error);
             });
 
+            //devrais pas ètre ici en cas d'erreur mais l'api renvoie une erreur alors que le delete fonctionne
+
               const isitem = (element) => element == oneItem;
 
               const indexDel = this.items.findIndex(isitem);
@@ -160,7 +162,7 @@ export class ProfilePage implements OnInit {
 
 
     });
-    
+
   }
 
   ionViewWillEnter
@@ -169,7 +171,7 @@ export class ProfilePage implements OnInit {
  }
 
 
- 
+
 
 async presentCreateSalepoint() {
   const modal = await this.modalController.create({
@@ -289,19 +291,19 @@ async presentHome() {
 }
 
 dismissModal() {
-  
+
 
  this.modalController.dismiss();
  this.presentHome();
- 
-} 
+
+}
 logOut() {
   console.log("logging out...");
   this.router.navigateByUrl("/login");
   this.modalController.dismiss();
   this.auth.logOut();
-  
-   
+
+
 }
 
 
