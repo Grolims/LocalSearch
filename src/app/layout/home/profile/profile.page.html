@@ -17,7 +17,6 @@
 
   <ion-list>
     <ion-item-sliding  *ngFor="let item of items">
-
       <ion-item (click)="openItem(item)" >
         <ion-thumbnail slot="start">
           <ion-img [src]="item.picture"></ion-img>
@@ -80,8 +79,12 @@
   <h2>Mes points de vente</h2>
   <ion-list>
     <ion-item (click)="openSalepoint(salepoint)" *ngFor="let salepoint of salepoints">
-      <ion-label>{{salepoint.address}}</ion-label>
-      <ion-img [src]="salepoint.picture"></ion-img>
+      <ion-thumbnail slot="start">
+        <ion-img [src]="salepoint.picture"></ion-img>
+      </ion-thumbnail>
+      <p class="titleItem">
+        {{salepoint.address}}
+      </p>
     </ion-item>
   </ion-list>
 
@@ -92,4 +95,8 @@
     <ion-label expand="block" (click)="logOut()">Se déconnecter</ion-label>
   </div>
 
-</ion-content>
+
+
+  <!--<ion-button color="warning" (click)="updateItem(item)">Change item</ion-button>
+<ion-badge color="danger"  (click)="deleteItem(item)">Delete item</ion-badge>-->
+
