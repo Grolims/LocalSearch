@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ItemResponseValue } from 'src/app/models/item';
 import { Itemservice } from 'src/app/services/item.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Router } from '@angular/router';
+import { Data, Router } from '@angular/router';
 import { NavparamService } from 'src/app/navparam.service';
 import { HttpClient } from '@angular/common/http';
 import { element } from 'protractor';
@@ -16,6 +16,8 @@ import { CreateSalepointPage } from './create-salepoint/create-salepoint.page';
 import { ItemDetailPage } from '../item-detail/item-detail.page';
 import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
 import { UpdateItemsPage } from './update-items/update-items.page';
+import { DataService } from 'src/app/services/data.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -28,8 +30,21 @@ export class ProfilePage implements OnInit {
   items:ItemResponseValue[] = [];
   salepoints:SalepointResponseValue[] = [];
   data:any = 0;
+  focusSalepoint: string;
+  subscription: Subscription;
 
-  constructor(public alertController: AlertController,private auth: AuthService, public modalController: ModalController,  public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private router: Router, private navParamService:NavparamService, private salepointService: Salepointservice) {
+  constructor(
+    public alertController: AlertController,
+    private auth: AuthService,
+    public modalController: ModalController,
+    public httpClient: HttpClient,
+    private itemService: Itemservice,
+    private authservice: AuthService,
+    private router: Router,
+    private navParamService:NavparamService,
+    private salepointService: Salepointservice,
+    private dataService: DataService
+    ) {
 
 
     this.authservice.getUser$().subscribe(user=> this.id = user._id)
@@ -224,7 +239,7 @@ async presentSalepoint() {
 
 
 openSalepoint(salepoint) {
-  //console.log("YEAAAAHHHH MODAL"+salepoint)
+  this.dataService.changeMessage(salepoint)
   this.navParamService.setNavData(salepoint);
   this.modalController.dismiss(undefined, undefined, 'profil');
     this.presentSalepoint();
