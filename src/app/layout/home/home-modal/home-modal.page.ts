@@ -38,8 +38,6 @@ export class HomeModalPage implements OnInit {
 
   searchTerm: string;
   searchPrice;
-  mapOptions: MapOptions;
-  map: Map;
   mapMarkers: CustomMarker[] = [];
   data: any = 0;
   filtreBol;
@@ -63,6 +61,7 @@ export class HomeModalPage implements OnInit {
     private geolocation: Geolocation,) {
 
       this.addSalepoint();
+      console.log("addsalehommodal")
     this.addItemCache();
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
@@ -323,15 +322,7 @@ export class HomeModalPage implements OnInit {
       salepoint.data.forEach(element => {
         this.salepoints.push(element);
 
-        const newMarker: CustomMarker = marker(
-          element.location.coordinates,
-          {icon: defaultIcon},
-          ).on('click', (e)=> {this.markerClick(e)});
 
-        newMarker.options.title = element.address
-        newMarker.id = element._id;
-
-        this.mapMarkers.push(newMarker);
       });
 
 
@@ -342,21 +333,7 @@ export class HomeModalPage implements OnInit {
 
 
 
-  /**gestion de click sur marker salepoint */
-  markerClick(e) {
-    let result = [];
-    const clickedSalepoint = e.target.id;
-    console.log("This is the salepoint " + clickedSalepoint)
-    // console.log("IDtargt: "+ idsalepoint);
-    this.salepoints.forEach(element => {
-      // console.log(element._id);
-      if (element._id == clickedSalepoint) {
-        console.log("id identique");
-        result.push(element);
-      }
-    });
-    this.openSalepoint(result[0])
-  }
+
 
 
   filterItems() {
@@ -371,18 +348,13 @@ export class HomeModalPage implements OnInit {
    */
   locateSalepoint()
   {
-    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    console.log("LOCA " + (this.salepoints[0].location.coordinates[0] -0.02));
+    const lat = this.salepoints[0].location.coordinates[0] - 0.001;
+    const lon = this.salepoints[0].location.coordinates[1];
+
   }
 
   ngOnInit() {
-    // Geoposition is an interface that describes the position object
-    this.geolocation.getCurrentPosition().then((position) => {
-      const coords = position.coords;
-      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.map.setView(latLng(coords.latitude, coords.longitude));
-    }).catch(err => {
-      console.warn(`Could not retrieve user position because: ${err.message}`);
-    });
 
 
   }
@@ -423,12 +395,6 @@ export class HomeModalPage implements OnInit {
     this.navParamService.setNavData(items);
 
     this.presentSalepointItemDetail();
-
-  }
-
-  onMapReady(map: Map) {
-    this.map = map;
-    setTimeout(() => map.invalidateSize(), 0);
 
   }
 

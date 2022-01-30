@@ -51,11 +51,11 @@ export class HomePage implements OnInit {
   items3: ItemResponseValue[] = [];
   positionIcon: Icon = icon({
     iconUrl: '../../../assets/image/position.png',
-    
+
     iconSize: [40, 40], // => random values you have to choose right ones for your case
     //iconAnchor: [20, 51] // => random values too
   });
-   
+
 
   constructor(private itemService: Itemservice,
 
@@ -68,8 +68,8 @@ export class HomePage implements OnInit {
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,
-    
-    
+
+
     //private icon: Icon
   ) {
 
@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
       center: latLng(46.778186 - 0.02, 6.641524)
     };
     this.addSalepoint();
-    this.addItemCache();
+    console.log("addsalehome");
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
@@ -96,18 +96,6 @@ export class HomePage implements OnInit {
 
 
   }
-
-  lower = 0;
-  upper = 120;
-
-  public types = [
-    { val: 'Fruit', isChecked: true },
-    { val: 'Viande', isChecked: true},
-    { val: 'Légumes', isChecked: true },
-    { val: 'Céréales', isChecked: true },
-    { val: 'Boissons', isChecked: true},
-    { val: 'Autre', isChecked: true}
-  ];
 
 
 
@@ -122,142 +110,16 @@ export class HomePage implements OnInit {
 
   }
 
-  filterAll(event: any)
-  {
-/*
-    let result;
-    let name = event.explicitOriginalTarget.firstChild.data;
-    let isCheck = event.detail.checked;
-    console.log("changeCheck")
-    console.log(isCheck);
-
-      if(isCheck == false){
-         result = this.items.filter(it=> it.type != name )
-         this.items = result;
-      }else{
-        result = this.itemsCache.filter(it=> it.type == name )
-          result.forEach(element => {
-
-            this.items.push(element);
-          });
-
-      }
-
-*/
-
-  }
-
-  updateBare()
-  {
-
-
-    if (this.listeEstFiltrer == false)
-    {
-      let result = this.itemsCache.filter(it => it.price >= this.lower && it.price <= this.upper);
-
-
-      this.items = result
-    }else if ( this.listeEstFiltrer == true)
-    {
-
-      let result = this.items3.filter(it => it.price >= this.lower && it.price <= this.upper);
-      this.items = result;
-    }
-
-  }
-
-  testChange(event: any)
-  {
-
-  this.lower = event.detail.value.lower
-  this.upper = event.detail.value.upper
-
-  }
-
-  changeValue(event: any)
-  {
-    //console.log(event.detail.value)
-
-    this.price = event.detail.value;
-
-    let result = this.itemsCache.filter(it => it.price >= event.detail.value.lower && it.price <= event.detail.value.upper);
-    //console.log(result);
-    this.items = result
-
-  }
-
-  changeValueCheckbox(event: any)
-  {
-
-    let result;
-    let tab
-    let name = event.explicitOriginalTarget.firstChild.data;
-    let isCheck = event.detail.checked;
 
 
 
-      if(isCheck == false){
-         result = this.items.filter(it=> it.type != name /* && it.price >= this.lower && it.price <= this.upper*/)
-
-         this.types.forEach(element => {
-           if(element.isChecked == false)
-           {
-              let result =this.items3.filter(it=> it.type != element.val)
-              this.items3 = result;
-           }
-         });
-
-         this.items = result;
-         this.listeEstFiltrer = true;
-      }else{
-
-        result = this.itemsCache.filter(it=> it.type == name)
-          result.forEach(element => {
-            this.items.push(element);
-            this.items3.push(element);
-
-          });
-
-
-      }
 
 
 
-    }
 
 
 
-  stopSearch() {
-    this.items = [];
-  }
 
-  filter() {
-    let tab = [];
-    this.data[0].forEach(element => {
-      if (element.isChecked = true) {
-        tab.push(element);
-      }
-    });
-
-    return tab;
-
-  }
-
-
-
-  addItemCache() {
-
-    this.itemService.getItem().subscribe(item => {
-      item.data.forEach(element => {
-        this.itemsCache.push(element);
-
-      });
-
-
-    });
-
-
-  }
   ionViewDidEnter() {
     this.presentHome();
    // this.openSalepoint();
@@ -277,7 +139,7 @@ export class HomePage implements OnInit {
 
 
     console.log("home modal créé")
-    
+
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
@@ -336,7 +198,7 @@ export class HomePage implements OnInit {
   }
 
   openSalepoint(salepoint) {
-    console.log("YEAAAAHHHH CARTE"+salepoint)
+
     this.navParamService.setNavData(salepoint);
     this.locateSalepoint(salepoint);
     this.presentSalepoint();
@@ -371,11 +233,9 @@ export class HomePage implements OnInit {
     });
   }
 
-  goToSalepoint()
-  {
-  
-  }
 
+
+    /**gestion de click sur marker salepoint */
   markerClick(e) {
     let result = [];
     const clickedSalepoint = e.target.id;
@@ -386,22 +246,13 @@ export class HomePage implements OnInit {
       if (element._id == clickedSalepoint) {
         console.log("id identique");
         this.modalController.dismiss();
-        
+
         result.push(element);
       }
     });
     this.openSalepoint(result[0])
   }
 
-
-  detailItem() {
-
-  }
-
-  filterItems() {
-    this.filtreBol = false;
-    this.router.navigateByUrl("home/filter-items");
-  }
 
 
 
@@ -434,6 +285,8 @@ export class HomePage implements OnInit {
 
   }
 
+  /*
+
   addSalepointId(items)
 {
   this.salepointService.getSalepointIDs().subscribe(salepoint => {
@@ -448,8 +301,9 @@ export class HomePage implements OnInit {
 
   });
 }
+*/
 
-
+/*
   locateItem(items)
   {
     this.addSalepointId(items);
@@ -458,7 +312,7 @@ export class HomePage implements OnInit {
 
     this.presentSalepointItemDetail();
 
-  }
+  }*/
 
   onMapReady(map: Map) {
     this.map = map;
@@ -466,27 +320,9 @@ export class HomePage implements OnInit {
 
   }
 
-  logOut() {
-    console.log("logging out...");
-    this.modalController.dismiss()
-    this.auth.logOut();
-    this.router.navigateByUrl("/login");
-  }
 
-  /**
-   * Ajoute les items si clicl sur la searchbar
-   */
-  addItEmpty() {
-    if (this.items.length == 0) {
-      this.addItem();
-      this.listItemBool = true;
-    }
-  }
-  closeSearchBar() {
 
-    this.items = [];
-    this.listItemBool = false;
-  }
+
 
   didDismiss(){
 
@@ -502,29 +338,29 @@ export class HomePage implements OnInit {
 
     this.modalController.dismiss(undefined, undefined, 'home');   this.presentProfil();
   }
-  
+
 
   centerMap(){
 
-    
+
 
     this.geolocation.getCurrentPosition().then((position) => {
 
-      
+
       const coords = position.coords;
 
       const newMarker: CustomMarker = marker(
         [coords.latitude,coords.longitude],
         {icon: this.positionIcon},
         );
-        
+
       this.mapMarkers.push(newMarker);
       // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
       this.map.flyTo(latLng(coords.latitude - 0.01, coords.longitude),14);
       console.log("map centré !!!")
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
-      
+
     });
   }
 }
