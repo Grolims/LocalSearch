@@ -37,7 +37,7 @@ export class RegistrationPage implements OnInit {
     this.httpClient.post("https://localsearch-ch.herokuapp.com/users", this.users)
     .subscribe(data => {
       this.router.navigateByUrl("/")
-      console.log(data);
+
      }, error => {
        console.log(error)
       console.warn(`Post failed: ${error.message}`);

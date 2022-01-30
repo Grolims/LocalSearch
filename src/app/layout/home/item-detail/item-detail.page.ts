@@ -40,7 +40,6 @@ export class ItemDetailPage implements OnInit {
     this.data = this.navParamService.getNavData();
 
     this.addSalepoint();
-    console.log(this.salepoints);
   }
 
   addSalepoint() {
@@ -62,7 +61,7 @@ export class ItemDetailPage implements OnInit {
   async presentHome() {
     const modal = await this.modalController.create({
       component: HomeModalPage,
-      
+
       initialBreakpoint: 0.5,
       breakpoints: [0.15, 0.5, 1],
       backdropBreakpoint: 0.5,
@@ -71,20 +70,20 @@ export class ItemDetailPage implements OnInit {
 
 
     });
-    
 
-    
+
+
    // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
   dismissModal() {
-    
+
 
    this.modalController.dismiss();
    //this.presentHome();
-   
-} 
+
+}
 async presentSalepoint() {
   const modal = await this.modalController.create({
     component: SalePointDetailPage,
@@ -106,7 +105,7 @@ async presentSalepoint() {
     this.dataService.changeMessage(salepoint);
     this.presentSalepoint();
     this.dismissModal();
-  }  
+  }
 
   ngOnInit() {
     this.subscription = this.dataService.currentMessage.subscribe(message => this.focusSalepoint = message);

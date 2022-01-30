@@ -25,7 +25,6 @@ export class UpdateItemsPage implements OnInit {
   constructor(public toastController: ToastController,private pictureService: PictureService,public modalController: ModalController , public httpClient: HttpClient, private itemService: Itemservice, private authservice: AuthService, private activatedRoute: ActivatedRoute, private navParamService:NavparamService) {
 
     this.data = this.navParamService.getNavData();
-    console.log(this.data.name);
 
   }
 
@@ -50,7 +49,6 @@ export class UpdateItemsPage implements OnInit {
   {
     this.pictureService.takeAndUploadPicture()
     .subscribe(pict=> {
-      console.log(pict)
       this.data.picture = pict.url
     })
   }
@@ -60,11 +58,9 @@ export class UpdateItemsPage implements OnInit {
     if (form.invalid) {
       return;
     }
-      console.log(this.data.name);
     this.httpClient.patch("https://localsearch-ch.herokuapp.com/items/"+ this.data._id, this.data)
     .subscribe(data => {
 
-      console.log(data);
      }, error => {
 
       console.warn(`Post failed: ${error.message}`);

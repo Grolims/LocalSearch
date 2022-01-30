@@ -89,7 +89,6 @@ export class HomePage implements OnInit {
       center: latLng(46.778186 - 0.02, 6.641524)
     };
     this.addSalepoint();
-    console.log("addsalehome");
     this.filtreBol = true;
     this.data = this.navParamService.getNavData();
 
@@ -217,7 +216,6 @@ export class HomePage implements OnInit {
     const clickedSalepoint = e.target.id;
     this.salepoints.forEach(element => {
       if (element._id == clickedSalepoint) {
-        console.log("id identique");
         this.modalController.dismiss();
 
         result.push(element);
@@ -256,7 +254,7 @@ export class HomePage implements OnInit {
 
   }
 
-  
+
 
   onMapReady(map: Map) {
     this.map = map;
@@ -270,12 +268,12 @@ export class HomePage implements OnInit {
 
   didDismiss() {
 
-    console.log(" HOME modal terminée puis creation home modal")
+
     this.presentHome();
   }
-  
+
   goProfile() {
-    
+
 
     this.modalController.dismiss(undefined, undefined, 'home'); this.presentProfil();
   }
@@ -296,9 +294,9 @@ export class HomePage implements OnInit {
       );
 
       this.mapMarkers.push(newMarker);
-      
+
       this.map.flyTo(latLng(coords.latitude - 0.01, coords.longitude), 14);
-      
+
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
 

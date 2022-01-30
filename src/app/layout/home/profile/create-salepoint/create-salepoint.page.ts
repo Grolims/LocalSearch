@@ -99,7 +99,6 @@ export class CreateSalepointPage implements OnInit {
     console.log(this.salepoints)
     this.httpClient.post("https://localsearch-ch.herokuapp.com/salepoints", this.salepoints)
       .subscribe(data => {
-        console.log(data);
         this.postOk = true;
         this.sucessToast();
         this.modalController.dismiss();
@@ -117,7 +116,6 @@ export class CreateSalepointPage implements OnInit {
   takePicture() {
     this.pictureService.takeAndUploadPicture()
       .subscribe(pict => {
-        console.log(pict)
         this.salepoints.picture = pict.url
       })
   }
@@ -143,11 +141,11 @@ export class CreateSalepointPage implements OnInit {
   }
 
   dismissModal() {
-  
+
 
     this.modalController.dismiss();
-    
-    
-   } 
+
+
+   }
 
 }

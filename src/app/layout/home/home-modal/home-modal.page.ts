@@ -37,9 +37,9 @@ import { DataService } from 'src/app/services/data.service';
 export class HomeModalPage implements OnInit, OnDestroy {
 
   isHomeModal = true;
-  
 
-  
+
+
   searchTerm: string;
   searchPrice;
   mapOptions: MapOptions;
@@ -238,7 +238,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
 
   didDismiss(){
 
-    console.log(" MODAL modal terminée puis creation home modal")
+
     this.presentHome();
   }
 
@@ -280,7 +280,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
   async closeModal() {
     const emitData: string = "Closed";
     await this.modalController.dismiss(emitData);
-  } 
+  }
 
 
   /**
@@ -330,7 +330,6 @@ export class HomeModalPage implements OnInit, OnDestroy {
   markerClick(e) {
     let result = [];
     const clickedSalepoint = e.target.id;
-    console.log("This is the salepoint " + clickedSalepoint)
     this.salepoints.forEach(element => {
       if (element._id == clickedSalepoint) {
         result.push(element);
@@ -352,14 +351,14 @@ export class HomeModalPage implements OnInit, OnDestroy {
    */
   locateSalepoint()
   {
-    
+
   }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
     this.geolocation.getCurrentPosition().then((position) => {
       const coords = position.coords;
-      
+
       this.map.setView(latLng(coords.latitude, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
@@ -406,7 +405,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
   locateItem(items)
   {
     this.addSalepointId(items);
-    
+
     this.navParamService.setNavData(items);
 
     this.presentSalepointItemDetail();
@@ -439,7 +438,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
 
 
   goProfile() {
-   
+
 
     this.modalController.dismiss(undefined, undefined, 'home');
     this.presentProfil();
