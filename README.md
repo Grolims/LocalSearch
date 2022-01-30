@@ -75,7 +75,7 @@ Vous pouvez maintenant parcourir les points de ventes, via la carte ou la liste,
 
 
 
-Recherche de produits 
+### Recherche de produits 
 
 Pour rechercher un produit spécifique, il suffit d’appuyer sur la barre de recherche et ensuite soit taper le nom du produit ou filtrer par prix et / ou catégories la liste affichée.
 
@@ -83,11 +83,11 @@ Pour rechercher un produit spécifique, il suffit d’appuyer sur la barre de re
 
 Appuyer ensuite sur celui-ci pour ouvrir les détails et si vous désirez connaître sa position, appuyez sur le point de vente.
 
-Mon profil
+###  Mon profil
 
 Pour accéder à votre profil, appuyé sur le logo. <img src="https://lh3.googleusercontent.com/Zv0uGW7Cs4dmGmatMfkYgf0m9JjdipTbJphGPjuBC4G0OaWy81RNrLG603duoLKd2TA6oYPm0qkbzBo7g1OlwRp0ZVsIMAaoKwjxXb8M9KaL5pSM5mq3p3w7lmLH4LFqXpQJbgXQ" alt="img" style="zoom: 50%;" /> Vous accédez maintenant à la liste des produits et des points de ventes que vous avez créés. Vous pouvez depuis cette page modifier vos produits ou les supprimer. Si vous appuyez sur le poduit, vous accédez à sa description.
 
-Modification et suppression d’un items
+### Modification et suppression d’un items
 
 Pour modifier ou supprimer un item il suffit de le slider vers la gauche et appuyez sur supprimer ou modifier selon l’action désirée.
 
@@ -95,12 +95,12 @@ Pour modifier ou supprimer un item il suffit de le slider vers la gauche et appu
 
 Le menu de modification est le même que celui de création, il suffit de renseigner les informations à modifier et de valider.
 
-Création point de vente et produit
+### Création point de vente et produit
 
 Pour créer un produit ou un point de vente il suffit d’appuyer sur le bouton correspondant en bas la page et de remplir les champs du formulaire.
+
+
 <img src="https://lh6.googleusercontent.com/B3SwfHe3htJkgP7-pCUYA0JiMFgEGNOPcfnhq_ow2G2zyBD6D4tob5SvwyeuaYqLqrMvLeWPgghqM71nzX40QbZaN9De7yM9amSfBnMv-o64B-vxH677qj9r7NoTIFx7Y1daFpRk" alt="img" style="zoom:67%;" />
-
-
 
 
 <img src="https://lh5.googleusercontent.com/GWI7lTPqJQbXmVWJgY7Jh-336HSPvb-09pHGz6tWm_JZG7j4t_-HEnsjUCPH3GCapgJ5EbfJ57UVhXFgJMBBH7Z6HDACdsFCpYXAoza2sxUyu18KFHppKHmSSlIqZ6d2yUwk1Qzc" alt="img" style="zoom:67%;" />
