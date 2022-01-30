@@ -56,8 +56,7 @@ export class HomePage implements OnInit {
   positionIcon: Icon = icon({
     iconUrl: '../../../assets/image/position.png',
 
-    iconSize: [40, 40], // => random values you have to choose right ones for your case
-    //iconAnchor: [20, 51] // => random values too
+    iconSize: [40, 40],
   });
 
 
@@ -68,14 +67,13 @@ export class HomePage implements OnInit {
     private navParamService: NavparamService,
     private dataService: DataService,
 
-    //private salePointDetailPage: SalePointDetailPage,
+
     private auth: AuthService,
     public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,
 
 
-    //private icon: Icon
   ) {
 
     this.mapOptions = {
@@ -105,12 +103,11 @@ export class HomePage implements OnInit {
 
 
 
-  price:any =0;
-  listItemBool:boolean = false;
-  listeEstFiltrer:boolean = false;
+  price: any = 0;
+  listItemBool: boolean = false;
+  listeEstFiltrer: boolean = false;
 
-  testClick()
-  {
+  testClick() {
 
 
   }
@@ -118,7 +115,6 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.presentHome();
-   // this.openSalepoint();
   }
 
   async presentHome() {
@@ -130,7 +126,6 @@ export class HomePage implements OnInit {
       id: "home",
 
     });
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
@@ -148,9 +143,6 @@ export class HomePage implements OnInit {
       id: "salepoint"
     });
 
-  //modal.onWillDismiss().then(() => this.didDismiss());
- //modal.onDidDismiss().then(() => this.didDismiss());
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
@@ -163,7 +155,7 @@ export class HomePage implements OnInit {
       breakpoints: [0, 0.48, 0.9],
       id: "item"
     });
-    //this.service.storeModal(modal);// storing modal instances in an array
+
     return await modal.present();
   }
 
@@ -180,7 +172,6 @@ export class HomePage implements OnInit {
     });
 
 
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
@@ -190,14 +181,12 @@ export class HomePage implements OnInit {
     this.locateSalepoint(salepoint);
     this.presentSalepoint();
 
-    // this.router.navigateByUrl("home/sale-point-detail");
   }
 
 
-    save()
-    {
+  save() {
 
-    }
+  }
 
   addSalepoint() {
 
@@ -207,8 +196,8 @@ export class HomePage implements OnInit {
 
         const newMarker: CustomMarker = marker(
           element.location.coordinates,
-          {icon: defaultIcon},
-          ).on('click', (e)=> {this.markerClick(e)});
+          { icon: defaultIcon },
+        ).on('click', (e) => { this.markerClick(e) });
 
         newMarker.options.title = element.address
         newMarker.id = element._id;
@@ -222,7 +211,7 @@ export class HomePage implements OnInit {
 
 
 
-    /**gestion de click sur marker salepoint */
+  /**gestion de click sur marker salepoint */
   markerClick(e) {
     let result = [];
     const clickedSalepoint = e.target.id;
@@ -241,8 +230,7 @@ export class HomePage implements OnInit {
 
 
 
-  locateSalepoint(salepoint)
-  {
+  locateSalepoint(salepoint) {
     const lat = salepoint.location.coordinates[0] - 0.001;
     const lon = salepoint.location.coordinates[1];
     this.map.flyTo(latLng(lat, lon), 18);
@@ -254,8 +242,8 @@ export class HomePage implements OnInit {
       if (!(message === 'none')) {
         this.locateSalepoint(message);
         this.focusSalepoint = message;
-      } 
-    
+      }
+
     })
   }
 
@@ -263,40 +251,12 @@ export class HomePage implements OnInit {
     this.subscription.unsubscribe();
   }
 
-  addItem()
-  {
+  addItem() {
     this.items = this.itemsCache;
 
   }
 
-  /*
-
-  addSalepointId(items)
-{
-  this.salepointService.getSalepointIDs().subscribe(salepoint => {
-    salepoint.data.forEach(element => {
-      if (element._id == items.salepointId)
-      {
-        this.salepoints.push(element);
-      }
-
-    });
-
-
-  });
-}
-*/
-
-/*
-  locateItem(items)
-  {
-    this.addSalepointId(items);
-    this.map.setView(latLng(this.salepoints[0].location.coordinates));
-    this.navParamService.setNavData(items);
-
-    this.presentSalepointItemDetail();
-
-  }*/
+  
 
   onMapReady(map: Map) {
     this.map = map;
@@ -308,23 +268,20 @@ export class HomePage implements OnInit {
 
 
 
-  didDismiss(){
+  didDismiss() {
 
     console.log(" HOME modal terminée puis creation home modal")
     this.presentHome();
   }
-  goHome() {
-
-    //this.router.navigateByUrl("/home");
-  }
+  
   goProfile() {
-    //this.router.navigateByUrl("/home/profile");
+    
 
-    this.modalController.dismiss(undefined, undefined, 'home');   this.presentProfil();
+    this.modalController.dismiss(undefined, undefined, 'home'); this.presentProfil();
   }
 
 
-  centerMap(){
+  centerMap() {
 
 
 
@@ -334,14 +291,14 @@ export class HomePage implements OnInit {
       const coords = position.coords;
 
       const newMarker: CustomMarker = marker(
-        [coords.latitude,coords.longitude],
-        {icon: this.positionIcon},
-        );
+        [coords.latitude, coords.longitude],
+        { icon: this.positionIcon },
+      );
 
       this.mapMarkers.push(newMarker);
-      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
-      this.map.flyTo(latLng(coords.latitude - 0.01, coords.longitude),14);
-      console.log("map centré !!!")
+      
+      this.map.flyTo(latLng(coords.latitude - 0.01, coords.longitude), 14);
+      
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
 

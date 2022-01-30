@@ -16,7 +16,6 @@ import * as L from 'leaflet';
 import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
 
 import { ModalController } from '@ionic/angular';
-//import { IonRouterOutlet } from '@ionic/angular';
 import { SalePointDetailPage } from '../sale-point-detail/sale-point-detail.page';
 
 import { SearchFilterPipe } from 'src/app/search-filter.pipe';
@@ -64,9 +63,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
     private navParamService: NavparamService,
     private dataService: DataService,
 
-    //private salePointDetailPage: SalePointDetailPage,
     private auth: AuthService,
-    //public routerOutlet: IonRouterOutlet,
     public modalController: ModalController,
     private geolocation: Geolocation,) {
 
@@ -184,11 +181,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
 
           });
 
-
       }
-
-
-
     }
 
 
@@ -240,13 +233,6 @@ export class HomeModalPage implements OnInit, OnDestroy {
       backdropBreakpoint: 0.6,
       id: "salepoint"
     });
-
-    
-    //modal.onWillDismiss().then(() => this.didDismiss());
-
-    //modal.onDidDismiss().then(() => this.didDismiss());
-
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
@@ -266,11 +252,6 @@ export class HomeModalPage implements OnInit, OnDestroy {
       id: "home"
     });
 
-    
-
-
-    //console.log("home modal créé")
-   // this.service.storeModal(modal);// storing modal instances in an array
     return await modal.present();
   }
 
@@ -281,7 +262,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
       breakpoints: [0, 0.9],
       id: "item"
     });
-    //this.service.storeModal(modal);// storing modal instances in an array
+
     return await modal.present();
   }
 
@@ -312,7 +293,6 @@ export class HomeModalPage implements OnInit, OnDestroy {
     this.locateSalepoint();
     this.modalController.dismiss();
     this.presentSalepoint();
-    // this.router.navigateByUrl("home/sale-point-detail");
   }
 
 
@@ -351,11 +331,8 @@ export class HomeModalPage implements OnInit, OnDestroy {
     let result = [];
     const clickedSalepoint = e.target.id;
     console.log("This is the salepoint " + clickedSalepoint)
-    // console.log("IDtargt: "+ idsalepoint);
     this.salepoints.forEach(element => {
-      // console.log(element._id);
       if (element._id == clickedSalepoint) {
-        console.log("id identique");
         result.push(element);
       }
     });
@@ -375,14 +352,14 @@ export class HomeModalPage implements OnInit, OnDestroy {
    */
   locateSalepoint()
   {
-    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    
   }
 
   ngOnInit() {
     // Geoposition is an interface that describes the position object
     this.geolocation.getCurrentPosition().then((position) => {
       const coords = position.coords;
-      // console.log(`User is at ${coords.longitude}, ${coords.latitude}`);
+      
       this.map.setView(latLng(coords.latitude, coords.longitude));
     }).catch(err => {
       console.warn(`Could not retrieve user position because: ${err.message}`);
@@ -429,7 +406,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
   locateItem(items)
   {
     this.addSalepointId(items);
-    //this.map.setView(latLng(this.salepoints[0].location.coordinates));
+    
     this.navParamService.setNavData(items);
 
     this.presentSalepointItemDetail();
@@ -462,7 +439,7 @@ export class HomeModalPage implements OnInit, OnDestroy {
 
 
   goProfile() {
-    //this.router.navigateByUrl("/home/profile");
+   
 
     this.modalController.dismiss(undefined, undefined, 'home');
     this.presentProfil();
