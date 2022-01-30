@@ -76,7 +76,9 @@ export class CreateSalepointPage implements OnInit {
   async sucessToast() {
     const toast = await this.toastController.create({
       message: 'Point de vente créé avec succès',
-      duration: 2000
+      icon: 'information-circle',
+      color: 'success',
+      duration: 3000
     });
     toast.present();
   }

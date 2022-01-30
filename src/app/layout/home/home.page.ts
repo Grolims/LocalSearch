@@ -50,10 +50,10 @@ export class HomePage implements OnInit {
   itemsCache: ItemResponseValue[] = [];
   items3: ItemResponseValue[] = [];
   positionIcon: Icon = icon({
-    iconUrl: './image/position.png',
+    iconUrl: '../../../assets/image/position.png',
     
-    iconSize: [41, 51], // => random values you have to choose right ones for your case
-    iconAnchor: [20, 51] // => random values too
+    iconSize: [40, 40], // => random values you have to choose right ones for your case
+    //iconAnchor: [20, 51] // => random values too
   });
    
 

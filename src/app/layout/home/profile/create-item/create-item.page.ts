@@ -89,7 +89,9 @@ export class CreateItemPage implements OnInit {
   async sucessToast() {
     const toast = await this.toastController.create({
       message: 'Le produit a été créé avec succès',
-      duration: 2000
+      icon: 'information-circle',
+      color: 'success',
+      duration: 3000
     });
     toast.present();
   }
