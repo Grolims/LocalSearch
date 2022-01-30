@@ -1,8 +1,16 @@
 <ion-content>
 
+  <div class="locate">
+    <ion-buttons  slot="end">
+    <ion-button  (click)="centerMap()">
+      <ion-icon size="large" class="bLocate" name="navigate"></ion-icon>
+    </ion-button>
+ </ion-buttons>
+</div>
   <div class="map" leaflet [leafletOptions]="mapOptions" [leafletLayers]="mapMarkers"
     (leafletMapReady)="onMapReady($event)">
   </div>
+  
 
 
 

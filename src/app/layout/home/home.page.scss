@@ -1,3 +1,25 @@
 .map {
     height: 100%;
+    z-index: 0;
   }
+
+  .locate{
+    
+    padding: auto;
+    background-color: rgba(236, 236, 236, 0.924);
+    border-radius: 10px;
+    z-index: 99;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    right: 3%;
+    top: 6%;
+    margin: auto;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bLocate{
+ 
+  color: rgb(56, 56, 56);
+}
